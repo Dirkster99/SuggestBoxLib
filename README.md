@@ -30,13 +30,13 @@ Load *Light* or *Dark* brush resources in you resource dictionary to take advant
 
 ```XAML
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/MRULib;component/Themes/DarkBrushes.xaml" />
+        <ResourceDictionary Source="/SuggestBoxLib;component/Themes/DarkBrushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 ```
 
 ```XAML
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/MRULib;component/Themes/LightBrushes.xaml" />
+        <ResourceDictionary Source="/SuggestBoxLib;component/Themes/LightBrushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 ```
 
