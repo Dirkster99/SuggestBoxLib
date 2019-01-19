@@ -2,6 +2,8 @@
 [![Release](https://img.shields.io/github/release/Dirkster99/SuggestBoxLib.svg)](https://github.com/Dirkster99/SuggestBoxLib/releases/latest)
 [![NuGet](https://img.shields.io/nuget/dt/Dirkster.SuggestBoxLib.svg)](http://nuget.org/packages/Dirkster.SuggestBoxLib)
 
+The SuggestBox control in this repository was originally developed by <b>Leung Yat Chun Joseph <a href="https://github.com/lycj">lycj</a></b> in his FileExplorer application originating from CodePlex and <a href="https://www.codeproject.com/Members/Fainx">CodeProject</a>.
+
 # SuggestBoxLib
 This project implements a WPF Dark/Light AutoComplete TextBox that can easily handle 20.000+ entries in the
 list of suggestions. The screenshots below show a dark themed demo appliaction with a classic AutoComplete
