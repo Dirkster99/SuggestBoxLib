@@ -22,5 +22,29 @@ can be triggered with the property attached to the checkbox in the demo applicat
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-6.png)
 
+## Highlighting Color and Themes
 Screenshot in this repository where done with this highlighting color on Windows 10:
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Untitled.png)
+
+Load *Light* or *Dark* brush resources in you resource dictionary to take advantage of existing definitions.
+
+```XAML
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MRULib;component/Themes/DarkBrushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+```
+
+```XAML
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MRULib;component/Themes/LightBrushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+```
+
+These definitions do not theme all controls used within this library. You should use a standard theming library, such as:
+- [MahApps.Metro](https://github.com/MahApps/MahApps.Metro),
+- [MLib](https://github.com/Dirkster99/MLib), or
+- [MUI](https://github.com/firstfloorsoftware/mui)
+
+to also theme standard elements, such as, button and textblock etc.
+
+A Dark/Light themed demo appliactions and a Generic themed application are part of this repository.  
