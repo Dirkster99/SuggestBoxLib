@@ -9,7 +9,6 @@ use case for browsing the file system. This control can also be used to browse o
 the data processing is implemented in the ViewModel/Model layers of the MVVM demo app, while
 the control itself is limited to the view.
 
-
 The first two screenshots show how a seperate combobox like drop down control can be used to select an entry from
 a list of recently visited locations (bound to a collection in the viewmodel):
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-7.png)
@@ -53,3 +52,5 @@ These definitions do not theme all controls used within this library. You should
 to also theme standard elements, such as, button and textblock etc.
 
 A Dark/Light themed demo appliactions and a Generic themed application are part of this repository.  
+
+![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-4.png)
