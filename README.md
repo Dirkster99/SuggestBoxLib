@@ -15,3 +15,12 @@ the control itself is limited to the view.
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-9.png)
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-10.png)
+
+## Error Feedback
+The control can show a red rectangle if the user types a completely unmatchable string. This red rectangle
+can be triggered with the property attached to the checkbox in the demo application.
+
+![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-6.png)
+
+Screenshot in this repository where done with this highlighting color on Windows 10:
+![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Untitled.png)
