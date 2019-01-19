@@ -24,6 +24,13 @@ A selection of a recently visited location can be used as a starting point to fo
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-10.png)
 
+## User Feedback
+
+The control implements a [NextTargetLocationArgs](https://github.com/Dirkster99/SuggestBoxLib/blob/master/source/SuggestBoxLib/Events/NextTargetLocationArgs.cs) event that can be raised via enter/escape key in the textbox control to support keyboard
+gestures to confirm/cancel editing of a location.
+
+![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/OK_Cancel.png)
+
 ## Error Feedback
 The control can show a red rectangle if the user types a completely unmatchable string. This red rectangle
 can be triggered with the property attached to the checkbox in the demo application.
