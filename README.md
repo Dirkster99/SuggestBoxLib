@@ -9,10 +9,14 @@ use case for browsing the file system. This control can also be used to browse o
 the data processing is implemented in the ViewModel/Model layers of the MVVM demo app, while
 the control itself is limited to the view.
 
+
+The first two screenshots show how a seperate combobox like drop down control can be used to select an entry from
+a list of recently visited locations (bound to a collection in the viewmodel):
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-7.png)
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-8.png)
 
+A selection of a recently visited location can be used as a starting point to follow up with more suggestions:
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-9.png)
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-10.png)
