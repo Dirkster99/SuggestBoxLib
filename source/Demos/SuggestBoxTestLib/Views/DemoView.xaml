@@ -1,0 +1,253 @@
+﻿<UserControl x:Class="SuggestBoxTestLib.Views.DemoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SuggestBoxTestLib.Views"
+             xmlns:bc="clr-namespace:SuggestBoxLib;assembly=SuggestBoxLib"
+             xmlns:conv="clr-namespace:SuggestBoxLib.Converters;assembly=SuggestBoxLib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <conv:BoolToVisibilityPropConverter TrueValue="Visible" FalseValue="Hidden"
+                                                x:Key="BoolToVisibilityPropConverter" />
+            <conv:InvertBoolConverter x:Key="InvertBoolConverter"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Test Result:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Text,ElementName=suggestBoxDummy}"
+                       Grid.Column="1" Grid.Row="0" Margin="3,0"
+                       VerticalAlignment="Center" ToolTip="suggestBoxDummy"/>
+
+                <TextBlock Text="Test Input 1:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+                <bc:SuggestBox
+                    x:Name="suggestBoxDummy" Grid.Column="1" Grid.Row="1"
+                    Hint="Custom implement (+xyz/abc)"
+                    DataContext="{Binding DummySuggestions}"
+                    Text="{Binding CurrentText}"
+                    TextChangedCommand="{Binding SuggestTextChangedCommand}"
+                    ItemsSource="{Binding ListQueryResult}"
+                           
+                    MinHeight="21"
+                    MinWidth="100" Margin="3"
+                />
+
+                <Separator Grid.Row="2" Grid.ColumnSpan="2" Margin="3"/>
+
+                <TextBlock Text="Test Result:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtAuto" Grid.Column="1" Grid.Row="3" Margin="3,0"
+                           VerticalAlignment="Center" ToolTip="suggestBoxAuto"
+                           Text="{Binding ElementName=suggestBoxAuto,Path=Text,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                           />
+
+                <TextBlock Text="Test Input 2:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
+                <bc:SuggestBox x:Name="suggestBoxAuto" Grid.Column="1" Grid.Row="4"
+                        DisplayMemberPath="Value"
+                        Hint="Uses ViewModel, try Sub1\Sub12"                                   
+                        DataContext="{Binding SuggestBoxAuto_SuggestSources}"
+                        Text="{Binding CurrentText}"
+                        TextChangedCommand="{Binding SuggestTextChangedCommand}"
+                        ItemsSource="{Binding ListQueryResult}"
+                               
+                        IsEnabled="{Binding Processing,Converter={StaticResource InvertBoolConverter}}"
+                        Margin="3"
+                        />
+
+                <Separator Grid.Row="5" Grid.ColumnSpan="2" Margin="3"/>
+
+                <TextBlock Text="Test Result:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtAuto2" Grid.Column="1" Grid.Row="6" Margin="3,0"
+                           VerticalAlignment="Center" ToolTip="SuggestBoxAuto2_RootItems"
+                           Text="{Binding ElementName=SuggestBoxAuto2,Path=Text,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                           />
+
+                <TextBlock Text="Test Input 3:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center"/>
+                <bc:SuggestBox
+                    Name="SuggestBoxAuto2"
+                    Grid.Column="1" Grid.Row="7"
+                    DisplayMemberPath="Value"
+                    Hint="With delay 1 sec"
+                    DataContext="{Binding SuggestBoxAuto2_SuggestSources}"
+                    
+                    Text="{Binding CurrentText}"
+                    TextChangedCommand="{Binding SuggestTextChangedCommand}"
+                    ItemsSource="{Binding ListQueryResult}"
+                           
+                    Margin="3"    
+                />
+
+                <Separator Grid.Row="8" Grid.ColumnSpan="2" Margin="3"/>
+
+                <TextBlock Text="Test Result:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="9" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="9" Margin="3,0"
+                           VerticalAlignment="Center"
+                           Text="{Binding ElementName=DiskPathSuggestBox,Path=Text}"
+                           ToolTip="DiskPathSuggestBox"
+                           />
+
+                <TextBlock Text="Test Input 4:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="10" VerticalAlignment="Top"/>
+
+                <Grid Grid.Column="1" Grid.Row="10" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                   
+                    <bc:SuggestBox Grid.Column="0" Grid.Row="0"
+                        x:Name="DiskPathSuggestBox"
+                        Hint="Enter a file system path"
+                        DataContext="{Binding SuggestDirectory}"
+                        Text="{Binding CurrentText}"
+                        ValidText="{Binding IsValidText,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                        TextChangedCommand="{Binding SuggestTextChangedCommand}"
+                        ItemsSource="{Binding ListQueryResult}"
+                        Margin="3"    
+                    />
+
+                    <CheckBox Content="Is Valid" Grid.Column="1" Grid.Row="0"
+                              IsChecked="{Binding ElementName=DiskPathSuggestBox,Path=ValidText}"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+                               Text="Try Hitting Enter or Esc when editing" VerticalAlignment="Top" />
+
+                    <TextBox Grid.Column="0" Grid.Row="2" Grid.RowSpan="2"
+                             Text=""
+                             IsReadOnly="true" BorderBrush="Transparent"
+                             x:Name="NewLocationRequestEventDisplay" />
+                </Grid>
+
+                <Separator Grid.Row="11" Grid.ColumnSpan="2" Margin="3"/>
+
+                <TextBlock Text="Test Input 5:" HorizontalAlignment="Right" Margin="3"
+                           FontWeight="Bold" Grid.Column="0" Grid.Row="12" VerticalAlignment="Center"/>
+                
+                <Grid Grid.Column="1" Grid.Row="12" x:Name="MeasuringGrid" Margin="3">
+                    <Grid.Resources>
+                        <conv:BoolToVisibilityPropConverter x:Key="BoolToVisibilityPropConverter"
+                                                FalseValue="Collapsed"
+                                                TrueValue="Visible" />
+                        <conv:BoolToVisibilityPropConverter x:Key="BoolToVisibilityPropConverterNeg"
+                                                FalseValue="Visible"
+                                                TrueValue="Collapsed" />
+
+                        <conv:DoubleAddConverter x:Key="DoubleAddConverter"/>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <bc:SuggestBox x:Name="DiskPathSuggestComboBox"
+                        Grid.Column="0"
+                        Hint="Enter a file system path and use the ToggleButton"
+                        DataContext="{Binding SuggestDirectoryWithRecentList}"
+                        TextChangedCommand="{Binding SuggestTextChangedCommand}"
+                        ItemsSource="{Binding ListQueryResult}"
+                    />
+
+                    <bc:SuggestComboBox Grid.Column="1" x:Name="PART_SuggestComboBox"
+                                        ToggleRecentListCommand="{Binding RecentListCommand,RelativeSource={RelativeSource AncestorType={x:Type local:DemoView}},Mode=OneTime}"
+                                        VerticalAlignment="Stretch"
+                                        HorizontalAlignment="Right"
+                                        Height="{Binding ElementName=DiskPathSuggestComboBox,Path=ActualHeight}"
+                                        ItemsSource="{Binding RecentLocationItems}"
+                                        >
+                        <bc:SuggestComboBox.PopUpWidth>
+                            <MultiBinding Converter="{StaticResource DoubleAddConverter}">
+                                <Binding ElementName="MeasuringGrid" Path="ActualWidth" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                <!--Binding ElementName="DiskPathSuggestComboBox" Path="Padding.Left" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/-->
+                            </MultiBinding>
+                        </bc:SuggestComboBox.PopUpWidth>
+                        <bc:SuggestComboBox.ButtonContent>
+                            <Viewbox>
+                                <Rectangle Width="16" Height="16">
+                                    <Rectangle.Fill>
+                                        <DrawingBrush>
+                                            <DrawingBrush.Drawing>
+                                                <DrawingGroup>
+                                                    <DrawingGroup.Children>
+                                                        <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M0,0L16,0 16,16 0,16z" />
+                                                        <GeometryDrawing Brush="#10F6F6F6" Geometry="F1M2.3057,6.3906L4.7807,3.9156 7.9997,7.1356 11.2197,3.9156 13.6947,6.3906 7.9997,12.0836z" />
+                                                        <GeometryDrawing Brush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button},Mode=FindAncestor},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                                                                 Geometry="F1M3.7197,6.3901L4.7807,5.3291 7.9997,8.5491 11.2197,5.3291 12.2807,6.3901 7.9997,10.6701z" />
+                                                    </DrawingGroup.Children>
+                                                </DrawingGroup>
+                                            </DrawingBrush.Drawing>
+                                        </DrawingBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Viewbox>
+                        </bc:SuggestComboBox.ButtonContent>
+                    </bc:SuggestComboBox>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <TextBox Text="Test Text Control ..."
+                  Grid.Row="3" />
+
+        <Grid Grid.Row="4" VerticalAlignment="Bottom"
+              DataContext="{Binding SuggestBoxAuto_SuggestSources}"
+              Visibility="{Binding Processing,Converter={StaticResource BoolToVisibilityPropConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Building test data for Test Input 2..." Margin="3" />
+            <ProgressBar IsIndeterminate="True" Grid.Row="1" MinHeight="10" Margin="3"/>
+        </Grid>
+    </Grid>
+</UserControl>
