@@ -6,7 +6,7 @@ The SuggestBox control in this repository was originally developed by <b>Leung Y
 
 # SuggestBoxLib
 
-<h2><img src="https://github.com/Dirkster99/SuggestBoxLib/blob/master/ProjectIcon.png?raw=true" height="64"/>&nbsp;Overview</h2>
+<h2><img src="https://github.com/Dirkster99/SuggestBoxLib/blob/master/ProjectIcon.ico?raw=true" height="64"/>&nbsp;Overview</h2>
 
 A WPF Dark/Light AutoComplete TextBox that can easily handle 20.000+ entries.
 
