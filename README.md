@@ -5,6 +5,11 @@
 The SuggestBox control in this repository was originally developed by <b>Leung Yat Chun Joseph <a href="https://github.com/lycj">lycj</a></b> in his FileExplorer application originating from CodePlex and <a href="https://www.codeproject.com/Members/Fainx">CodeProject</a>.
 
 # SuggestBoxLib
+
+<h2><img src="https://github.com/Dirkster99/SuggestBoxLib/blob/master/ProjectIcon.png?raw=true" height="64"/>&nbsp;Overview</h2>
+
+A WPF Dark/Light AutoComplete TextBox that can easily handle 20.000+ entries.
+
 This project implements a WPF Dark/Light AutoComplete TextBox that can easily handle 20.000+ entries in the
 list of suggestions. The screenshots below show a dark themed demo appliaction with a classic AutoComplete
 use case for browsing the file system. This control can also be used to browse other data structures since
