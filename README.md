@@ -69,6 +69,6 @@ These definitions do not theme all controls used within this library. You should
 
 to also theme standard elements, such as, button and textblock etc.
 
-A Dark/Light themed demo appliactions and a Generic themed application are part of this repository.  
+A Dark/Light themed demo application and a Generic application are part of this repository.  
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-4.png)
