@@ -150,12 +150,9 @@
             DependencyProperty.Register("ValidText", typeof(bool),
                 typeof(SuggestBoxBase), new PropertyMetadata(true, OnValidTextChanged));
 
-        public EllipsisPlacement ShowElipses
-        {
-            get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
-            set { SetValue(ShowElipsesProperty, value); }
-        }
-
+        /// <summary>
+        /// Implements the backing store of the <see cref="ShowElipses"/> dependency property.
+        /// </summary>
         public static readonly DependencyProperty ShowElipsesProperty =
             DependencyProperty.Register("ShowElipses", typeof(EllipsisPlacement),
                 typeof(SuggestBoxBase), new PropertyMetadata(EllipsisPlacement.None));
@@ -346,6 +343,15 @@
             {
                 return _ParentWindowIsClosing;
             }
+        }
+
+        /// <summary>
+        /// Gets/sets whether the Path string should be shortend and displayed with an elipses or not.
+        /// </summary>
+        public EllipsisPlacement ShowElipses
+        {
+            get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
+            set { SetValue(ShowElipsesProperty, value); }
         }
         #endregion
 

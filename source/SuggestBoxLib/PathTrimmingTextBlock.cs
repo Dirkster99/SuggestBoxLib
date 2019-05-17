@@ -11,17 +11,23 @@ namespace SuggestBoxLib
     public enum EllipsisPlacement
     {
         /// <summary>
-        /// Do not show an ellipsis in PathTrimming TexBlock
+        /// Do not show an ellipsis in the Text of the PathTrimming TexBlock
         /// </summary>
         None,
 
         /// <summary>
-        /// Show an ellipsis in the center of PathTrimming TexBlock
+        /// Show an ellipsis in the center of the Text in the PathTrimming TexBlock
         /// </summary>
         Center,
 
+        /// <summary>
+        /// Show an ellipsis in the left side of the Text in the PathTrimming TexBlock
+        /// </summary>
         Left,
 
+        /// <summary>
+        /// Show an ellipsis in the right side of the Text in the PathTrimming TexBlock
+        /// </summary>
         Right
     }
 
@@ -46,13 +52,9 @@ namespace SuggestBoxLib
                                         typeof(PathTrimmingTextBlock),
                                         new UIPropertyMetadata(string.Empty));
 
-
-        public EllipsisPlacement ShowElipses
-        {
-            get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
-            set { SetValue(ShowElipsesProperty, value); }
-        }
-
+        /// <summary>
+        /// Implements the backing store of the <see cref="ShowElipses"/> dependency property.
+        /// </summary>
         public static readonly DependencyProperty ShowElipsesProperty =
             DependencyProperty.Register("ShowElipses", typeof(EllipsisPlacement),
                 typeof(PathTrimmingTextBlock), new PropertyMetadata(EllipsisPlacement.None));
@@ -82,6 +84,15 @@ namespace SuggestBoxLib
         {
             get { return (string)this.GetValue(PathProperty); }
             set { this.SetValue(PathProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets/sets whether the Path string should be shortend and displayed with an elipses or not.
+        /// </summary>
+        public EllipsisPlacement ShowElipses
+        {
+            get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
+            set { SetValue(ShowElipsesProperty, value); }
         }
         #endregion properties
 
