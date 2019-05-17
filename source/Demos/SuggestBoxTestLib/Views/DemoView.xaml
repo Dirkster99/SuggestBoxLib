@@ -145,10 +145,12 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                    
-                    <bc:SuggestBox Grid.Column="0" Grid.Row="0"
+                    <bc:SuggestBox
+                        Grid.Column="0" Grid.Row="0"
                         x:Name="DiskPathSuggestBox"
                         Hint="Enter a file system path"
                         DataContext="{Binding SuggestDirectory}"
+                        ShowElipses="Center"
                         Text="{Binding CurrentText}"
                         ValidText="{Binding IsValidText,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
                         TextChangedCommand="{Binding SuggestTextChangedCommand}"

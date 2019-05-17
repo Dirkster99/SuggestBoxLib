@@ -26,7 +26,21 @@
                            Foreground="{DynamicResource {x:Static reskeys:ResourceKeys.ControlTextBrushKey}}"
                            Visibility="{Binding IsHintVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource btv}}"
                            Opacity="0.5" />
-                <ScrollViewer Margin="0" x:Name="PART_ContentHost" RenderOptions.ClearTypeHint="Enabled" />
+
+                <ScrollViewer Margin="0"
+                              x:Name="PART_ContentHost"
+                              RenderOptions.ClearTypeHint="Enabled"
+                              Visibility="Hidden"
+                              />
+
+                <bc:PathTrimmingTextBlock
+                    Path="{Binding Text, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                    ShowElipses="{Binding ShowElipses, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                    RenderOptions.ClearTypeHint="Enabled"
+                    x:Name="PART_EllipsedTEXT"
+                    Visibility="Visible"
+                />
+
                 <Popup x:Name="PART_Popup"
                        AllowsTransparency="true"  
                        PlacementTarget="{Binding ElementName=PART_ContentHost}"                                   
@@ -111,6 +125,8 @@
             </Trigger>
             <Trigger Property="IsFocused" Value="true">
                 <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ControlAccentBrushKey}}" />
+                <Setter TargetName="PART_ContentHost" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_EllipsedTEXT" Property="Visibility" Value="Hidden"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -132,6 +148,7 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ControlTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ControlInputBackgroundKey}}"/>
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="PopupBorderBrush" Value="{DynamicResource {x:Static reskeys:ResourceKeys.ControlInputBorderKey}}"/>
         <Setter Property="PopupBorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>

@@ -150,6 +150,17 @@
             DependencyProperty.Register("ValidText", typeof(bool),
                 typeof(SuggestBoxBase), new PropertyMetadata(true, OnValidTextChanged));
 
+        public EllipsisPlacement ShowElipses
+        {
+            get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
+            set { SetValue(ShowElipsesProperty, value); }
+        }
+
+        public static readonly DependencyProperty ShowElipsesProperty =
+            DependencyProperty.Register("ShowElipses", typeof(EllipsisPlacement),
+                typeof(SuggestBoxBase), new PropertyMetadata(EllipsisPlacement.None));
+
+        private TextBlock _PART_MeasuredTEXT;
         private Popup _PART_Popup;
         private Thumb _PART_ResizeGripThumb;
         private Grid _PART_ResizeableGrid;
@@ -345,6 +356,8 @@
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            _PART_MeasuredTEXT = this.Template.FindName("PART_MeasuredTEXT", this) as TextBlock;
 
             _PART_Popup = this.Template.FindName(PART_Popup, this) as Popup;
             _PART_ItemList = this.Template.FindName(PART_ItemList, this) as ListBox;

@@ -59,6 +59,7 @@
     <Compile Include="Converters\RecentSuggestsVisibilityConverter.cs" />
     <Compile Include="Events\NextTargetLocationArgs.cs" />
     <Compile Include="Interfaces\ISuggestResult.cs" />
+    <Compile Include="PathTrimmingTextBlock.cs" />
     <Compile Include="SuggestBoxBase.xaml.cs">
       <DependentUpon>SuggestBoxBase.xaml</DependentUpon>
     </Compile>
