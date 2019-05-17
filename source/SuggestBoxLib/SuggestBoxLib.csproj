@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\Release\SuggestBoxLib.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
