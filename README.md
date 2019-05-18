@@ -29,7 +29,7 @@ A selection of a recently visited location can be used as a starting point to fo
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-10.png)
 
-The control can short text that are too long in meaningfull way by inserting ellipses '...' on the:
+The control can shorten text that is too long for display by inserting ellipses '...' on the:
 - left
 - right or in the
 - center
