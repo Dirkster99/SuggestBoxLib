@@ -4,6 +4,7 @@ namespace SuggestBoxLib
     using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Data;
 
     /// <summary>
     /// Enum for specifying where the ellipsis should appear.
@@ -50,16 +51,20 @@ namespace SuggestBoxLib
             DependencyProperty.Register("Path",
                                         typeof(string),
                                         typeof(PathTrimmingTextBlock),
-                                        new UIPropertyMetadata(string.Empty));
+                                        new UIPropertyMetadata(string.Empty, OnPathChanged));
 
         /// <summary>
         /// Implements the backing store of the <see cref="ShowElipses"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ShowElipsesProperty =
             DependencyProperty.Register("ShowElipses", typeof(EllipsisPlacement),
-                typeof(PathTrimmingTextBlock), new PropertyMetadata(EllipsisPlacement.None));
+                typeof(PathTrimmingTextBlock), new PropertyMetadata(EllipsisPlacement.None, OnShowElipsesChanged));
 
-        private FrameworkElement mContainer;
+        private FrameworkElement _Container;
+
+        private readonly TextBlock _MeasureBlock;
+        private double _lastMeasuredWith;
+        private string _lastString;
         #endregion fields
 
         #region constructor
@@ -68,7 +73,13 @@ namespace SuggestBoxLib
         /// </summary>
         public PathTrimmingTextBlock()
         {
-            this.mContainer = null;
+            _MeasureBlock = new TextBlock();
+            BindOneWay(this, "Style", _MeasureBlock, TextBlock.StyleProperty);
+            BindOneWay(this, "FontWeight", _MeasureBlock, TextBlock.FontWeightProperty);
+            BindOneWay(this, "FontStyle", _MeasureBlock, TextBlock.FontStyleProperty);
+            BindOneWay(this, "FontStretch", _MeasureBlock, TextBlock.FontStretchProperty);
+            BindOneWay(this, "FontSize", _MeasureBlock, TextBlock.FontSizeProperty);
+            BindOneWay(this, "FontFamily", _MeasureBlock, TextBlock.FontFamilyProperty);
 
             this.Loaded += new RoutedEventHandler(this.PathTrimmingTextBlock_Loaded);
             this.Unloaded += new RoutedEventHandler(this.PathTrimmingTextBlock_Unloaded);
@@ -98,6 +109,37 @@ namespace SuggestBoxLib
 
         #region methods
         /// <summary>
+        /// Updates the trimmed text based on current measurements, text input, and Show Ellipses parameter.
+        /// </summary>
+        protected virtual void UpdateText()
+        {
+            if (_Container != null)
+                this.Text = this.GetTrimmedPath(this.Path, _Container.ActualWidth, this.ShowElipses);
+            //// else
+            ////  throw new InvalidOperationException("PathTrimmingTextBlock must have a container such as a Grid.");
+        }
+
+        /// <summary>
+        /// Update measured and trimmed text output if text input has changed.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as PathTrimmingTextBlock).UpdateText();
+        }
+
+        /// <summary>
+        /// Update measured and trimmed text output if text trimming option has changed.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnShowElipsesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as PathTrimmingTextBlock).UpdateText();
+        }
+
+        /// <summary>
         /// Textblock is constructed and start its live - lets attach to the
         /// size changed event handler of the containing parent.
         /// </summary>
@@ -109,7 +151,7 @@ namespace SuggestBoxLib
             if (this.Parent is FrameworkElement)
             {
                 p = (FrameworkElement)this.Parent;
-                this.mContainer = p;
+                _Container = p;
             }
             else
             {
@@ -126,15 +168,15 @@ namespace SuggestBoxLib
                             break;
                     }
 
-                    this.mContainer = p;
+                    _Container = p;
                 }
             }
 
-            if (this.mContainer != null)
+            if (_Container != null)
             {
-                this.mContainer.SizeChanged += new SizeChangedEventHandler(this.container_SizeChanged);
+                _Container.SizeChanged += new SizeChangedEventHandler(this.container_SizeChanged);
 
-                this.Text = this.GetTrimmedPath(this.mContainer.ActualWidth, this.ShowElipses);
+                UpdateText();
             }
             //// else
             ////  throw new InvalidOperationException("PathTrimmingTextBlock must have a container such as a Grid.");
@@ -147,8 +189,8 @@ namespace SuggestBoxLib
         /// <param name="e"></param>
         private void PathTrimmingTextBlock_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (this.mContainer != null)
-                this.mContainer.SizeChanged -= this.container_SizeChanged;
+            if (_Container != null)
+                _Container.SizeChanged -= this.container_SizeChanged;
         }
 
         /// <summary>
@@ -158,8 +200,7 @@ namespace SuggestBoxLib
         /// <param name="e"></param>
         private void container_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (this.mContainer != null)
-                this.Text = this.GetTrimmedPath(this.mContainer.ActualWidth, this.ShowElipses);
+            UpdateText();
         }
 
         /// <summary>
@@ -170,21 +211,29 @@ namespace SuggestBoxLib
         private void PathTrimmingTextBlock_IsVisibleChanged(object sender,
                                                             DependencyPropertyChangedEventArgs e)
         {
-            if (this.mContainer != null && (bool)e.NewValue == true)
-            {
-                this.Text = this.GetTrimmedPath(this.mContainer.ActualWidth, this.ShowElipses);
-            }
+            if ((bool)e.NewValue == true)
+                UpdateText();
         }
 
         /// <summary>
         /// Compute the text to display (with ellipsis) that fits the ActualWidth of the container
         /// </summary>
-        /// <param name="width"></param>
+        /// <param name="inputString">Input string to measure whether it fits into container width or not.</param>
+        /// <param name="containerWidth">ActualWidth restriction by container element (eg.: Grid)</param>
         /// <param name="placement"></param>
         /// <returns></returns>
-        private string GetTrimmedPath(double width,
+        private string GetTrimmedPath(string inputString,
+                                      double containerWidth,
                                       EllipsisPlacement placement)
         {
+            // Lets not measure the same thing twice
+            if (Math.Abs(_lastMeasuredWith - containerWidth) <= 0.5 &&
+                string.Compare(_lastString, inputString) == 0)
+               return _MeasureBlock.Text;
+
+            _lastMeasuredWith = containerWidth;
+            _lastString = inputString;
+
             string filename = string.Empty;
             string directory = string.Empty;
 
@@ -192,49 +241,53 @@ namespace SuggestBoxLib
             {
                 // We don't want no ellipses to be shown for a string shortener
                 case EllipsisPlacement.None:
-                    return this.Path;
+                    _MeasureBlock.Text = inputString;
+                    return inputString;
 
                 // Try to show a nice ellipses somewhere in the middle of the string
                 case EllipsisPlacement.Center:
                     try
                     {
-                        if (string.IsNullOrEmpty(this.Path) == false)
+                        if (string.IsNullOrEmpty(inputString) == false)
                         {
-                            if (this.Path.Contains(string.Empty + System.IO.Path.DirectorySeparatorChar))
+                            if (inputString.Contains(string.Empty + System.IO.Path.DirectorySeparatorChar))
                             {
                                 // Lets try to display the file name with priority
-                                filename = System.IO.Path.GetFileName(this.Path);
-                                directory = System.IO.Path.GetDirectoryName(this.Path);
+                                filename = System.IO.Path.GetFileName(inputString);
+                                directory = System.IO.Path.GetDirectoryName(inputString);
                             }
                             else
                             {
                                 // Cut this right in the middle since it does not seem to hold path info
-                                int len      = this.Path.Length;
-                                int firstLen = this.Path.Length / 2;
-                                filename = this.Path.Substring(0, firstLen);
+                                int len      = inputString.Length;
+                                int firstLen = inputString.Length / 2;
+                                filename = inputString.Substring(0, firstLen);
 
-                                if (this.Path.Length >= (firstLen + 1))
-                                    directory = this.Path.Substring(firstLen);
+                                if (inputString.Length >= (firstLen + 1))
+                                    directory = inputString.Substring(firstLen);
                             }
                         }
                         else
+                        {
+                            _MeasureBlock.Text = string.Empty;
                             return string.Empty;
+                        }
                     }
                     catch (Exception)
                     {
-                        directory = this.Path;
+                        directory = inputString;
                         filename = string.Empty;
                     }
                     break;
 
                 case EllipsisPlacement.Left:
-                    directory = this.Path;
+                    directory = inputString;
                     filename = string.Empty;
                     break;
 
                 case EllipsisPlacement.Right:
                     directory = string.Empty;
-                    filename = this.Path;
+                    filename = inputString;
                     break;
 
                 default:
@@ -248,20 +301,12 @@ namespace SuggestBoxLib
             if (placement == EllipsisPlacement.Left)
                 indexString = 1;
 
-            TextBlock block = new TextBlock();
-            block.Style = this.Style;
-            block.FontWeight = this.FontWeight;
-            block.FontStyle = this.FontStyle;
-            block.FontStretch = this.FontStretch;
-            block.FontSize = this.FontSize;
-            block.FontFamily = this.FontFamily;
-
             do
             {
-                block.Text = FormatWith(placement, directory, filename);
-                block.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                _MeasureBlock.Text = FormatWith(placement, directory, filename);
+                _MeasureBlock.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
 
-                widthOK = block.DesiredSize.Width < width;
+                widthOK = _MeasureBlock.DesiredSize.Width < containerWidth;
 
                 if (widthOK == false)
                 {
@@ -273,7 +318,10 @@ namespace SuggestBoxLib
                             filename = filename.Substring(indexString, filename.Length - 1);
                         }
                         else
+                        {
+                            _MeasureBlock.Text = string.Empty;
                             return string.Empty;
+                        }
                     }
                     else
                     {
@@ -285,12 +333,12 @@ namespace SuggestBoxLib
             while (widthOK == false);
 
             if (changedWidth == false)
-                return this.Path;
+            {
+                _MeasureBlock.Text = inputString;
+                return inputString;
+            }
 
-            if (block != null)   // Optimize for speed
-                return block.Text;
-
-            return FormatWith(placement, directory, filename);
+            return _MeasureBlock.Text;
         }
 
         /// <summary>
@@ -323,6 +371,19 @@ namespace SuggestBoxLib
             }
 
             return string.Format(CultureInfo.InvariantCulture, formatString, args);
+        }
+
+        private void BindOneWay(FrameworkElement soureOfBinding,
+                                string sourcePathName,
+                                FrameworkElement destinationOfBinding,
+                                DependencyProperty destinationProperty)
+        {
+            Binding binding = new Binding();
+            binding.Path = new PropertyPath(sourcePathName);
+            binding.Source = soureOfBinding;
+            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            binding.Mode = BindingMode.OneWay;
+            BindingOperations.SetBinding(destinationOfBinding, destinationProperty, binding);
         }
         #endregion methods
     }
