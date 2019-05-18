@@ -29,6 +29,14 @@ A selection of a recently visited location can be used as a starting point to fo
 
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-10.png)
 
+The control can short text that are too long in meaningfull way by inserting ellipses '...' on the:
+- left
+- right or in the
+- center
+
+of a given string. This display is available only if the control is not currently focused.
+![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/ShowEllipses_Centered.png)
+
 ## User Feedback
 
 The control implements a [NextTargetLocationArgs](https://github.com/Dirkster99/SuggestBoxLib/blob/master/source/SuggestBoxLib/Events/NextTargetLocationArgs.cs) event that can be raised via enter/escape key in the textbox control to support keyboard
@@ -45,6 +53,10 @@ can be triggered with the property attached to the checkbox in the demo applicat
 ## Highlighting Color and Themes
 Screenshot in this repository where done with this highlighting color on Windows 10:
 ![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Untitled.png)
+
+A Dark/Light themed demo application and a Generic application are part of this repository.  
+
+![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-4.png)
 
 Load *Light* or *Dark* brush resources in you resource dictionary to take advantage of existing definitions.
 
@@ -66,7 +78,3 @@ These definitions do not theme all controls used within this library. You should
 - [MUI](https://github.com/firstfloorsoftware/mui)
 
 to also theme standard elements, such as, button and textblock etc.
-
-A Dark/Light themed demo application and a Generic application are part of this repository.  
-
-![](https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/screenshots/Unbenannt-4.png)
