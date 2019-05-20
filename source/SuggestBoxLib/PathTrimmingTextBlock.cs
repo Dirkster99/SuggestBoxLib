@@ -4,7 +4,7 @@ namespace SuggestBoxLib
     using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
+    using System.Windows.Media;
 
     /// <summary>
     /// Enum for specifying where the ellipsis should appear.
@@ -32,69 +32,64 @@ namespace SuggestBoxLib
         Right
     }
 
+    /*********************
+    https://www.codeproject.com/Tips/467054/WPF-PathTrimmingTextBlock
+    Improved Implementation:
+    Forum Entry from 2017:
+    Thanks for this, it was a good start. I've made some modifications to introduce a the following improvements:
+    1. No longer necessary to be inside a Grid
+    2. Won't throw exception if the path is not in a valid format
+    3. Measures text size more accurately (ujb1's suggestion - thanks)
+    4. Tries to obtain as much space as needed to display complete path
+    5. Uses MeasureOverride to size itself (I'm not an expert, but I understand this is more efficient than using the SizeChanged event)
+    6. Updates the displayed path if the path is changed via Data Binding
+    **********************/
+
     /// <summary>
-    /// This PathTrimmingTextBlock textblock attaches itself to the events of a parent container and
-    /// displays a trimmed path text when the size of the parent (container) is changed.
-    /// 
-    /// http://www.codeproject.com/Tips/467054/WPF-PathTrimmingTextBlock
-    /// 
-    /// Make sure you set, if you use this within an ListBox or ListView:
-    ///           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+    /// A TextBlock like control that provides special text trimming logic
+    /// designed for a file or folder path.
     /// </summary>
-    public class PathTrimmingTextBlock : TextBlock
+    public class PathTrimmingTextBlock : UserControl
     {
         #region fields
         /// <summary>
-        /// Path dependency property that stores the trimmed path
+        /// Implements the backing store of the <see cref="Path"/> dependency property.
         /// </summary>
-        private static readonly DependencyProperty PathProperty =
-            DependencyProperty.Register("Path",
-                                        typeof(string),
-                                        typeof(PathTrimmingTextBlock),
-                                        new UIPropertyMetadata(string.Empty, OnPathChanged));
+        public static readonly DependencyProperty PathProperty =
+            DependencyProperty.Register("Path", typeof(string),
+                typeof(PathTrimmingTextBlock), new UIPropertyMetadata("", OnPathChanged));
 
         /// <summary>
         /// Implements the backing store of the <see cref="ShowElipses"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ShowElipsesProperty =
             DependencyProperty.Register("ShowElipses", typeof(EllipsisPlacement),
-                typeof(PathTrimmingTextBlock), new PropertyMetadata(EllipsisPlacement.None, OnShowElipsesChanged));
+                typeof(PathTrimmingTextBlock),
+                new PropertyMetadata(EllipsisPlacement.Center, OnShowElipsesChanged));
 
-        private FrameworkElement _Container;
-
-        private readonly TextBlock _MeasureBlock;
-        private double _lastMeasuredWith;
-        private string _lastString;
+        private readonly TextBlock _TextBlock;
         #endregion fields
 
-        #region constructor
+        #region ctors
         /// <summary>
-        /// Class Constructor
+        /// Class constructor
         /// </summary>
         public PathTrimmingTextBlock()
         {
-            _MeasureBlock = new TextBlock();
-            BindOneWay(this, "Style", _MeasureBlock, TextBlock.StyleProperty);
-            BindOneWay(this, "FontWeight", _MeasureBlock, TextBlock.FontWeightProperty);
-            BindOneWay(this, "FontStyle", _MeasureBlock, TextBlock.FontStyleProperty);
-            BindOneWay(this, "FontStretch", _MeasureBlock, TextBlock.FontStretchProperty);
-            BindOneWay(this, "FontSize", _MeasureBlock, TextBlock.FontSizeProperty);
-            BindOneWay(this, "FontFamily", _MeasureBlock, TextBlock.FontFamilyProperty);
-
-            this.Loaded += new RoutedEventHandler(this.PathTrimmingTextBlock_Loaded);
-            this.Unloaded += new RoutedEventHandler(this.PathTrimmingTextBlock_Unloaded);
-            this.IsVisibleChanged += PathTrimmingTextBlock_IsVisibleChanged;
+            _TextBlock = new TextBlock();
+            AddChild(_TextBlock);
         }
-        #endregion constructor
+        #endregion ctors
 
         #region properties
         /// <summary>
-        /// Path dependency property that stores the trimmed path
+        /// Gets/sets the path to display.
+        /// The text that is actually displayed will be trimmed with Ellipses.
         /// </summary>
         public string Path
         {
-            get { return (string)this.GetValue(PathProperty); }
-            set { this.SetValue(PathProperty, value); }
+            get { return (string)GetValue(PathProperty); }
+            set { SetValue(PathProperty, value); }
         }
 
         /// <summary>
@@ -109,140 +104,53 @@ namespace SuggestBoxLib
 
         #region methods
         /// <summary>
-        /// Updates the trimmed text based on current measurements, text input, and Show Ellipses parameter.
+        /// Called to remeasure a control.
         /// </summary>
-        protected virtual void UpdateText()
+        /// <param name="constraint">The maximum size that the method can return.</param>
+        /// <returns>The size of the control, up to the maximum specified by constraint.</returns>
+        protected override Size MeasureOverride(Size constraint)
         {
-            if (_Container != null)
-                this.Text = this.GetTrimmedPath(this.Path, _Container.ActualWidth, this.ShowElipses);
-            //// else
-            ////  throw new InvalidOperationException("PathTrimmingTextBlock must have a container such as a Grid.");
-        }
+            base.MeasureOverride(constraint);
 
-        /// <summary>
-        /// Update measured and trimmed text output if text input has changed.
-        /// </summary>
-        /// <param name="d"></param>
-        /// <param name="e"></param>
-        private static void OnPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            (d as PathTrimmingTextBlock).UpdateText();
-        }
+            // This is where the control requests to be as large
+            // as is needed while fitting within the given bounds
+            var meas = GetTrimmedPath(Path, constraint, this.ShowElipses, this);
 
-        /// <summary>
-        /// Update measured and trimmed text output if text trimming option has changed.
-        /// </summary>
-        /// <param name="d"></param>
-        /// <param name="e"></param>
-        private static void OnShowElipsesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            (d as PathTrimmingTextBlock).UpdateText();
-        }
+            // Update the text with or without short version + Ellipses '...' depending on available space
+            _TextBlock.Text = meas.Item1;
 
-        /// <summary>
-        /// Textblock is constructed and start its live - lets attach to the
-        /// size changed event handler of the containing parent.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PathTrimmingTextBlock_Loaded(object sender, RoutedEventArgs e)
-        {
-            FrameworkElement p = null;
-            if (this.Parent is FrameworkElement)
-            {
-                p = (FrameworkElement)this.Parent;
-                _Container = p;
-            }
-            else
-            {
-
-                if (this.Parent is DependencyObject dp)
-                {
-                    for (DependencyObject parent = LogicalTreeHelper.GetParent(dp as DependencyObject);
-                         parent != null;
-                         parent = LogicalTreeHelper.GetParent(parent as DependencyObject))
-                    {
-                        p = parent as FrameworkElement;
-
-                        if (p != null)
-                            break;
-                    }
-
-                    _Container = p;
-                }
-            }
-
-            if (_Container != null)
-            {
-                _Container.SizeChanged += new SizeChangedEventHandler(this.container_SizeChanged);
-
-                UpdateText();
-            }
-            //// else
-            ////  throw new InvalidOperationException("PathTrimmingTextBlock must have a container such as a Grid.");
-        }
-
-        /// <summary>
-        /// Remove custom event handlers and clean-up on unload.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PathTrimmingTextBlock_Unloaded(object sender, RoutedEventArgs e)
-        {
-            if (_Container != null)
-                _Container.SizeChanged -= this.container_SizeChanged;
-        }
-
-        /// <summary>
-        /// Trim the containing text (path) accordingly whenever the parent container chnages its size.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void container_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateText();
-        }
-
-        /// <summary>
-        /// Make sure we show the current string if visibility has changed to visible
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PathTrimmingTextBlock_IsVisibleChanged(object sender,
-                                                            DependencyPropertyChangedEventArgs e)
-        {
-            if ((bool)e.NewValue == true)
-                UpdateText();
+            return meas.Item2;
         }
 
         /// <summary>
         /// Compute the text to display (with ellipsis) that fits the ActualWidth of the container
         /// </summary>
         /// <param name="inputString">Input string to measure whether it fits into container width or not.</param>
-        /// <param name="containerWidth">ActualWidth restriction by container element (eg.: Grid)</param>
+        /// <param name="constraint">ActualWidth restriction by container element (eg.: Grid)</param>
         /// <param name="placement"></param>
+        /// <param name="ctrl"></param>
         /// <returns></returns>
-        private string GetTrimmedPath(string inputString,
-                                      double containerWidth,
-                                      EllipsisPlacement placement)
+        private static Tuple<string, Size> GetTrimmedPath(string inputString,
+                                                          Size constraint,
+                                                          EllipsisPlacement placement,
+                                                          Control ctrl)
         {
-            // Lets not measure the same thing twice
-            if (Math.Abs(_lastMeasuredWith - containerWidth) <= 0.5 &&
-                string.Compare(_lastString, inputString) == 0)
-               return _MeasureBlock.Text;
-
-            _lastMeasuredWith = containerWidth;
-            _lastString = inputString;
-
+            Size size = new Size();
             string filename = string.Empty;
             string directory = string.Empty;
+
+            if (constraint.Width != double.PositiveInfinity)
+                size.Width = constraint.Width;
+
+            if (constraint.Height != double.PositiveInfinity)
+                size.Height = constraint.Height;
 
             switch (placement)
             {
                 // We don't want no ellipses to be shown for a string shortener
                 case EllipsisPlacement.None:
-                    _MeasureBlock.Text = inputString;
-                    return inputString;
+                    size = MeasureString(inputString, ctrl);
+                    return new Tuple<string, Size>(inputString, size);
 
                 // Try to show a nice ellipses somewhere in the middle of the string
                 case EllipsisPlacement.Center:
@@ -259,7 +167,7 @@ namespace SuggestBoxLib
                             else
                             {
                                 // Cut this right in the middle since it does not seem to hold path info
-                                int len      = inputString.Length;
+                                int len = inputString.Length;
                                 int firstLen = inputString.Length / 2;
                                 filename = inputString.Substring(0, firstLen);
 
@@ -269,8 +177,8 @@ namespace SuggestBoxLib
                         }
                         else
                         {
-                            _MeasureBlock.Text = string.Empty;
-                            return string.Empty;
+                            size = MeasureString(string.Empty, ctrl);
+                            return new Tuple<string, Size>(inputString, size);
                         }
                     }
                     catch (Exception)
@@ -294,19 +202,21 @@ namespace SuggestBoxLib
                     throw new ArgumentOutOfRangeException(placement.ToString());
             }
 
+            double fudgeValue = 3.0;
             bool widthOK = false;
-            bool changedWidth = false;
             int indexString = 0;
+            string path = inputString;
+            bool changedWidth = false;
 
             if (placement == EllipsisPlacement.Left)
                 indexString = 1;
 
             do
             {
-                _MeasureBlock.Text = FormatWith(placement, directory, filename);
-                _MeasureBlock.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                path = FormatWith(placement, directory, filename);
+                size = MeasureString(path, ctrl);
 
-                widthOK = _MeasureBlock.DesiredSize.Width < containerWidth;
+                widthOK = (size.Width + fudgeValue) < constraint.Width;
 
                 if (widthOK == false)
                 {
@@ -319,8 +229,8 @@ namespace SuggestBoxLib
                         }
                         else
                         {
-                            _MeasureBlock.Text = string.Empty;
-                            return string.Empty;
+                            size = MeasureString(string.Empty, ctrl);
+                            return new Tuple<string, Size>(inputString, size);
                         }
                     }
                     else
@@ -332,13 +242,28 @@ namespace SuggestBoxLib
             }
             while (widthOK == false);
 
-            if (changedWidth == false)
-            {
-                _MeasureBlock.Text = inputString;
-                return inputString;
-            }
+            size.Width += fudgeValue;
 
-            return _MeasureBlock.Text;
+            if (changedWidth == false)
+                return new Tuple<string, Size>(inputString, size);
+
+            return new Tuple<string, Size>(path, size);
+        }
+
+        /// <summary>
+        /// Returns the size of the given string if it were to be rendered.
+        /// </summary>
+        /// <param name="str">The string to measure.</param>
+        /// <param name="ctrl"></param>
+        /// <returns>The size of the string.</returns>
+        private static Size MeasureString(string str, Control ctrl)
+        {
+            var typeFace = new Typeface(ctrl.FontFamily, ctrl.FontStyle, ctrl.FontWeight, ctrl.FontStretch);
+            var text = new FormattedText(str, CultureInfo.CurrentCulture,
+                                              ctrl.FlowDirection, typeFace,
+                                              ctrl.FontSize, ctrl.Foreground);
+
+            return new Size(text.Width, text.Height);
         }
 
         /// <summary>
@@ -347,7 +272,7 @@ namespace SuggestBoxLib
         /// <param name="args"></param>
         /// <param name="placing"></param>
         /// <returns></returns>
-        public static string FormatWith(EllipsisPlacement placing,
+        private static string FormatWith(EllipsisPlacement placing,
                                         params object[] args)
         {
             string formatString;
@@ -373,17 +298,32 @@ namespace SuggestBoxLib
             return string.Format(CultureInfo.InvariantCulture, formatString, args);
         }
 
-        private void BindOneWay(FrameworkElement soureOfBinding,
-                                string sourcePathName,
-                                FrameworkElement destinationOfBinding,
-                                DependencyProperty destinationProperty)
+        /// <summary>
+        /// Update measured and trimmed text output if path text property has changed.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Binding binding = new Binding();
-            binding.Path = new PropertyPath(sourcePathName);
-            binding.Source = soureOfBinding;
-            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            binding.Mode = BindingMode.OneWay;
-            BindingOperations.SetBinding(destinationOfBinding, destinationProperty, binding);
+            PathTrimmingTextBlock @this = (PathTrimmingTextBlock)d;
+
+            // This element will be re-measured
+            // The text will be updated during that process
+            @this.InvalidateMeasure();
+        }
+
+        /// <summary>
+        /// Update measured and trimmed text output if text trimming option has changed.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnShowElipsesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PathTrimmingTextBlock @this = (PathTrimmingTextBlock)d;
+
+            // This element will be re-measured
+            // The text will be updated during that process
+            @this.InvalidateMeasure();
         }
         #endregion methods
     }
