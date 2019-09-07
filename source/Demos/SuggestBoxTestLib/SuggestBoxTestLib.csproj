@@ -64,17 +64,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SuggestBoxLib\SuggestBoxLib.csproj">
-      <Project>{78bf82dc-38fd-41dc-a8ce-45c79f628103}</Project>
-      <Name>SuggestLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Views\DemoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\SuggestBoxLib\SuggestBoxLib.csproj">
+      <Project>{f6d38418-cd9a-4f26-bc8b-12c9bd74a672}</Project>
+      <Name>SuggestBoxLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

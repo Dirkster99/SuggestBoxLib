@@ -100,8 +100,8 @@
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\SuggestBoxLib\SuggestBoxLib.csproj">
-      <Project>{78bf82dc-38fd-41dc-a8ce-45c79f628103}</Project>
-      <Name>SuggestLib</Name>
+      <Project>{f6d38418-cd9a-4f26-bc8b-12c9bd74a672}</Project>
+      <Name>SuggestBoxLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\SuggestBoxTestLib\SuggestBoxTestLib.csproj">
       <Project>{f6a08289-52e8-45cd-928b-e71d7bcb6290}</Project>

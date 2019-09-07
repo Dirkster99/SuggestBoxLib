@@ -1,0 +1,1222 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SuggestBoxLib</name>
+    </assembly>
+    <members>
+        <member name="T:SuggestBoxLib.Converters.BoolToVisibilityPropConverter">
+            <summary>
+            Converts a boolean value into a configurable
+            value of type <seealso cref="T:System.Windows.Visibility"/>.
+            
+            Source: http://stackoverflow.com/questions/3128023/wpf-booleantovisibilityconverter-that-converts-to-hidden-instead-of-collapsed-wh
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.TrueValue">
+            <summary>
+            Gets/sets the <see cref="T:System.Windows.Visibility"/> value that is associated
+            (converted into) with the boolean true value.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.FalseValue">
+            <summary>
+            Gets/sets the <see cref="T:System.Windows.Visibility"/> value that is associated
+            (converted into) with the boolean false value.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convertzs a bool value into <see cref="T:System.Windows.Visibility"/> as configured in the
+            <see cref="P:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.TrueValue"/> and <see cref="P:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.FalseValue"/> properties.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convertzs a <see cref="T:System.Windows.Visibility"/> value into bool as configured in the
+            <see cref="P:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.TrueValue"/> and <see cref="P:SuggestBoxLib.Converters.BoolToVisibilityPropConverter.FalseValue"/> properties.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SuggestBoxLib.Converters.DoubleAddConverter">
+            <summary>
+            Converts an array of double values into their sum() and returns it.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.DoubleAddConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Expects an array of doubles and converts these values to their sum.
+            </summary>
+            <param name="values"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.DoubleAddConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value"></param>
+            <param name="targetTypes"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SuggestBoxLib.Converters.IntToVisibilityPropConverter">
+            <summary>
+            Converts an int value of zero or non-zero into a configurable
+            value of type <seealso cref="T:System.Windows.Visibility"/>.
+            
+            Source: http://stackoverflow.com/questions/3128023/wpf-booleantovisibilityconverter-that-converts-to-hidden-instead-of-collapsed-wh
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.IntToVisibilityPropConverter.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Converters.IntToVisibilityPropConverter.ZeroValue">
+            <summary>
+            Gets/sets the <see cref="T:System.Windows.Visibility"/> value that is associated
+            (converted into) with the boolean true value.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Converters.IntToVisibilityPropConverter.NonZeroValue">
+            <summary>
+            Gets/sets the <see cref="T:System.Windows.Visibility"/> value that is associated
+            (converted into) with the boolean false value.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.IntToVisibilityPropConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts an int value into <see cref="T:System.Windows.Visibility"/> as configured in the
+            <see cref="P:SuggestBoxLib.Converters.IntToVisibilityPropConverter.ZeroValue"/> and <see cref="P:SuggestBoxLib.Converters.IntToVisibilityPropConverter.NonZeroValue"/> properties.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.IntToVisibilityPropConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SuggestBoxLib.Converters.InvertBoolConverter">
+            <summary>
+            Inverts a boolean value and returns it.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.InvertBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Returns an inverted boolean value.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.InvertBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Returns an inverted boolean value.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SuggestBoxLib.Converters.RecentSuggestsVisibilityConverter">
+            <summary>
+            Implements a <see cref="T:System.Windows.Data.IMultiValueConverter"/> that expects an int and bool
+            value as input and outputs a <see cref="F:System.Windows.Visibility.Visible"/> if:
+            - int > 0 and bool == true
+            - output is otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.RecentSuggestsVisibilityConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert int and bool into associated <see cref="T:System.Windows.Visibility"/> output value.
+            </summary>
+            <param name="values"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.Converters.RecentSuggestsVisibilityConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not Implemented.
+            </summary>
+            <param name="value"></param>
+            <param name="targetTypes"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SuggestBoxLib.Events.EditPathResult">
+            <summary>
+            Determines whether the textual editing of the path was:
+            1) Cancell'ed (eg: user pressed Escape key -> rollback to previous location) or
+            2) OK'ed (eg: user pressed Enter key -> tree view should shown new location)
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Events.EditPathResult.Cancel">
+            <summary>
+            The process of changing location has been cancelled:
+            The application should stay at the previous known location.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Events.EditPathResult.OK">
+            <summary>
+            The process of changing location has been OK'ed:
+            The application should change to the new location to
+            reflect the selection.
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.Events.EditResult">
+            <summary>
+            Implements a simple class to store what the new loaction of
+            a path edit workflow is and whether editing was cancell'ed or OK'ed.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Events.EditResult.#ctor(SuggestBoxLib.Events.EditPathResult,System.String)">
+            <summary>
+            Parameterized standard constructor
+            </summary>
+            <param name="result"></param>
+            <param name="newLocation"></param>
+        </member>
+        <member name="M:SuggestBoxLib.Events.EditResult.#ctor">
+            <summary>
+            Hidden standard constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Events.EditResult.Result">
+            <summary>
+            Gets whether the path editing should be canceled or not.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Events.EditResult.NewLocation">
+            <summary>
+            Gets the new path location.
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.Events.NextTargetLocationArgs">
+            <summary>
+            Class implements an event that tells subscribers
+            when the user has finished edinting a path and what
+            the result of that editing is.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Events.NextTargetLocationArgs.#ctor(SuggestBoxLib.Events.EditResult)">
+            <summary>
+            Parameterized standard constructor
+            </summary>
+            <param name="editResult"></param>
+        </member>
+        <member name="M:SuggestBoxLib.Events.NextTargetLocationArgs.#ctor">
+            <summary>
+            Hidden standard constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Events.NextTargetLocationArgs.EditResult">
+            <summary>
+            Gets the result of the path editing workflow.
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.Interfaces.ISuggestResult">
+            <summary>
+            Defines properties and methods of an object that is used to generate a list
+            of suggestion results and whether the given path was considered as valid or not.
+            
+            This type of object is typically used by a <see cref="T:SuggestBoxLib.Interfaces.ISuggestSource"/> object.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Interfaces.ISuggestResult.Suggestions">
+            <summary>
+            Gets a list of suugestion based on a given input.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.Interfaces.ISuggestResult.ValidPath">
+            <summary>
+            Gets/sets whether the given input was considered as valid or not.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Interfaces.ISuggestResult.AddRange(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Adds a range of entries into the list of <see cref="P:SuggestBoxLib.Interfaces.ISuggestResult.Suggestions"/>.
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="T:SuggestBoxLib.Interfaces.ISuggestSource">
+            <summary>
+            Defines a suggestion interface to generate suggestions
+            based on sub entries of specified data.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Interfaces.ISuggestSource.SuggestAsync(System.Object,System.String)">
+            <summary>
+            Method returns a task that returns a list of suggestion objects
+            that are associated to the <paramref name="input"/> string
+            and given <paramref name="location"/> object.
+            
+            The list of suggestion is empty if helper object is null.
+            </summary>
+            <param name="location">Currently selected location
+            or root of the hierarchy being browsed.</param>
+            <param name="input">Text input to formulate string based path.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SuggestBoxLib.EllipsisPlacement">
+            <summary>
+            Enum for specifying where the ellipsis should appear.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.EllipsisPlacement.None">
+            <summary>
+            Do not show an ellipsis in the Text of the PathTrimming TexBlock
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.EllipsisPlacement.Center">
+            <summary>
+            Show an ellipsis in the center of the Text in the PathTrimming TexBlock
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.EllipsisPlacement.Left">
+            <summary>
+            Show an ellipsis in the left side of the Text in the PathTrimming TexBlock
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.EllipsisPlacement.Right">
+            <summary>
+            Show an ellipsis in the right side of the Text in the PathTrimming TexBlock
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.PathTrimmingTextBlock">
+            <summary>
+            A TextBlock like control that provides special text trimming logic
+            designed for a file or folder path.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.PathTrimmingTextBlock.PathProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.PathTrimmingTextBlock.Path"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.PathTrimmingTextBlock.ShowElipsesProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.PathTrimmingTextBlock.ShowElipses"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.PathTrimmingTextBlock.Path">
+            <summary>
+            Gets/sets the path to display.
+            The text that is actually displayed will be trimmed with Ellipses.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.PathTrimmingTextBlock.ShowElipses">
+            <summary>
+            Gets/sets whether the Path string should be shortend and displayed with an elipses or not.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Called to remeasure a control.
+            </summary>
+            <param name="constraint">The maximum size that the method can return.</param>
+            <returns>The size of the control, up to the maximum specified by constraint.</returns>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.GetTrimmedPath(System.String,System.Windows.Size,SuggestBoxLib.EllipsisPlacement,System.Windows.Controls.Control)">
+            <summary>
+            Compute the text to display (with ellipsis) that fits the ActualWidth of the container
+            </summary>
+            <param name="inputString">Input string to measure whether it fits into container width or not.</param>
+            <param name="constraint">ActualWidth restriction by container element (eg.: Grid)</param>
+            <param name="placement"></param>
+            <param name="ctrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.MeasureString(System.String,System.Windows.Controls.Control)">
+            <summary>
+            Returns the size of the given string if it were to be rendered.
+            </summary>
+            <param name="str">The string to measure.</param>
+            <param name="ctrl"></param>
+            <returns>The size of the string.</returns>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.FormatWith(SuggestBoxLib.EllipsisPlacement,System.Object[])">
+            <summary>
+            Extend the string constructor with a string.Format like syntax.
+            </summary>
+            <param name="args"></param>
+            <param name="placing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.OnPathChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Update measured and trimmed text output if path text property has changed.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.PathTrimmingTextBlock.OnShowElipsesChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Update measured and trimmed text output if text trimming option has changed.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:SuggestBoxLib.SuggestBox">
+            <summary>
+            Implements a text based control that updates a list of suggestions
+            when user updates a given text based path -> TextChangedEvent is raised.
+            
+            This control uses <see cref="T:SuggestBoxLib.Interfaces.ISuggestSource"/> and HierarchyHelper
+            to suggest entries in a seperate popup as the user types.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBox.TextChangedCommandProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestBox.TextChangedCommand"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBox.#cctor">
+            <summary>
+            Static class constructor.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBox.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBox.TextChangedCommand">
+            <summary>
+            Gets/sets a command that should be executed whenever the text in the textbox
+            portion of this control has changed.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBox.OnEnableSuggestionChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the <see cref="P:SuggestBoxLib.SuggestBoxBase.EnableSuggestions"/> dependency property
+            has changed its value.
+            
+            Overwrite this method if you want to consume changes of this property.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBox.SuggestBox_IsVisibleChanged(System.Object,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the visibility of the control is changed to query for
+            suggestions if this was enabled...
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBox.OnTextChanged(System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Method executes when new text is entered in the textbox portion of the control.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:SuggestBoxLib.SuggestBoxBase">
+            <summary>
+            Implements a base control that updates a list of suggestions
+            when user updates a given text based path -> TextChangedEvent is raised.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PART_Popup">
+            <summary>
+            Defines the templated name of the required <see cref="T:System.Windows.Controls.Primitives.Popup"/>
+            control in the <see cref="T:SuggestBoxLib.SuggestBoxBase"/> template.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PART_ResizeGripThumb">
+            <summary>
+            Defines the templated name of the required Resize Grip <see cref="T:System.Windows.Controls.Primitives.Thumb"/>
+            control in the <see cref="T:SuggestBoxLib.SuggestBoxBase"/> template.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PART_ResizeableGrid">
+            <summary>
+            Defines the templated name of the required Resizeable <see cref="T:System.Windows.Controls.Grid"/>
+            control in the <see cref="T:SuggestBoxLib.SuggestBoxBase"/> template.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PART_ItemList">
+            <summary>
+            Defines the templated name of the required ItemsList <see cref="T:System.Windows.Controls.ListBox"/>
+            control in the <see cref="T:SuggestBoxLib.SuggestBoxBase"/> template.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.DisplayMemberPathProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.DisplayMemberPath"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.SelectedValuePathProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.SelectedValuePath"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.ItemTemplateProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.ItemTemplate"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.IsPopupOpenedProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.IsPopupOpened"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.HintProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.Hint"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.IsHintVisibleProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.IsHintVisible"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.ValueChangedEvent">
+            <summary>
+            Implements a <see cref="E:SuggestBoxLib.SuggestBoxBase.ValueChanged"/> routed event which is raised when
+            the text in the <see cref="T:SuggestBoxLib.SuggestBoxBase"/> has been changed.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PopupBorderBrushProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.PopupBorderBrush"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PopupBorderThicknessProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.PopupBorderThickness"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.EnableSuggestionsProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.EnableSuggestions"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.ItemsSourceProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.ItemsSource"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.IsDeferredScrollingProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestBoxBase.IsDeferredScrolling"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.PathValidationProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestBoxBase.PathValidation"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.ValidTextProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestBoxBase.ValidText"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestBoxBase.ShowElipsesProperty">
+            <summary>
+            Implements the backing store of the <see cref="P:SuggestBoxLib.SuggestBoxBase.ShowElipses"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.#ctor">
+            <summary>
+            Standard class constructor
+            </summary>
+        </member>
+        <member name="E:SuggestBoxLib.SuggestBoxBase.ValueChanged">
+            <summary>
+            Gets/sets a routed event handler that is invoked whenever the value of the
+            Textbox.TextProperty of this textbox derived control has changed.
+            </summary>
+        </member>
+        <member name="E:SuggestBoxLib.SuggestBoxBase.NewLocationRequestEvent">
+            <summary>
+            Implements a location changed event, which is raised when the user
+            types a certain key gesture (Enter == OK, Escape == Cancel) to inform
+            the client application that another location change request is available.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.DisplayMemberPath">
+            <summary>
+            Gets/sets the DisplayMemberPath for the ListBox portion of the suggestion popup.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.SelectedValuePath">
+            <summary>
+            Gets/sets the SelectedValuePath for the ListBox portion of the suggestion popup.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.ItemTemplate">
+            <summary>
+            Gets/sets the ItemTemplate for the ListBox portion of the suggestion popup.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.IsPopupOpened">
+            <summary>
+            Gets/sets whether the Popup portion of the control is currently open or not.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.Hint">
+            <summary>
+            Gets/sets the Watermark Hint that is shown if the user has not typed anything, yet,
+            and if <see cref="P:SuggestBoxLib.SuggestBoxBase.IsHintVisible"/> is consfigured accordingly.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.IsHintVisible">
+            <summary>
+            Gets/sets whether Watermark in the textbox portion of suggestion box
+            is currently visible or not.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.PopupBorderBrush">
+            <summary>
+            Gets/sets the <see cref="T:System.Windows.Media.Brush"/> of the border in the popup
+            of the suggestion box.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.PopupBorderThickness">
+            <summary>
+            Gets/sets the <see cref="T:System.Windows.Thickness"/> of the border in the popup
+            of the suggestion box.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.EnableSuggestions">
+            <summary>
+            Gets/sets whether suggestions should currently be queried and viewed or not.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.ItemsSource">
+            <summary>
+            Gets/sets an <see cref="T:System.Collections.IEnumerable"/> ItemsSource for the list of objects
+            that pops up when the user has entered some text.
+            
+            Ideally, this should be an ObservableCollection{T} since the control with
+            look for the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> event in order to listen
+            for this type of event.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.IsDeferredScrolling">
+            <summary>
+            Gets/sets whether the scrollbar <see cref="T:System.Windows.Controls.ListBox"/> inside the suggestions PopUp
+            control is directly linked to scrolling the content or not (is deferred).
+            
+            This property is handled by the control itself and should not be used via binding.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.PathValidation">
+            <summary>
+            Gets/sets a <see cref="T:System.Windows.Controls.ValidationRule"/> that must be present to show a
+            validation error (red rectangle around textbox) if user entered invalid data.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.ValidText">
+            <summary>
+            Gets/sets whether the current text should be marked as invalid (control
+            shows a red rectangle around the textbox portion or not).
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.ParentWindowIsClosing">
+            <summary>
+            Gets whether the containing parent window is about to be closed or not.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestBoxBase.ShowElipses">
+            <summary>
+            Gets/sets whether the Path string should be shortend and displayed with an elipses or not.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnApplyTemplate">
+            <summary>
+            Is called when a control template is applied.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnPreviewMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Invoked when an unhandled <see cref="E:System.Windows.UIElement.PreviewMouseLeftButtonDown"/>
+            routed event reaches an element in its route that is derived from this class.
+            
+            Implement this method to add class handling for this event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.SaveRestorePopUpStateOnWindowDeActivation">
+            <summary>
+            Attempts to find the window that contains this pop-up control
+            and attaches a handler for window activation and deactivation
+            to save and restore pop-up state such that pop up is never open
+            when window is deactivated.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.ParentWindow_LocationChanged(System.Object,System.EventArgs)">
+            <summary>
+            Close the pop-up if user drags the window around while its open.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.ParentWindow_SizeChanged(System.Object,System.Windows.SizeChangedEventArgs)">
+            <summary>
+            Close pop-up element if window is re-positioned while pop-up is open
+            (instead of looking stupid with an open popup at an invalid x,y position).
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.ParentWindow_PreviewMouseDown(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Is invoked when any element in the window is clicked and closes
+            the popup if it was open and the clicked item was something else.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.AttachHandlers(System.Windows.Controls.ListBox)">
+            <summary>
+            Attaches mouse and keyboard handlers to the <paramref name="itemList"/>
+            to make selected entries navigatable for the user.
+            </summary>
+            <param name="itemList"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.updateValueFromListBox(System.Boolean)">
+            <summary>
+            Method is invoked when an item in the popup list is selected.
+            
+            The control is derived from TextBox which is why we can set the
+            TextBox.Text property with the SelectedValue here.
+            
+            The method also calls the updateSource() method (or its override
+            in a derived class) and closes the popup portion of the control.
+            </summary>
+            <param name="updateSrc">Calls the updateSource() method (or its override
+            in a derived class) if true, method is not invoked otherwise.</param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.updateSource">
+            <summary>
+            Updates the TextBox.Text Binding expression (if any) and
+            raises the <see cref="F:SuggestBoxLib.SuggestBoxBase.ValueChangedEvent"/> event to notify
+            subscribers of the changed text value.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.PopupIfSuggest">
+            <summary>
+            Opens the popup control if SuggestBox has currently focus
+            and there are suggestions available.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.MarkInvalidInputSuggestBox(System.Boolean,System.String)">
+            <summary>
+            Sets or clears a validation error on the SuggestBox
+            to indicate invalid input to the user.
+            </summary>
+            <param name="markError">True: Shows a red validation error rectangle around the SuggestBox
+            (<paramref name="msg"/> should also be set).
+            False: Clears previously set validation errors around the Text property of the SuggestBox.
+            </param>
+            <param name="msg">Error message (eg.: "invalid input") is set on the binding expression if
+            <paramref name="markError"/> is true.</param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.SetPopUp(System.Boolean,System.String)">
+            <summary>
+            Method is invoked to close or open the PopUp control
+            via bound dependency property.
+            </summary>
+            <param name="newIsOpenValue"></param>
+            <param name="sourceOfReuqest"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnPreviewKeyDown(System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Called when the System.Windows.UIElement.KeyDown occurs.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.MessageEditResult(SuggestBoxLib.Events.EditPathResult)">
+            <summary>
+            Method creates and sends an <see cref="T:SuggestBoxLib.Events.EditResult"/> event to
+            attached listners (if any). This event can be used to react on simple
+            keyboard short-cuts like Enter or Escape...
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnEnableSuggestionChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the <see cref="P:SuggestBoxLib.SuggestBoxBase.EnableSuggestions"/> dependency property
+            has changed its value.
+            
+            Overwrite this method if you want to consume changes of this property.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.getDirectoryName(System.String)">
+            <summary>
+            Returns:
+            1) The current path if it ends with a '\' character or
+            2) The next substring that is delimited by a '\' character or
+            3 an empty string if there is no '\' character present.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.Observable_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Is invoked when the bound list of suggestions in the <see cref="P:SuggestBoxLib.SuggestBoxBase.ItemsSource"/>
+            has changed and shows the popup list if control has focus and there are
+            suggestions available.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnIsPopUpOpenChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method is attached on the changed handler of the IsPopUp dependency property.
+            The IsPopUp dependency property in turn is bound to the popup and changes between
+            true and false when the popup opens or closes.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnEnableSuggestionChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the <see cref="P:SuggestBoxLib.SuggestBoxBase.EnableSuggestions"/> dependency property
+            has changed its value.
+            </summary>
+            <param name="d"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.MyThumb_DragDelta(System.Object,System.Windows.Controls.Primitives.DragDeltaEventArgs)">
+            <summary>
+            https://stackoverflow.com/questions/1695101/why-are-actualwidth-and-actualheight-0-0-in-this-case
+            
+            Method executes when user drages the resize thumb to resize
+            the suggestions drop down of the suggestion box.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestBoxBase.OnIsPopUpOpenChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Method executes when the Pop-up list is opened or closed.
+            
+            The method re-focuses the textbox when the popup closes
+            and sets the cursor at the end of the textbox string.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:SuggestBoxLib.SuggestComboBox">
+            <summary>
+            Implements a control that lets the user pick a suggestion
+            from a popup list of recently visited locations.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestComboBox.PopUpWidthProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestComboBox.PopUpWidth"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestComboBox.ButtonContentProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestComboBox.ButtonContent"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestComboBox.ButtonBackgroundProperty">
+            <summary>
+            Implements the backing store for the <see cref="P:SuggestBoxLib.SuggestComboBox.ButtonBackground"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestComboBox.ToggleRecentListCommandProperty">
+            <summary>
+            Backing store of the <see cref="P:SuggestBoxLib.SuggestComboBox.ToggleRecentListCommand"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.SuggestComboBox.ToggleRecentListCommandParameterProperty">
+            <summary>
+            Backing store of the <see cref="P:SuggestBoxLib.SuggestComboBox.ToggleRecentListCommandParameter"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestComboBox.#cctor">
+            <summary>
+            Static class constructor
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestComboBox.PopUpWidth">
+            <summary>
+            Gets/sets the width if the pop-up that opens underneath the toggle button.
+            Setting a custom width can be useful since the pop-up is otherwise as wide
+            or small as the largest entry is. Aligning the width with the size of
+            other controls (eg. TextBox that acts similar to the edit host inside the
+            combobox) can be a useful thing to do.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestComboBox.ButtonContent">
+            <summary>
+            Gets/sets the content property of the drop down button
+            in the <see cref="T:SuggestBoxLib.SuggestComboBox"/> drop down element.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestComboBox.ButtonBackground">
+            <summary>
+            Gets/sets the Background <see cref="T:System.Windows.Media.Brush"/> of the drop down button
+            in the <see cref="T:SuggestBoxLib.SuggestComboBox"/> drop down element.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestComboBox.ToggleRecentListCommand">
+            <summary>
+            Gets/sets a command that toggles the pop-up portion of the suggestion list.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestComboBox.ToggleRecentListCommandParameter">
+            <summary>
+            Gets/sets a command parameter for command
+            that toggles the pop-up portion of the suggestion list.
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.SuggestSource.SuggestResult">
+            <summary>
+            Models a result class for the drop down portion of the SuggestionBox.
+            
+            Each suggestion source <see cref="T:SuggestBoxLib.Interfaces.ISuggestSource"/> returns one of these objects
+            containing a list of suggestions and whether the input was considered valid or not.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestSource.SuggestResult.#ctor(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Class constructor from list of suggestions
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestSource.SuggestResult.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.SuggestSource.SuggestResult.AddRange(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Adds a range of entries into the list of <see cref="P:SuggestBoxLib.SuggestSource.SuggestResult.Suggestions"/>.
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestSource.SuggestResult.Suggestions">
+            <summary>
+            Gets a list of suugestion based on a given input.
+            </summary>
+        </member>
+        <member name="P:SuggestBoxLib.SuggestSource.SuggestResult.ValidPath">
+            <summary>
+            Gets/sets whether the given input was considered as valid or not.
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.Themes.ResourceKeys">
+            <summary>
+            Class implements static resource keys that should be referenced to configure
+            colors, styles and other elements that are typically changed between themes.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlAccentColorKey">
+            <summary>
+            Accent Color Key - This Color key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlAccentBrushKey">
+            <summary>
+            Accent Brush Key - This Brush key is used to accent elements in the UI
+            (e.g.: Color of Activated Normal Window Frame, ResizeGrip, Focus or MouseOver input elements)
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.PopListBoxControlTemplate">
+            <summary>
+            Gets the Style of the ListBox in the pop-up element of the suggest box.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.PopListBoxScrollViewerControlTemplate">
+            <summary>
+            Gets the Style of the ScrollViewer in the pop-up element of the suggest box.
+            
+            https://www.codeproject.com/Tips/1271095/A-Custom-WPF-ScrollViewer
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ResizeGripStyleKey">
+            <summary>
+            Gets the Style of the ResizeGrip in the pop-up element of the suggest box.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlNormalForegroundKey">
+            <summary>
+            Unspecific normal foreground <see cref="T:System.Windows.Media.Color"/> key.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlNormalForegroundBrushKey">
+            <summary>
+            Unspecific normal foreground <see cref="T:System.Windows.Media.Brush"/> key.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlTextBrushKey">
+            <summary>
+            Gets a the applicable foreground Brush key that should be used for coloring text.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlInputBackgroundKey">
+            <summary>
+            Gets a background Brush key of an input control.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlInputBorderKey">
+            <summary>
+            Gets a border Brush key of an input control.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlPopupBackgroundKey">
+            <summary>
+            Gets a background Color key of a Pop-Up control.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlPopupBackgroundBrushKey">
+            <summary>
+            Gets a background Brush key of a Pop-Up control.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.PopUpControlNormalBackgroundKey">
+            <summary>
+            PopUp control background <see cref="T:System.Windows.Media.Brush"/> key for disabled items in ItemsControls, such as, treeviews, listbox etc.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.PopUpControlNormalBorderKey">
+            <summary>
+            PopUp control border <see cref="T:System.Windows.Media.Brush"/> key for disabled items in ItemsControls, such as, treeviews, listbox etc.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ResizeThumbBackgroundDraggingKey">
+            <summary>
+            Gets the background Brush key of the thumb that is used to resize
+            the pop-up element of the suggestbox.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.HistoryButtonStyleKey">
+            <summary>
+            Determines the style of the history (forward, backward, up) buttons in BrowseHistory display.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.HistoryToggleButtonStyleKey">
+            <summary>
+            Determines the style of the toggle drop down button in BrowseHistory display.
+            This button is usually a clickable down chevron symbol with a pop-up list of recent
+            locations underneath.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.SuggestComboBoxToggleButtonStyleKey">
+            <summary>
+            Determines the style of the toggle drop down button in SuggestComboBox display.
+            This button is usually a clickable down chevron symbol with a pop-up list of recent
+            locations underneath.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlItemBackgroundSelectedKey">
+            <summary>
+            Item background <see cref="T:System.Windows.Media.Brush"/> key for selected or highlighted items in ItemsControls, such as, treeviews, listbox etc.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlItemBorderSelectedKey">
+            <summary>
+            Item border <see cref="T:System.Windows.Media.Brush"/> key for selected or highlighted items in ItemsControls, such as, treeviews, listbox etc.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlItemTextSelectedKey">
+            <summary>
+            Item foreground <see cref="T:System.Windows.Media.Brush"/> key for selected items in ItemsControls, such as, treeviews, listbox etc.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlMouseOverBackgroundBrushKey">
+            <summary>
+            Unspecific normal background <see cref="T:System.Windows.Media.Brush"/> key for mouse over effects.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlInputTextDisabledKey">
+            <summary>
+            Gets text or foreground Brush key of an unspecified input control that is in disabled state
+            (e.g.: ItemsControl, TreeView, ListBox ...).
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlInputBackgroundHoverKey">
+            <summary>
+            Gets a background Brush key of an input control when the mouse is hovering over it.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlInputBorderHoverKey">
+            <summary>
+            Gets a border Brush key of an input control when the mouse is hovering over it.
+            </summary>
+        </member>
+        <member name="F:SuggestBoxLib.Themes.ResourceKeys.ControlItemTextHoverKey">
+            <summary>
+            Gets text or foreground Brush key of an item in an ItemsControl (TreeView, ListBox, ListView)
+            where the mouse is hovering over.
+            </summary>
+        </member>
+        <member name="T:SuggestBoxLib.Utils.InvalidValidationRule">
+            <summary>
+            Implements a validation rule that will always be invalid.
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.InvalidValidationRule.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.InvalidValidationRule.Validate(System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Always returns an invalid state - use this for standard
+            marking of invalid input with red rectangle.
+            </summary>
+            <param name="value"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.GetParent(System.Windows.DependencyObject)">
+            <summary>
+            Tries its best to return the specified element's parent. It will 
+            try to find, in this order, the VisualParent, LogicalParent, LogicalTemplatedParent.
+            It only works for Visual, FrameworkElement or FrameworkContentElement.
+            </summary>
+            <param name="element">The element to which to return the parent. It will only 
+            work if element is a Visual, a FrameworkElement or a FrameworkContentElement.</param>
+            <remarks>If the logical parent is not found (Parent), we check the TemplatedParent
+            (see FrameworkElement.Parent documentation). But, we never actually witnessed
+            this situation.</remarks>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.FindParent``1(System.Windows.DependencyObject)">
+            <summary>
+            This will search for a parent of the specified type.
+            </summary>
+            <typeparam name="T">The type of the element to find</typeparam>
+            <param name="startingObject">The node where the search begins. This element is not checked.</param>
+            <returns>Returns the found element. Null if nothing is found.</returns>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.FindParent``1(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            This will search for a parent of the specified type.
+            </summary>
+            <typeparam name="T">The type of the element to find</typeparam>
+            <param name="startingObject">The node where the search begins.</param>
+            <param name="checkStartingObject">Should the specified startingObject be checked first.</param>
+            <returns>Returns the found element. Null if nothing is found.</returns>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.FindParent``1(System.Windows.DependencyObject,System.Boolean,System.Func{``0,System.Boolean})">
+            <summary>
+            This will search for a parent of the specified type.
+            </summary>
+            <typeparam name="T">The type of the element to find</typeparam>
+            <param name="startingObject">The node where the search begins.</param>
+            <param name="checkStartingObject">Should the specified startingObject be checked first.</param>
+            <param name="additionalCheck">Provide a callback to check additional properties 
+            of the found elements. Can be left Null if no additional criteria are needed.</param>
+            <returns>Returns the found element. Null if nothing is found.</returns>
+            <example>Button button = TreeHelper.FindParent&lt;Button&gt;( this, foundChild => foundChild.Focusable );</example>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.FindChild``1(System.Windows.DependencyObject)">
+            <summary>
+            This will search for a child of the specified type. The search is performed 
+            hierarchically, breadth first (as opposed to depth first).
+            </summary>
+            <typeparam name="T">The type of the element to find</typeparam>
+            <param name="parent">The root of the tree to search for. This element itself is not checked.</param>
+            <returns>Returns the found element. Null if nothing is found.</returns>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.FindChild``1(System.Windows.DependencyObject,System.Func{``0,System.Boolean})">
+            <summary>
+            This will search for a child of the specified type. The search is performed 
+            hierarchically, breadth first (as opposed to depth first).
+            </summary>
+            <typeparam name="T">The type of the element to find</typeparam>
+            <param name="parent">The root of the tree to search for. This element itself is not checked.</param>
+            <param name="additionalCheck">Provide a callback to check additional properties 
+            of the found elements. Can be left Null if no additional criteria are needed.</param>
+            <returns>Returns the found element. Null if nothing is found.</returns>
+            <example>Button button = TreeHelper.FindChild&lt;Button&gt;( this, foundChild => foundChild.Focusable );</example>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.IsDescendantOf(System.Windows.DependencyObject,System.Windows.DependencyObject)">
+            <summary>
+            Returns true if the specified element is a child of parent somewhere in the visual 
+            tree. This method will work for Visual, FrameworkElement and FrameworkContentElement.
+            </summary>
+            <param name="element">The element that is potentially a child of the specified parent.</param>
+            <param name="parent">The element that is potentially a parent of the specified element.</param>
+        </member>
+        <member name="M:SuggestBoxLib.Utils.TreeHelper.IsDescendantOf(System.Windows.DependencyObject,System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Returns true if the specified element is a child of parent somewhere in the visual 
+            tree. This method will work for Visual, FrameworkElement and FrameworkContentElement.
+            </summary>
+            <param name="element">The element that is potentially a child of the specified parent.</param>
+            <param name="parent">The element that is potentially a parent of the specified element.</param>
+            <param name="recurseIntoPopup"></param>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>
