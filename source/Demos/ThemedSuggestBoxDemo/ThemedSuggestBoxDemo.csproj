@@ -44,21 +44,21 @@
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\Microsoft.Expression.Interactions.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.MWindowLib.1.2.1\lib\net452\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="MLib, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MLib.1.0.10\lib\net4\MLib.dll</HintPath>
+    <Reference Include="MLib, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MLib.1.2.0\lib\net4\MLib.dll</HintPath>
     </Reference>
     <Reference Include="MWindowInterfacesLib, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\MWindowInterfacesLib.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.MWindowLib.1.2.1\lib\net452\MWindowInterfacesLib.dll</HintPath>
     </Reference>
-    <Reference Include="MWindowLib, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\MWindowLib.dll</HintPath>
+    <Reference Include="MWindowLib, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dirkster.MWindowLib.1.2.1\lib\net452\MWindowLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Dirkster.MWindowLib.1.0.4.2\lib\net452\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Dirkster.MWindowLib.1.2.1\lib\net452\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -149,8 +149,8 @@
       <Name>Settings</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SuggestBoxLib\SuggestBoxLib.csproj">
-      <Project>{78bf82dc-38fd-41dc-a8ce-45c79f628103}</Project>
-      <Name>SuggestLib</Name>
+      <Project>{f6d38418-cd9a-4f26-bc8b-12c9bd74a672}</Project>
+      <Name>SuggestBoxLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\SuggestBoxTestLib\SuggestBoxTestLib.csproj">
       <Project>{f6a08289-52e8-45cd-928b-e71d7bcb6290}</Project>

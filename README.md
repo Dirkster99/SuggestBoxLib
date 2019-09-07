@@ -1,5 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/nw16d7fi59x0se0p?svg=true)](https://ci.appveyor.com/project/Dirkster99/suggestboxlib) [![Release](https://img.shields.io/github/release/Dirkster99/SuggestBoxLib.svg)](https://github.com/Dirkster99/SuggestBoxLib/releases/latest) [![NuGet](https://img.shields.io/nuget/dt/Dirkster.SuggestBoxLib.svg)](http://nuget.org/packages/Dirkster.SuggestBoxLib)
 
+![Net4](https://badgen.net/badge/Framework/.Net&nbsp;4/blue) ![NetCore3](https://badgen.net/badge/Framework/NetCore&nbsp;3/blue)
+
 The SuggestBox control in this repository was originally developed by <b>Leung Yat Chun Joseph <a href="https://github.com/lycj">lycj</a></b> in his FileExplorer application originating from CodePlex and <a href="https://www.codeproject.com/Members/Fainx">CodeProject</a>.
 
 # SuggestBoxLib

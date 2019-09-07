@@ -1,134 +1,71 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78BF82DC-38FD-41DC-A8CE-45C79F628103}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <RootNamespace>SuggestBoxLib</RootNamespace>
-    <AssemblyName>SuggestBoxLib</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net452;netcoreapp3.0</TargetFrameworks>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Debug\SuggestBoxLib.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Release\SuggestBoxLib.xml</DocumentationFile>
-  </PropertyGroup>
+
   <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblyTitle>SuggestBoxLib</AssemblyTitle>
+    <PackageId>Dirkster.SuggestBoxLib</PackageId>
+    <Product>SuggestBoxLib</Product>
+    <Copyright>2018 - 2019</Copyright>
+    <Company>Open Source</Company>
+    <Description>Provides a WPF/MVVM AutoComplete control</Description>
+    <Version>1.2</Version>
+    <AssemblyVersion>1.2</AssemblyVersion>
+    <FileVersion>1.2</FileVersion>
+    <VersionPrefix>1.2</VersionPrefix>
+    <PackageProjectUrl>https://github.com/Dirkster99/SuggestBoxLib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Dirkster99/SuggestBoxLib</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>mvvm c# .net autocomplete wpf dark light themable control</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/Dirkster99/Docu/master/HistoryControlLib/Branch_64x.png</PackageIconUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>Package Update with support based on .NetCore 3 Preview 8 and .Net4.5.2</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <DocumentationFile>SuggestBoxLib.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+    <DocumentationFile>SuggestBoxLib.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Converters\IntToVisibilityPropConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityPropConverter.cs" />
-    <Compile Include="Converters\DoubleAddConverter.cs" />
-    <Compile Include="Converters\InvertBoolConverter.cs" />
-    <Compile Include="Converters\RecentSuggestsVisibilityConverter.cs" />
-    <Compile Include="Events\NextTargetLocationArgs.cs" />
-    <Compile Include="Interfaces\ISuggestResult.cs" />
-    <Compile Include="PathTrimmingTextBlock.cs" />
-    <Compile Include="SuggestBoxBase.xaml.cs">
+    <Compile Update="SuggestBoxBase.xaml.cs">
       <DependentUpon>SuggestBoxBase.xaml</DependentUpon>
     </Compile>
-    <Page Include="Styles\ListBoxTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\ResizeGrip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SuggestBoxBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SuggestComboBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SuggestComboBoxButtonStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\DarkBrushs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\LightBrushs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Interfaces\ISuggestSource.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="SuggestBox.cs" />
-    <Compile Include="SuggestComboBox.cs" />
-    <Compile Include="SuggestSource\SuggestResult.cs" />
-    <Compile Include="Themes\ResourceKeys.cs" />
-    <Compile Include="Utils\InvalidValidationRule.cs" />
-    <Compile Include="Utils\TreeHelper.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <Page Update="Styles\ListBoxTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\ResizeGrip.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SuggestBoxBase.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SuggestComboBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SuggestComboBoxButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\DarkBrushs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Themes\LightBrushs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
