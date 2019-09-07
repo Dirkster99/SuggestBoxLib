@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <TargetFrameworks>net452;netcoreapp3.0</TargetFrameworks>
@@ -20,7 +20,7 @@
     <RepositoryUrl>https://github.com/Dirkster99/SuggestBoxLib</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>mvvm c# .net autocomplete wpf dark light themable control</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/Dirkster99/Docu/master/HistoryControlLib/Branch_64x.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/icons/AutoComplete_64x.png</PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>Package Update with support based on .NetCore 3 Preview 8 and .Net4.5.2</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
