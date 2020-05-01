@@ -1,9 +1,9 @@
-﻿namespace SuggestBoxTestLib.ViewModels.Base
-{
-    using System;
-    using System.Diagnostics;
-    using System.Windows.Input;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Input;
 
+namespace CachedPathSuggestBoxDemo.Infrastructure
+{
     /// <summary>
     /// A command whose sole purpose is to 
     /// relay its functionality to other

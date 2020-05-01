@@ -1,10 +1,10 @@
-﻿using LiteDB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using LiteDB;
 
-namespace WpfApp1
+namespace CachedPathSuggestBoxDemo.Infrastructure
 {
 
     public class SuggestionProvider 

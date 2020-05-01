@@ -1,14 +1,14 @@
-﻿#nullable enable
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace SuggestBoxTestLib.DataSources
+#nullable enable
+
+namespace CachedPathSuggestBoxDemo.Infrastructure
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Defines a suggestion object to generate suggestions
     /// based on sub entries of specified string.

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using SuggestBoxTestLib.DataSources;
-using SuggestBoxTestLib.ViewModels;
-using SuggestBoxTestLib.ViewModels.Base;
+using CachedPathSuggestBoxDemo.Infrastructure;
 
-namespace WpfApp1
+namespace CachedPathSuggestBoxDemo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -1,11 +1,11 @@
-﻿namespace SuggestBoxTestLib.ViewModels
-{
-    using System;
-    using System.Collections;
-    using System.Collections.ObjectModel;
-    using System.Collections.Specialized;
-    using System.Windows.Threading;
+﻿using System;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Windows.Threading;
 
+namespace CachedPathSuggestBoxDemo.Infrastructure
+{
     /// <summary>
     /// WPF-it's implementation
     /// http://stackoverflow.com/questions/7687000/fast-performing-and-thread-safe-observable-collection
