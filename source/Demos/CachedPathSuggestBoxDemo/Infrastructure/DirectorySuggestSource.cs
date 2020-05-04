@@ -13,7 +13,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
     /// Defines a suggestion object to generate suggestions
     /// based on sub entries of specified string.
     /// </summary>
-    public class DirectorySuggestSource
+    public class DirectorySuggest : ISuggest
     {
         #region fields
         private readonly Dictionary<string, CancellationTokenSource> _Queue;
@@ -24,7 +24,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
         /// <summary>
         /// Class constructor
         /// </summary>
-        public DirectorySuggestSource()
+        public DirectorySuggest()
         {
             _Queue = new Dictionary<string, CancellationTokenSource>();
             _SlowStuffSemaphore = new SemaphoreSlim(1, 1);
@@ -69,14 +69,14 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
 
 
-            static IEnumerable<object> EnumerateSubDirs(string input)
+            static IEnumerable<object>? EnumerateSubDirs(string input)
             {
                 if (string.IsNullOrEmpty(input))
                     return EnumerateLogicalDrives();
 
                 var subDirs = EnumerateLogicalDriveOrSubDirs(input, input);
 
-                return subDirs ?? Get();
+                return subDirs!=null? subDirs.Any()? subDirs: Get():null;
 
                 // Find last separator and list directories underneath
                 // with * search-pattern
@@ -90,7 +90,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
                     string[]? directories = null;
                     try
                     {
-                        directories = System.IO.Directory.GetDirectories(folder, searchPattern);
+                        directories = Directory.GetDirectories(folder, searchPattern);
                     }
                     catch
                     {
@@ -161,11 +161,14 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
             static IEnumerable<object>? EnumerateLogicalDriveOrSubDirs(string testDrive, string input)
             {
-                return System.IO.Directory.Exists(testDrive) != true ?
-                    null :
-                    GetLogicalDriveOrSubDirs2(testDrive, input);
+                return System.IO.Directory.Exists(testDrive) ?
+                    GetDirectories(testDrive) is {} array?
+                    GetLogicalDriveOrSubDirs2(testDrive, input, array):
+                    null:
+                    null;
+                   
 
-                static IEnumerable<object>  GetLogicalDriveOrSubDirs2(string testDrive, string input)
+                static IEnumerable<object>?  GetLogicalDriveOrSubDirs2(string testDrive, string input, IEnumerable<string> directories)
                 {
                     // List the drive itself if there was only 1 or 2 letters
                     // since this is not a valid drive and we don'nt know if the user
@@ -173,9 +176,23 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
                     if (input.Length <= 2)
                         yield return new {Header = testDrive, Value = testDrive};
 
-                    // and list all sub-directories of that drive
-                    foreach (var item in System.IO.Directory.GetDirectories(testDrive))
-                        yield return new {Header = item, Value = item};
+                    foreach (var item in directories)
+                        yield return new { Header = item, Value = item };
+                }
+
+                static string[]? GetDirectories(string testDrive)
+                {
+                    string[] directories;
+                    try
+                    {
+                        directories = Directory.GetDirectories(testDrive);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        return null;
+                    }
+
+                    return directories;
                 }
             }
         }

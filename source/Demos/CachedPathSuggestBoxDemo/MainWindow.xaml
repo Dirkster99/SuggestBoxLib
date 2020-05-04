@@ -15,6 +15,7 @@
                                   Width="400"
                                   x:Name="DiskPathSuggestBox"
                                   Hint="Enter a file system path"
+                                  FontSize="14"
                                   Text="{Binding Text}"
                                   Margin="5" />
         <Button Width="100" Grid.Column="1" Content="Save" FontSize="20" FontWeight="Bold" Margin="5" Click="ButtonBase_OnClick">
