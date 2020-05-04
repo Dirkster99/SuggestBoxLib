@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
                     xmlns:bc="clr-namespace:SuggestBoxLib"
                     xmlns:conv="clr-namespace:SuggestBoxLib.Converters"
                     xmlns:reskeys="clr-namespace:SuggestBoxLib.Themes"
@@ -23,6 +22,9 @@
             <Grid x:Name="PART_Root">
                 <TextBlock Text="{TemplateBinding Hint}"
                            Background="Transparent"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="3,0"
                            Foreground="{DynamicResource {x:Static reskeys:ResourceKeys.ControlTextBrushKey}}"
                            Visibility="{Binding IsHintVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource btv}}"
                            Opacity="0.5" />
@@ -34,6 +36,9 @@
                               />
 
                 <bc:PathTrimmingTextBlock
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="3,0"
                     Path="{Binding Text, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                     ShowElipses="{Binding ShowElipses, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                     RenderOptions.ClearTypeHint="Enabled"
