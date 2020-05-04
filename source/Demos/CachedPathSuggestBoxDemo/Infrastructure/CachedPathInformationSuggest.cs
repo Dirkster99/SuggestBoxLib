@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace CachedPathSuggestBoxDemo.Infrastructure
 {
 
-
     public class CachedPathInformationSuggest :ISuggest
     {
+        private static readonly int NumberOfResultsReturned = 5;
+
         public void Insert(string path)
         {
             var fileInfo =new FileInfo(path);
@@ -25,8 +26,8 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
         }
 
         /// <summary>
-        /// Makes suggestions of paths based on match between query and the name of the path.
-        /// Only returns latest 3 results. Newest first.
+        /// Makes suggestions of paths based on match between query and the full-name of the path.
+        /// Only returns latest <see cref="NumberOfResultsReturned"/> results (newest first).
         /// </summary>
         /// <inheritdoc cref="MakeSuggestions"/>
         /// <example>
@@ -48,7 +49,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
             static PathInformation[] GetPathInformations(string key)
             {
-                return LiteRepository.Instance.Filter(key).OrderByDescending(a => a.Value).Take(5).Select(a => new PathInformation(a.Key)).ToArray();
+                return LiteRepository.Instance.Filter(key).OrderByDescending(a => a.Value).Take(NumberOfResultsReturned).Select(a => new PathInformation(a.Key)).ToArray();
             }
         }
     }
