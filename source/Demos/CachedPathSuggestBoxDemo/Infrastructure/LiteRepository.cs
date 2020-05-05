@@ -31,8 +31,8 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
         {
             using var db = new LiteDatabase(DbPath);
             var col = db.GetCollection<KeyValuePair<string, DateTime>>(collectionName ?? CollectionName);
-            return string.IsNullOrEmpty(key)?
-                new KeyValuePair<string, DateTime>[]{}:
+            return string.IsNullOrWhiteSpace(key)?
+                col.Query().ToArray():
                 col.Find(Query.Contains(nameof(KeyValuePair<string, DateTime>.Key), key)).ToArray();
         }
 

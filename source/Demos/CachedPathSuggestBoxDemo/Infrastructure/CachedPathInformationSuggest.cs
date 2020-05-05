@@ -41,10 +41,10 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
         /// </example>
         public async Task<IEnumerable<object>?> MakeSuggestions(string queryThis)
         {
-            return await Task.Run(() => MakeSuggestionsPrivate(queryThis).ToArray());
+            return await Task.Run(() => MakeSuggestionsPrivate().ToArray());
 
-            IEnumerable<object> MakeSuggestionsPrivate(string queryThis) => from item in GetPathInformations(queryThis)
-                where item.Name.Contains(queryThis, StringComparison.CurrentCultureIgnoreCase)
+            IEnumerable<object> MakeSuggestionsPrivate() => 
+                from item in GetPathInformations(queryThis)
                 select new { Header = item.FullName, Value = item.FullName };
 
             static PathInformation[] GetPathInformations(string key)

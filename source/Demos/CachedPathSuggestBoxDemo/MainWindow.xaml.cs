@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
 using System.Windows;
 using CachedPathSuggestBoxDemo.Infrastructure;
@@ -11,10 +10,8 @@ namespace CachedPathSuggestBoxDemo
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly DirectorySuggest directorySuggest = new DirectorySuggest();
+        private readonly CombinedSuggest combinedSuggest =new CombinedSuggest();
         private readonly FastObservableCollection<object> listQueryResult = new FastObservableCollection<object>();
-        public readonly CachedPathInformationSuggest cachedPathInformationSuggest =new CachedPathInformationSuggest();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -36,28 +33,20 @@ namespace CachedPathSuggestBoxDemo
             if (!(p is string newText))
                 return;
 
-            var suggestions2 = await directorySuggest.MakeSuggestions(newText);
-
+            var suggestions = (await combinedSuggest.MakeSuggestions(newText))?.ToArray();
             listQueryResult.Clear();
-            if (suggestions2 == null)
+            if (suggestions == null)
             {
                 this.DiskPathSuggestBox.ValidText = false;
                 return;
             }
             this.DiskPathSuggestBox.ValidText = true;
-
-            var suggestions1 = await cachedPathInformationSuggest.MakeSuggestions(newText);
-
-            var enumerable = suggestions1
-                                        .Concat(suggestions2)
-                                        .ToArray();
-
-            listQueryResult.AddItems(enumerable);
+            listQueryResult.AddItems(suggestions);
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            cachedPathInformationSuggest.Insert(Text);
+            combinedSuggest.CachedPathInformationSuggest.Insert(Text);
         }
     }
 }
