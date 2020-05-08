@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace CachedPathSuggestBoxDemo.Infrastructure
+namespace CachedPathSuggestBoxDemo.ViewModels.Base
 {
 	/// <summary>
 	/// A command whose sole purpose is to 

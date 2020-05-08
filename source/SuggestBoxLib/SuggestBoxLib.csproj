@@ -13,9 +13,9 @@
     <Company>Open Source</Company>
     <Description>Provides a WPF/MVVM AutoComplete control</Description>
     <Version>1.2.1</Version>
-    <AssemblyVersion>1.2.1</AssemblyVersion>
-    <FileVersion>1.2.1</FileVersion>
-    <VersionPrefix>1.2.1</VersionPrefix>
+    <AssemblyVersion>1.2.2</AssemblyVersion>
+    <FileVersion>1.2.2</FileVersion>
+    <VersionPrefix>1.2.2</VersionPrefix>
     <PackageProjectUrl>https://github.com/Dirkster99/SuggestBoxLib</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Dirkster99/SuggestBoxLib</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

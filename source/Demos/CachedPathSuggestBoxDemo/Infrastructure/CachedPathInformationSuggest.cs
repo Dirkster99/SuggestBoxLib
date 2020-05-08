@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace CachedPathSuggestBoxDemo.Infrastructure
 {
-
+	/// <summary>
+	/// Wraps a LiteDB to generate previously bookmarked suggestions through similarity for a given string.
+	/// </summary>
 	public class CachedPathInformationSuggest : ISuggest
 	{
 		private static readonly int NumberOfResultsReturned = 5;
@@ -25,6 +27,11 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 			LiteRepository.Instance.Insert(directoryInfo.FullName);
 		}
 
+		internal void Delete(string text)
+		{
+			throw new NotImplementedException();
+		}
+
 		/// <summary>
 		/// Makes suggestions of paths based on match between query and the full-name of the path.
 		/// Only returns latest <see cref="NumberOfResultsReturned"/> results (newest first).
@@ -39,13 +46,13 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 		/// f:\\do_letters
 		/// g:\\document\lists.ico
 		/// </example>
-		public async Task<IEnumerable<object>?> MakeSuggestions(string queryThis)
+		public async Task<IEnumerable<ViewModels.List.BaseItem>?> MakeSuggestions(string queryThis)
 		{
 			return await Task.Run(() => MakeSuggestionsPrivate().ToArray());
 
-			IEnumerable<object> MakeSuggestionsPrivate() =>
+			IEnumerable<ViewModels.List.BaseItem> MakeSuggestionsPrivate() =>
 				from item in GetPathInformations(queryThis)
-				select new { Header = item.FullName, Value = item.FullName };
+				select new ViewModels.List.Item( item.FullName, item.FullName );
 
 			static PathInformation[] GetPathInformations(string key)
 			{

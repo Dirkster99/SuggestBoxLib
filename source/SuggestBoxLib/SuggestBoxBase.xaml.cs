@@ -72,6 +72,20 @@
 			typeof(DataTemplate), typeof(SuggestBoxBase), new PropertyMetadata(null));
 
 		/// <summary>
+		/// Implements the backing store of the <see cref="ItemTemplateSelector"/> dependency property.
+		/// </summary>
+		public static readonly DependencyProperty ItemTemplateSelectorProperty =
+			DependencyProperty.Register("ItemTemplateSelector", typeof(DataTemplateSelector),
+				typeof(SuggestBoxBase), new PropertyMetadata(null));
+
+		/// <summary>
+		/// Implements the backing store of the <see cref="ItemContainerStyle"/> dependency property.
+		/// </summary>
+		public static readonly DependencyProperty ItemContainerStyleProperty =
+			DependencyProperty.Register("ItemContainerStyle", typeof(Style),
+				typeof(SuggestBoxBase), new PropertyMetadata(null));
+
+		/// <summary>
 		/// Implements the backing store of the <see cref="IsPopupOpened"/> dependency property.
 		/// </summary>
 		public static readonly DependencyProperty IsPopupOpenedProperty =
@@ -222,12 +236,30 @@
 		}
 
 		/// <summary>
-		/// Gets/sets the ItemTemplate for the ListBox portion of the suggestion popup.
+		/// Gets/sets the ContentTemplate (ItemTemplate) for the ListBox portion of the suggestion popup.
 		/// </summary>
 		public DataTemplate ItemTemplate
 		{
 			get { return (DataTemplate)GetValue(ItemTemplateProperty); }
 			set { SetValue(ItemTemplateProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets/sets the Content Template Selector (ItemTemplateSelector) for the ListBox portion of the suggestion popup.
+		/// </summary>
+		public DataTemplateSelector ItemTemplateSelector
+		{
+			get { return (DataTemplateSelector)GetValue(ItemTemplateSelectorProperty); }
+			set { SetValue(ItemTemplateSelectorProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets/sets the ItemContainerStyle for the ListBox portion of the suggestion popup.
+		/// </summary>
+		public Style ItemContainerStyle
+		{
+			get { return (Style)GetValue(ItemContainerStyleProperty); }
+			set { SetValue(ItemContainerStyleProperty, value); }
 		}
 
 		/// <summary>

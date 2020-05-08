@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 namespace CachedPathSuggestBoxDemo.Infrastructure
 {
 	/// <summary>
-	/// Defines a suggestion object to generate suggestions
-	/// based on sub entries of specified string.
+	/// Wraps a LiteDB and a FileSystem data provider to generate similarity based suggestions
+	/// for a given string.
+	/// 
+	/// Defines a suggestion object to generate suggestions based on sub entries of specified string.
 	/// </summary>
 	public class DirectorySuggest : ISuggest
 	{
@@ -31,7 +33,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 		}
 		#endregion ctors
 
-		public async Task<IEnumerable<object>?> MakeSuggestions(string queryThis)
+		public async Task<IEnumerable<ViewModels.List.BaseItem>?> MakeSuggestions(string queryThis)
 		{
 			// Cancel current task(s) if there is any...
 			var queueList = _Queue.Values.ToList();
@@ -67,9 +69,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
 			return null;
 
-
-
-			static IEnumerable<object>? EnumerateSubDirs(string input)
+			static IEnumerable<ViewModels.List.Item>? EnumerateSubDirs(string input)
 			{
 				if (string.IsNullOrEmpty(input))
 					return EnumerateLogicalDrives();
@@ -80,7 +80,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
 				// Find last separator and list directories underneath
 				// with * search-pattern
-				IEnumerable<object> Get()
+				IEnumerable<ViewModels.List.Item> Get()
 				{
 					int sepIdx = input.LastIndexOf('\\');
 
@@ -98,24 +98,23 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 					}
 
 					if (directories == null) return EnumerateLogicalDrives();
-					var dirs = new List<object>();
+					var dirs = new List<ViewModels.List.Item>();
 
 					foreach (var t in directories)
-						dirs.Add(new { Header = t, Value = t });
+						dirs.Add(new ViewModels.List.Item (t, t ));
 
 					return dirs;
 				}
 			}
 
-			static IEnumerable<object> EnumerateDrives(string input)
+			static IEnumerable<ViewModels.List.Item> EnumerateDrives(string input)
 			{
 				if (string.IsNullOrEmpty(input))
 					return EnumerateLogicalDrives();
 
 				return EnumeratePaths(input) ?? EnumerateLogicalDrives();
 
-
-				static IEnumerable<object>? EnumeratePaths(string input) => input.Length switch
+				static IEnumerable<ViewModels.List.Item>? EnumeratePaths(string input) => input.Length switch
 				{
 					1 when char.ToUpper(input[0]) >= 'A' && char.ToUpper(input[0]) <= 'Z' =>
 					EnumerateLogicalDriveOrSubDirs(input + ":\\", input),
@@ -124,19 +123,18 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 						   char.ToUpper(input[0]) >= 'A' && char.ToUpper(input[0]) <= 'Z' =>
 					EnumerateLogicalDriveOrSubDirs(input + "\\", input),
 
-					2 => new List<object>(),
+					2 => new List<ViewModels.List.Item>(),
 
 					_ when (char.ToUpper(input[1]) == ':' &&
 							char.ToUpper(input[2]) == '\\' &&
 							char.ToUpper(input[0]) >= 'A' && char.ToUpper(input[0]) <= 'Z') =>
 					// Check if we know this drive and list it with sub-folders if we do
 					EnumerateLogicalDriveOrSubDirs(input, input),
-					_ => new List<object>()
+					_ => new List<ViewModels.List.Item>()
 				};
 			}
 
-
-			static IEnumerable<object> EnumerateLogicalDrives()
+			static IEnumerable<ViewModels.List.Item> EnumerateLogicalDrives()
 			{
 				foreach (var driveName in Environment.GetLogicalDrives()
 					.Where(driveName => string.IsNullOrEmpty(driveName) == false))
@@ -155,11 +153,11 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 						header = driveName;
 					}
 
-					yield return new { Header = header, Value = driveName };
+					yield return new ViewModels.List.Item (header, driveName );
 				}
 			}
 
-			static IEnumerable<object>? EnumerateLogicalDriveOrSubDirs(string testDrive, string input)
+			static IEnumerable<ViewModels.List.Item>? EnumerateLogicalDriveOrSubDirs(string testDrive, string input)
 			{
 				return System.IO.Directory.Exists(testDrive) ?
 					GetDirectories(testDrive) is { } array ?
@@ -167,17 +165,16 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 					null :
 					null;
 
-
-				static IEnumerable<object>? GetLogicalDriveOrSubDirs2(string testDrive, string input, IEnumerable<string> directories)
+				static IEnumerable<ViewModels.List.Item>? GetLogicalDriveOrSubDirs2(string testDrive, string input, IEnumerable<string> directories)
 				{
 					// List the drive itself if there was only 1 or 2 letters
 					// since this is not a valid drive and we don'nt know if the user
 					// wants to go to the drive or a folder contained in it
 					if (input.Length <= 2)
-						yield return new { Header = testDrive, Value = testDrive };
+						yield return new ViewModels.List.Item(testDrive, testDrive );
 
 					foreach (var item in directories)
-						yield return new { Header = item, Value = item };
+						yield return new ViewModels.List.Item(item, item );
 				}
 
 				static string[]? GetDirectories(string testDrive)

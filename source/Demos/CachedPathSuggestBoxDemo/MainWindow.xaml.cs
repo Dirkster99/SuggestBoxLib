@@ -1,7 +1,6 @@
-﻿
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using CachedPathSuggestBoxDemo.Infrastructure;
+using CachedPathSuggestBoxDemo.ViewModels;
 
 namespace CachedPathSuggestBoxDemo
 {
@@ -16,37 +15,14 @@ namespace CachedPathSuggestBoxDemo
 		{
 			InitializeComponent();
 
-			this.DiskPathSuggestBox.TextChangedCommand = new RelayCommand<object>(Execute); ;
-			this.DiskPathSuggestBox.ItemsSource = listQueryResult;
-			this.DiskPathSuggestBox.DataContext = this;
-
+			Loaded += MainWindow_Loaded;
 		}
 
-		/// <summary>
-		/// Need to bind to text in order to generate binding-expression that is then used for displaying validation errors
-		/// </summary>
-		public string Text { get; set; }
-
-		private async void Execute(object p)
+		private void MainWindow_Loaded(object sender, RoutedEventArgs e)
 		{
-			// We want to process empty strings here as well
-			if (!(p is string newText))
-				return;
+			Loaded -= MainWindow_Loaded;
 
-			var suggestions = (await combinedSuggest.MakeSuggestions(newText))?.ToArray();
-			listQueryResult.Clear();
-			if (suggestions == null)
-			{
-				this.DiskPathSuggestBox.ValidText = false;
-				return;
-			}
-			this.DiskPathSuggestBox.ValidText = true;
-			listQueryResult.AddItems(suggestions);
-		}
-
-		private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-		{
-			combinedSuggest.CachedPathInformationSuggest.Insert(Text);
+			this.DataContext = new AppViewModel();
 		}
 	}
 }
