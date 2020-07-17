@@ -11,6 +11,7 @@
 	public class LocationIndicator
 	{
 		#region ctors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -35,6 +36,7 @@
 		protected LocationIndicator()
 		{
 		}
+
 		#endregion ctors
 
 		/// <summary>

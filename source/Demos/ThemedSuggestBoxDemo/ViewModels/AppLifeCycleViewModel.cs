@@ -17,6 +17,7 @@
 	public class AppLifeCycleViewModel : Base.ViewModelBase
 	{
 		#region fields
+
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		private bool? mDialogCloseResult = null;
@@ -24,9 +25,11 @@
 		private bool mShutDownInProgress_Cancel = false;
 
 		private ICommand mExitApp = null;
+
 		#endregion fields
 
 		#region properties
+
 		/// <summary>
 		/// Gets a string for display of the application title.
 		/// </summary>
@@ -53,7 +56,7 @@
 
 		/// <summary>
 		/// This can be used to close the attached view via ViewModel
-		/// 
+		///
 		/// Source: http://stackoverflow.com/questions/501886/wpf-mvvm-newbie-how-should-the-viewmodel-close-the-form
 		/// </summary>
 		public bool? DialogCloseResult
@@ -114,9 +117,11 @@
 					mShutDownInProgress_Cancel = value;
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		private void CreateDefaultsSettings(ISettingsManager settings
 										  , IAppearanceManager appearance)
 		{
@@ -133,7 +138,6 @@
 				   ,new Uri("/ThemedSuggestBoxDemo;component/BindToMLib/MWindowLib/DarkLightBrushs.xaml", UriKind.RelativeOrAbsolute)
 				   ,new Uri("/SuggestBoxLib;component/Themes/DarkBrushs.xaml", UriKind.RelativeOrAbsolute)
 				   ,new Uri("/ThemedSuggestBoxDemo;component/BindToMLib/SuggestionLibDarkLightBrushs.xaml", UriKind.RelativeOrAbsolute)
-
 				}, settings.Themes);
 			}
 			catch
@@ -150,7 +154,6 @@
 				   ,new Uri("/ThemedSuggestBoxDemo;component/BindToMLib/MWindowLib/DarkLightBrushs.xaml", UriKind.RelativeOrAbsolute)
 				   ,new Uri("/SuggestBoxLib;component/Themes/LightBrushs.xaml", UriKind.RelativeOrAbsolute)
 				   ,new Uri("/ThemedSuggestBoxDemo;component/BindToMLib/SuggestionLibDarkLightBrushs.xaml", UriKind.RelativeOrAbsolute)
-
 				}, settings.Themes);
 			}
 			catch
@@ -174,6 +177,7 @@
 		}
 
 		#region Save Load Application configuration
+
 		/// <summary>
 		/// Save application settings when the application is being closed down
 		/// </summary>
@@ -234,9 +238,11 @@
 			{
 			}
 		}
+
 		#endregion Save Load Application configuration
 
 		#region StartUp/ShutDown
+
 		private void AppExit_CommandExecuted()
 		{
 			try
@@ -304,6 +310,7 @@
 		}
 
 		#region RequestClose [event]
+
 		/// <summary>
 		/// Raised when this workspace should be removed from the UI.
 		/// </summary>
@@ -356,8 +363,11 @@
 		{
 			DialogCloseResult = null;
 		}
-		#endregion // RequestClose [event]
+
+		#endregion RequestClose [event]
+
 		#endregion StartUp/ShutDown
+
 		#endregion methods
 	}
 }

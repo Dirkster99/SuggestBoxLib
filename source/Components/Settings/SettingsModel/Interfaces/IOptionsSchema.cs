@@ -42,6 +42,7 @@
 		object DefaultValue { get; }
 
 		#region methods
+
 		/// <summary>
 		/// Removes the value with the specified key
 		/// from the internal dictionary.
@@ -51,7 +52,7 @@
 		/// true if the element is successfully found and removed; otherwise, false.
 		/// This method returns false if key is not found in
 		/// the System.Collections.Generic.Dictionary&lt;TKey,TValue>.
-		/// 
+		///
 		/// Exceptions:
 		///   System.ArgumentNullException:
 		///     key is null.
@@ -114,11 +115,12 @@
 		/// <summary>
 		/// Gets a list of current keys and values if this schema
 		/// descripes a List.
-		/// 
+		///
 		/// Return a single value schema as a list of 1 item.
 		/// </summary>
 		/// <returns></returns>
 		IEnumerable<KeyValuePair<object, object>> List_GetListOfKeyValues();
+
 		#endregion methods
 	}
 }

@@ -30,7 +30,7 @@
 		/// <summary>
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or null
 		/// if either option or <seealso cref="OptionGroup"/> does not exist.
-		/// 
+		///
 		/// Method returns false if option or <seealso cref="OptionGroup"/> are not known.
 		/// </summary>
 		/// <param name="optionName"></param>
@@ -42,7 +42,7 @@
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or
 		/// throws an exception if either option or <seealso cref="OptionGroup"/>
 		/// does not exist.
-		/// 
+		///
 		/// Method the requested option value if option and <seealso cref="OptionGroup"/> are known.
 		/// </summary>
 		/// <param name="optionName"></param>
@@ -108,7 +108,7 @@
 		/// <summary>
 		/// Gets a list of current keys and values if this schema
 		/// descripes a List.
-		/// 
+		///
 		/// Return a single value schema as a list of 1 item.
 		/// </summary>
 		/// <param name="optionName"></param>

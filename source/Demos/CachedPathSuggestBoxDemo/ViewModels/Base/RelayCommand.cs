@@ -5,22 +5,25 @@ using System.Windows.Input;
 namespace CachedPathSuggestBoxDemo.ViewModels.Base
 {
 	/// <summary>
-	/// A command whose sole purpose is to 
+	/// A command whose sole purpose is to
 	/// relay its functionality to other
 	/// objects by invoking delegates. The
 	/// default return value for the CanExecute
 	/// method is 'true'.
-	/// 
+	///
 	/// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
 	/// </summary>
 	internal class RelayCommand<T> : ICommand
 	{
 		#region Fields
+
 		private readonly Action<T> mExecute = null;
 		private readonly Predicate<T> mCanExecute = null;
-		#endregion // Fields
+
+		#endregion Fields
 
 		#region Constructors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -44,9 +47,10 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 			this.mCanExecute = canExecute;
 		}
 
-		#endregion // Constructors
+		#endregion Constructors
 
 		#region events
+
 		/// <summary>
 		/// Eventhandler to re-evaluate whether this command can execute or not
 		/// </summary>
@@ -64,9 +68,11 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 					CommandManager.RequerySuggested -= value;
 			}
 		}
-		#endregion
+
+		#endregion events
 
 		#region methods
+
 		/// <summary>
 		/// Determine whether this pre-requisites to execute this command are given or not.
 		/// </summary>
@@ -86,11 +92,12 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 		{
 			this.mExecute((T)parameter);
 		}
+
 		#endregion methods
 	}
 
 	/// <summary>
-	/// A command whose sole purpose is to 
+	/// A command whose sole purpose is to
 	/// relay its functionality to other
 	/// objects by invoking delegates. The
 	/// default return value for the CanExecute
@@ -99,8 +106,10 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 	internal class RelayCommand : ICommand
 	{
 		#region Fields
+
 		private readonly Action mExecute;
 		private readonly Func<bool> mCanExecute;
+
 		#endregion Fields
 
 		#region Constructors
@@ -140,6 +149,7 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 		#endregion Constructors
 
 		#region Events
+
 		/// <summary>
 		/// Eventhandler to re-evaluate whether this command can execute or not
 		/// </summary>
@@ -157,9 +167,11 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 					CommandManager.RequerySuggested -= value;
 			}
 		}
+
 		#endregion Events
 
 		#region Methods
+
 		/// <summary>
 		/// Execute the attached CanExecute methode delegate (or always return true)
 		/// to determine whether the command managed in this object can execute or not.
@@ -180,6 +192,7 @@ namespace CachedPathSuggestBoxDemo.ViewModels.Base
 		{
 			this.mExecute();
 		}
+
 		#endregion Methods
 	}
 }

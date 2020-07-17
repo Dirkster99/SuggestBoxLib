@@ -70,7 +70,7 @@
 		/// This method is called when the selection changed event occurs. The sender should be the control
 		/// on which this behaviour is attached - so we convert the sender into a <seealso cref="UIElement"/>
 		/// and receive the Command through the <seealso cref="GetChangedCommand"/> getter listed above.
-		/// 
+		///
 		/// This implementation supports binding of delegate commands and routed commands.
 		/// </summary>
 		/// <param name="sender"></param>
@@ -111,5 +111,4 @@
 			}
 		}
 	}
-
 }

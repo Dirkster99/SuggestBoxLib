@@ -41,5 +41,4 @@
 									 ResourceId=ControlMouseOverBackgroundBrushKey}"
 		options:Freeze="true"
 		Color="{DynamicResource {x:Static MLib_reskeys:ResourceKeys.ControlMouseOverBackgroundKey}}" />
-
 </ResourceDictionary>

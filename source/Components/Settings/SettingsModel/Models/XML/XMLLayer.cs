@@ -15,8 +15,10 @@
 	internal class XMLLayer
 	{
 		#region fields
+
 		internal readonly static char[] ResvedOptionListCharacters = new char[] { '$', '{', '}' };
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 		#endregion fields
 
 		/// <summary>
@@ -322,7 +324,6 @@
 						masterRow[columnSchema.OptionName] = item;
 				}
 
-
 				var row = dataTable.NewRow();
 
 				if (handler != null)
@@ -339,7 +340,7 @@
 		/// <summary>
 		/// Attempts to map a table name into an OptionsGroup which is return as
 		/// <see cref="IOptionGroup"/> interface.
-		/// 
+		///
 		/// This includes lists of values that are stored inside
 		/// an option in an optiongroup (optionName is set in this case).
 		/// </summary>

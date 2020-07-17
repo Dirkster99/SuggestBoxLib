@@ -1,12 +1,12 @@
 ﻿namespace ThemedSuggestBoxDemo.ViewModels
 {
 	using Base;
-	using ThemedSuggestBoxDemo.Demos.ViewModels;
 	using MLib.Interfaces;
 	using Settings.Interfaces;
 	using System;
 	using System.Windows;
 	using System.Windows.Input;
+	using ThemedSuggestBoxDemo.Demos.ViewModels;
 
 	/// <summary>
 	/// Main ViewModel vlass that manages session start-up, life span, and shutdown
@@ -15,6 +15,7 @@
 	public class AppViewModel : Base.ViewModelBase, IDisposable
 	{
 		#region private fields
+
 		private bool mDisposed = false;
 		private AppLifeCycleViewModel _AppLifeCycle = null;
 
@@ -24,9 +25,11 @@
 		private ICommand _ThemeSelectionChangedCommand;
 		private ThemeViewModel _AppTheme;
 		private readonly DemoViewModel _demo;
+
 		#endregion private fields
 
 		#region constructors
+
 		/// <summary>
 		/// Standard Constructor
 		/// </summary>
@@ -44,9 +47,11 @@
 			_AppTheme = new ThemeViewModel();
 			_demo = new DemoViewModel();
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		public AppLifeCycleViewModel AppLifeCycle
 		{
 			get
@@ -56,10 +61,11 @@
 		}
 
 		#region app theme
+
 		/// <summary>
 		/// Command executes when the user has selected
 		/// a different UI theme to display.
-		/// 
+		///
 		/// Command Parameter is the <seealso cref="ThemeDefinitionViewModel"/> object
 		/// that should be selected next. This object can be handed over as:
 		/// 1> an object[] array at object[0] or as simple object
@@ -127,6 +133,7 @@
 				}
 			}
 		}
+
 		#endregion app theme
 
 		/// <summary>
@@ -139,10 +146,13 @@
 				return _demo;
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		#region Get/set Session Application Data
+
 		internal void GetSessionData(IProfile sessionData)
 		{
 			/***
@@ -173,13 +183,14 @@
                         }
             ***/
 		}
+
 		#endregion Get/set Session Application Data
 
 		/// <summary>
 		/// Call this method if you want to initialize a headless
 		/// (command line) application. This method will initialize only
 		/// Non-WPF related items.
-		/// 
+		///
 		/// Method should not be called after <seealso cref="InitForMainWindow"/>
 		/// </summary>
 		public void InitWithoutMainWindow()
@@ -196,9 +207,9 @@
 		/// <summary>
 		/// Call this to initialize application specific items that should be initialized
 		/// before loading and display of mainWindow.
-		/// 
+		///
 		/// Invocation of This method is REQUIRED if UI is used in this application instance.
-		/// 
+		///
 		/// Method should not be called after <seealso cref="InitWithoutMainWindow"/>
 		/// </summary>
 		public void InitForMainWindow(IAppearanceManager appearance
@@ -212,7 +223,6 @@
 			// Initialize UI specific stuff here
 			this.AppTheme.ApplyTheme(Application.Current.MainWindow, themeDisplayName);
 		}
-
 
 		/// <summary>
 		/// Standard dispose method of the <seealso cref="IDisposable" /> interface.
@@ -262,6 +272,7 @@
 			// So, most of the time you will not need this but its there in case you prefer code behind
 			// for this and do actually need it.
 		}
+
 		#endregion methods
 	}
 }

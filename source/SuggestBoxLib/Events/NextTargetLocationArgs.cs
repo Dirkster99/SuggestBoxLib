@@ -30,6 +30,7 @@
 	public class EditResult
 	{
 		#region ctors
+
 		/// <summary>
 		/// Parameterized standard constructor
 		/// </summary>
@@ -50,6 +51,7 @@
 		protected EditResult()
 		{
 		}
+
 		#endregion ctors
 
 		/// <summary>
@@ -71,6 +73,7 @@
 	public class NextTargetLocationArgs : EventArgs
 	{
 		#region ctors
+
 		/// <summary>
 		/// Parameterized standard constructor
 		/// </summary>
@@ -87,6 +90,7 @@
 		protected NextTargetLocationArgs()
 		{
 		}
+
 		#endregion ctors
 
 		/// <summary>

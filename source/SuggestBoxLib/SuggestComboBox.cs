@@ -12,6 +12,7 @@
 	public class SuggestComboBox : ComboBox
 	{
 		#region fields
+
 		/// <summary>
 		/// Implements the backing store for the <see cref="PopUpWidth"/> dependency property.
 		/// </summary>
@@ -34,6 +35,7 @@
 				typeof(SuggestComboBox), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0, 0, 0, 0))));
 
 		#region ToggleRecentListCommand
+
 		/// <summary>
 		/// Backing store of the <see cref="ToggleRecentListCommand"/> dependency property.
 		/// </summary>
@@ -47,7 +49,9 @@
 		public static readonly DependencyProperty ToggleRecentListCommandParameterProperty =
 			DependencyProperty.Register("ToggleRecentListCommandParameter", typeof(object),
 				typeof(SuggestComboBox), new PropertyMetadata(null));
+
 		#endregion ToggleRecentListCommand
+
 		#endregion fields
 
 		/// <summary>
@@ -93,6 +97,7 @@
 		}
 
 		#region ToggleRecentListCommand
+
 		/// <summary>
 		/// Gets/sets a command that toggles the pop-up portion of the suggestion list.
 		/// </summary>
@@ -111,6 +116,7 @@
 			get { return (object)GetValue(ToggleRecentListCommandParameterProperty); }
 			set { SetValue(ToggleRecentListCommandParameterProperty, value); }
 		}
-		#endregion SwitchContentCommand
+
+		#endregion ToggleRecentListCommand
 	}
 }

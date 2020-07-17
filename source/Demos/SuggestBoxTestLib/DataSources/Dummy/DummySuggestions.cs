@@ -16,15 +16,18 @@
 	public class DummySuggestions : ViewModelBase
 	{
 		#region fields
+
 		private readonly Dictionary<string, CancellationTokenSource> _Queue;
 		private readonly SemaphoreSlim _SlowStuffSemaphore;
 		private readonly FastObservableCollection<object> _ListQueryResult;
 		private ICommand _SuggestTextChangedCommand;
 		private string _CurrentText;
 		private bool _IsValidText = true;
+
 		#endregion fields
 
 		#region ctors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -34,9 +37,11 @@
 			_SlowStuffSemaphore = new SemaphoreSlim(1, 1);
 			_ListQueryResult = new FastObservableCollection<object>();
 		}
+
 		#endregion ctors
 
 		#region properties
+
 		/// <summary>
 		/// Gets whether the last query text was valid or invalid.
 		/// </summary>
@@ -120,9 +125,11 @@
 				return _SuggestTextChangedCommand;
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		private async Task<SuggestQueryResultModel> SuggestTextChangedCommand_Executed(string queryThis)
 		{
 			// Cancel current task(s) if there is any...
@@ -164,14 +171,15 @@
 		}
 
 		#region input parser
+
 		/// <summary>
 		/// Method returns a task that returns a list of suggestion objects
 		/// that are associated to the <paramref name="input"/> string
 		/// and given <paramref name="location"/> object.
-		/// 
+		///
 		/// This sample is really easy because it simply takes the input
 		/// string and add an output as suggestion to the given input.
-		/// 
+		///
 		/// This always returns 2 suggestions.
 		/// </summary>
 		/// <param name="location"></param>
@@ -188,7 +196,9 @@
 
 			return Task.FromResult<SuggestQueryResultModel>(result);
 		}
+
 		#endregion input parser
+
 		#endregion methods
 	}
 }

@@ -149,7 +149,7 @@
 		/// <param name="e">The event argument.</param>
 		protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
 		{
-			// Recommended is to avoid reentry 
+			// Recommended is to avoid reentry
 			// in collection changed event while collection
 			// is getting changed on other thread.
 			using (this.BlockReentrancy())
@@ -174,7 +174,7 @@
 
 						if (dispatcherObject != null && !dispatcherObject.CheckAccess())
 						{
-							// Invoke handler in the target dispatcher's thread... 
+							// Invoke handler in the target dispatcher's thread...
 							// asynchronously for better responsiveness.
 							dispatcherObject.Dispatcher.BeginInvoke(DispatcherPriority.DataBind, handler, this, e);
 						}

@@ -11,6 +11,7 @@
 	public class InvertBoolConverter : IValueConverter
 	{
 		#region IValueConverter Members
+
 		/// <summary>
 		/// Returns an inverted boolean value.
 		/// </summary>
@@ -43,6 +44,6 @@
 				return true;
 		}
 
-		#endregion
+		#endregion IValueConverter Members
 	}
 }

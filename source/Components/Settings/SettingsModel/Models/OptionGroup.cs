@@ -10,13 +10,14 @@
 	/// physically or logically into any specific group. Using these groups or sets
 	/// of options allows application to configure and manage different sets of options
 	/// while using a similar backend system.
-	/// 
+	///
 	/// Using this technique means, the set of available application options is dynamic
 	/// and can be configured in dependence of current run-time conditions.
 	/// </summary>
 	internal class OptionGroup : IOptionGroup
 	{
 		#region constructors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -27,9 +28,11 @@
 			OptionDefinitions = new Dictionary<string, OptionsSchema>();
 			IsDirty = false;
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets the name of the <seealso cref="OptionGroup"/>.
 		/// </summary>
@@ -44,9 +47,11 @@
 		/// Gets a dictionary of otpions defined for this <seealso cref="OptionGroup"/>.
 		/// </summary>
 		private Dictionary<string, OptionsSchema> OptionDefinitions { get; set; }
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Retrieves the schema of each option in this optiongroup.
 		/// </summary>
@@ -96,7 +101,7 @@
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or
 		/// throws an exception if either option or <seealso cref="OptionGroup"/>
 		/// does not exist.
-		/// 
+		///
 		/// Method the requested option value if option and <seealso cref="OptionGroup"/> are known.
 		/// </summary>
 		/// <param name="optionName"></param>
@@ -157,6 +162,7 @@
 		}
 
 		#region List related methods
+
 		/// <summary>
 		/// Add a list item in a list schema
 		/// </summary>
@@ -230,7 +236,7 @@
 		/// <summary>
 		/// Gets a list of current keys and values if this schema
 		/// descripes a List.
-		/// 
+		///
 		/// Return a single value schema as a list of 1 item.
 		/// </summary>
 		/// <param name="optionName"></param>
@@ -244,6 +250,7 @@
 
 			return schema.List_GetListOfKeyValues();
 		}
+
 		#endregion List related methods
 
 		/// <summary>
@@ -284,6 +291,7 @@
 		{
 			return OptionDefinitions.Remove(optionName);
 		}
+
 		#endregion methods
 	}
 }

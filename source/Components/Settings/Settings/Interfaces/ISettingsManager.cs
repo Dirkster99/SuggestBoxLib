@@ -1,7 +1,7 @@
 ﻿namespace Settings.Interfaces
 {
-	using Settings.ProgramSettings;
 	using MLib.Interfaces;
+	using Settings.ProgramSettings;
 	using System.Collections.Generic;
 	using System.Xml.Serialization;
 
@@ -22,6 +22,7 @@
 		IEnumerable<LanguageCollection> GetSupportedLanguages();
 
 		#region properties
+
 		Settings.Interfaces.IProfile SessionData { get; }
 
 		int IconSizeMin { get; }
@@ -50,6 +51,7 @@
 		/// </summary>
 		[XmlIgnore]
 		IThemeInfos Themes { get; }
+
 		#endregion properties
 	}
 }

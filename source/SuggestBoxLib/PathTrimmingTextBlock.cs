@@ -52,6 +52,7 @@ namespace SuggestBoxLib
 	public class PathTrimmingTextBlock : UserControl
 	{
 		#region fields
+
 		/// <summary>
 		/// Implements the backing store of the <see cref="Path"/> dependency property.
 		/// </summary>
@@ -68,9 +69,11 @@ namespace SuggestBoxLib
 				new PropertyMetadata(EllipsisPlacement.Center, OnShowElipsesChanged));
 
 		private readonly TextBlock _TextBlock;
+
 		#endregion fields
 
 		#region ctors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -79,9 +82,11 @@ namespace SuggestBoxLib
 			_TextBlock = new TextBlock();
 			AddChild(_TextBlock);
 		}
+
 		#endregion ctors
 
 		#region properties
+
 		/// <summary>
 		/// Gets/sets the path to display.
 		/// The text that is actually displayed will be trimmed with Ellipses.
@@ -100,9 +105,11 @@ namespace SuggestBoxLib
 			get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
 			set { SetValue(ShowElipsesProperty, value); }
 		}
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Called to remeasure a control.
 		/// </summary>
@@ -282,15 +289,19 @@ namespace SuggestBoxLib
 				case EllipsisPlacement.None:
 					formatString = "{0}{1}";
 					break;
+
 				case EllipsisPlacement.Left:
 					formatString = "...{0}{1}";
 					break;
+
 				case EllipsisPlacement.Center:
 					formatString = "{0}...{1}";
 					break;
+
 				case EllipsisPlacement.Right:
 					formatString = "{0}{1}...";
 					break;
+
 				default:
 					throw new ArgumentOutOfRangeException(placing.ToString());
 			}
@@ -325,6 +336,7 @@ namespace SuggestBoxLib
 			// The text will be updated during that process
 			@this.InvalidateMeasure();
 		}
+
 		#endregion methods
 	}
 }

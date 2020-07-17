@@ -1,7 +1,6 @@
 ﻿namespace ThemedSuggestBoxDemo.ViewModels
 {
 	using MLib.Interfaces;
-	using MLib.Themes;
 	using Settings.Interfaces;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -14,13 +13,16 @@
 	public class ThemeViewModel : Base.ViewModelBase
 	{
 		#region private fields
+
 		private readonly ThemeDefinitionViewModel _DefaultTheme = null;
 		private Dictionary<string, ThemeDefinitionViewModel> _ListOfThemes = null;
 		private ThemeDefinitionViewModel _SelectedTheme = null;
 		private bool _IsEnabled = true;
+
 		#endregion private fields
 
 		#region constructors
+
 		/// <summary>
 		/// Standard Constructor
 		/// </summary>
@@ -42,9 +44,11 @@
 			_SelectedTheme = _DefaultTheme;
 			_SelectedTheme.IsSelected = true;
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Returns a default theme that should be applied when nothing else is available.
 		/// </summary>
@@ -114,9 +118,11 @@
 				}
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Applies a new theme based on the changed selection in the input element.
 		/// </summary>
@@ -170,6 +176,7 @@
 
 			return AccentColor;
 		}
+
 		#endregion methods
 	}
 }

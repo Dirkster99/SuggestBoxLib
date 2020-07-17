@@ -3,10 +3,10 @@
 	using SuggestBoxLib.Events;
 	using SuggestBoxLib.Utils;
 	using System;
-	using System.Linq;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Collections.Specialized;
+	using System.Linq;
 	using System.Windows;
 	using System.Windows.Controls;
 	using System.Windows.Controls.Primitives;
@@ -24,6 +24,7 @@
 	public class SuggestBoxBase : TextBox
 	{
 		#region fields
+
 		/// <summary>
 		/// Defines the templated name of the required <see cref="Popup"/>
 		/// control in the <see cref="SuggestBoxBase"/> template.
@@ -177,9 +178,11 @@
 		private Grid _PART_ResizeableGrid;
 		private ListBox _PART_ItemList;
 		private bool _ParentWindowIsClosing;
+
 		#endregion fields
 
 		#region Constructor
+
 		/// <summary>
 		/// Static class constructor
 		/// </summary>
@@ -195,9 +198,11 @@
 		public SuggestBoxBase()
 		{
 		}
-		#endregion
+
+		#endregion Constructor
 
 		#region Events
+
 		/// <summary>
 		/// Gets/sets a routed event handler that is invoked whenever the value of the
 		/// Textbox.TextProperty of this textbox derived control has changed.
@@ -214,9 +219,11 @@
 		/// the client application that another location change request is available.
 		/// </summary>
 		public event EventHandler<NextTargetLocationArgs> NewLocationRequestEvent;
-		#endregion
+
+		#endregion Events
 
 		#region Public Properties
+
 		/// <summary>
 		/// Gets/sets the DisplayMemberPath for the ListBox portion of the suggestion popup.
 		/// </summary>
@@ -323,7 +330,7 @@
 		/// <summary>
 		/// Gets/sets an <see cref="IEnumerable"/> ItemsSource for the list of objects
 		/// that pops up when the user has entered some text.
-		/// 
+		///
 		/// Ideally, this should be an ObservableCollection{T} since the control with
 		/// look for the <see cref="INotifyCollectionChanged"/> event in order to listen
 		/// for this type of event.
@@ -337,7 +344,7 @@
 		/// <summary>
 		/// Gets/sets whether the scrollbar <see cref="ListBox"/> inside the suggestions PopUp
 		/// control is directly linked to scrolling the content or not (is deferred).
-		/// 
+		///
 		/// This property is handled by the control itself and should not be used via binding.
 		/// </summary>
 		public bool IsDeferredScrolling
@@ -385,9 +392,11 @@
 			get { return (EllipsisPlacement)GetValue(ShowElipsesProperty); }
 			set { SetValue(ShowElipsesProperty, value); }
 		}
-		#endregion
+
+		#endregion Public Properties
 
 		#region Methods
+
 		/// <summary>
 		/// Is called when a control template is applied.
 		/// </summary>
@@ -440,7 +449,7 @@
 		/// <summary>
 		/// Invoked when an unhandled <see cref="System.Windows.UIElement.PreviewMouseLeftButtonDown"/>
 		/// routed event reaches an element in its route that is derived from this class.
-		/// 
+		///
 		/// Implement this method to add class handling for this event.
 		/// </summary>
 		/// <param name="e"></param>
@@ -465,7 +474,7 @@
 		{
 			// Select all text when control gains focus from a different control.
 			// If the focus was not in one of the children (or popup),
-			// we select all the text 
+			// we select all the text
 			//            if (!TreeHelper.IsDescendantOf(e.OldFocus as DependencyObject, this))
 			//                this.SelectAll();
 
@@ -501,7 +510,6 @@
 				{
 					SetPopUp(false, "parentWindow.Closing");
 					_ParentWindowIsClosing = true;
-
 				};
 
 				parentWindow.PreviewMouseDown += ParentWindow_PreviewMouseDown;
@@ -614,12 +622,13 @@
 		}
 
 		#region Utils - Update Bindings
+
 		/// <summary>
 		/// Method is invoked when an item in the popup list is selected.
-		/// 
+		///
 		/// The control is derived from TextBox which is why we can set the
 		/// TextBox.Text property with the SelectedValue here.
-		/// 
+		///
 		/// The method also calls the updateSource() method (or its override
 		/// in a derived class) and closes the popup portion of the control.
 		/// </summary>
@@ -649,9 +658,11 @@
 			txtBindingExpr.UpdateSource();
 			RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
 		}
-		#endregion
+
+		#endregion Utils - Update Bindings
 
 		#region Utils - Popup show / hide
+
 		/// <summary>
 		/// Opens the popup control if SuggestBox has currently focus
 		/// and there are suggestions available.
@@ -751,9 +762,11 @@
 				IsPopupOpened = newIsOpenValue;
 			}
 		}
-		#endregion
+
+		#endregion Utils - Popup show / hide
 
 		#region OnEventHandler
+
 		/// <summary>
 		/// Called when the System.Windows.UIElement.KeyDown occurs.
 		/// </summary>
@@ -849,13 +862,13 @@
 
 			NewLocationRequestEvent?.Invoke(this, new NextTargetLocationArgs(message));
 		}
-		#endregion
 
+		#endregion OnEventHandler
 
 		/// <summary>
 		/// Method executes when the <see cref="EnableSuggestions"/> dependency property
 		/// has changed its value.
-		/// 
+		///
 		/// Overwrite this method if you want to consume changes of this property.
 		/// </summary>
 		/// <param name="e"></param>
@@ -898,6 +911,7 @@
 		}
 
 		#region static privates
+
 		private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var sbox = d as SuggestBoxBase;
@@ -940,6 +954,7 @@
 			if (ctrl != null)
 				ctrl.OnValidTextChanged(e);
 		}
+
 		#endregion static privates
 
 		private void OnValidTextChanged(DependencyPropertyChangedEventArgs e)
@@ -964,7 +979,7 @@
 
 		/// <summary>
 		/// https://stackoverflow.com/questions/1695101/why-are-actualwidth-and-actualheight-0-0-in-this-case
-		/// 
+		///
 		/// Method executes when user drages the resize thumb to resize
 		/// the suggestions drop down of the suggestion box.
 		/// </summary>
@@ -1009,7 +1024,7 @@
 
 		/// <summary>
 		/// Method executes when the Pop-up list is opened or closed.
-		/// 
+		///
 		/// The method re-focuses the textbox when the popup closes
 		/// and sets the cursor at the end of the textbox string.
 		/// </summary>
@@ -1050,6 +1065,7 @@
 
 			return false;
 		}
-		#endregion
+
+		#endregion Methods
 	}
 }

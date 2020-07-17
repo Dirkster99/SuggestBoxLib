@@ -8,5 +8,4 @@
 		<ResourceDictionary Source="/SuggestBoxLib;component/SuggestComboBoxButtonStyle.xaml" />
 		<ResourceDictionary Source="/SuggestBoxLib;component/SuggestComboBox.xaml" />
 	</ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

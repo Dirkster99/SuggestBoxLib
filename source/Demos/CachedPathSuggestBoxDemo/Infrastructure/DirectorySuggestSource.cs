@@ -12,17 +12,20 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 	/// <summary>
 	/// Wraps a LiteDB and a FileSystem data provider to generate similarity based suggestions
 	/// for a given string.
-	/// 
+	///
 	/// Defines a suggestion object to generate suggestions based on sub entries of specified string.
 	/// </summary>
 	public class DirectorySuggest : ISuggest
 	{
 		#region fields
+
 		private readonly Dictionary<string, CancellationTokenSource> _Queue;
 		private readonly SemaphoreSlim _SlowStuffSemaphore;
+
 		#endregion fields
 
 		#region ctors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -31,6 +34,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 			_Queue = new Dictionary<string, CancellationTokenSource>();
 			_SlowStuffSemaphore = new SemaphoreSlim(1, 1);
 		}
+
 		#endregion ctors
 
 		public async Task<IEnumerable<ViewModels.List.BaseItem>?> MakeSuggestions(string queryThis)
@@ -55,7 +59,6 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 						: Task.FromResult(queryThis.Length <= 3 ? EnumerateDrives(queryThis) : EnumerateSubDirs(queryThis)));
 				_Queue.Remove(queryThis);
 				return null;
-
 			}
 			catch (Exception exp)
 			{
@@ -101,7 +104,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 					var dirs = new List<ViewModels.List.Item>();
 
 					foreach (var t in directories)
-						dirs.Add(new ViewModels.List.Item (t, t ));
+						dirs.Add(new ViewModels.List.Item(t, t));
 
 					return dirs;
 				}
@@ -153,7 +156,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 						header = driveName;
 					}
 
-					yield return new ViewModels.List.Item (header, driveName );
+					yield return new ViewModels.List.Item(header, driveName);
 				}
 			}
 
@@ -171,10 +174,10 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 					// since this is not a valid drive and we don'nt know if the user
 					// wants to go to the drive or a folder contained in it
 					if (input.Length <= 2)
-						yield return new ViewModels.List.Item(testDrive, testDrive );
+						yield return new ViewModels.List.Item(testDrive, testDrive);
 
 					foreach (var item in directories)
-						yield return new ViewModels.List.Item(item, item );
+						yield return new ViewModels.List.Item(item, item);
 				}
 
 				static string[]? GetDirectories(string testDrive)

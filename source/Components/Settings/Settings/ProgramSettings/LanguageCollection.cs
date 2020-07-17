@@ -5,7 +5,7 @@
 	/// <summary>
 	/// Base class for enumeration over languages (and their locale) that
 	/// are supported with specific (non-English) button and tool tip strings.
-	/// 
+	///
 	/// The class definition is based on BCP 47 which in turn is used to
 	/// set the UI and thread culture (which in turn selects the correct
 	/// string resource in MsgBox assembly).

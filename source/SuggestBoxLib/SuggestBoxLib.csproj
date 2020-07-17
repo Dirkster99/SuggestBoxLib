@@ -20,11 +20,15 @@
     <RepositoryUrl>https://github.com/Dirkster99/SuggestBoxLib</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>mvvm c# .net autocomplete wpf dark light themable control</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/Dirkster99/Docu/master/SuggestBoxLib/icons/AutoComplete_64x.png</PackageIconUrl>
+    <PackageIcon>AutoComplete_64x.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>Package Update with support based on .NetCore 3 Preview 8 and .Net4.5.2</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Resources\AutoComplete_64x.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
     <DocumentationFile>SuggestBoxLib.xml</DocumentationFile>
@@ -66,6 +70,10 @@
     <Page Update="Themes\LightBrushs.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

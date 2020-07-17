@@ -80,7 +80,7 @@
 	<!--
 		This Template defines the inner content of the way the ListBox is displayed
 		Change for example the Background color of the border to black to see where this is at.
-		
+
 		Checkout the ScrollViewTemplate which defines a custom scrollviewer with scrollbars
 		and a custom resize grip in the lower right corner.
 	-->
@@ -99,5 +99,4 @@
 			</ScrollViewer>
 		</Border>
 	</ControlTemplate>
-
 </ResourceDictionary>

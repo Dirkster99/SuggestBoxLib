@@ -11,11 +11,14 @@
 	public class FakeViewModel : Base.ViewModelBase
 	{
 		#region Fields
+
 		private readonly ObservableCollection<FakeViewModel> _subDirectories;
-		bool _loaded = false;
+		private bool _loaded = false;
+
 		#endregion Fields
 
 		#region constructors
+
 		private static void generate(FakeViewModel root, int level, string str = "")
 		{
 			if (level > 0)
@@ -50,9 +53,11 @@
 			Latency = TimeSpan.FromSeconds(0);
 			_subDirectories = new ObservableCollection<FakeViewModel>();
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets/sets the parent node of this node in the tree.
 		/// </summary>
@@ -89,9 +94,11 @@
 				return _subDirectories;
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Returns a string that represents the current object.
 		/// </summary>
@@ -109,6 +116,7 @@
 		{
 			_subDirectories.Add(item);
 		}
+
 		#endregion methods
 	}
 }

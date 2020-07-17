@@ -12,7 +12,7 @@
 		/// Method returns a task that returns a list of suggestion objects
 		/// that are associated to the <paramref name="input"/> string
 		/// and given <paramref name="location"/> object.
-		/// 
+		///
 		/// The list of suggestion is empty if helper object is null.
 		/// </summary>
 		/// <param name="location">Currently selected location

@@ -8,22 +8,25 @@
 	/// <summary>
 	/// Implements a text based control that updates a list of suggestions
 	/// when user updates a given text based path -> TextChangedEvent is raised.
-	/// 
+	///
 	/// This control uses <see cref="ISuggestSource"/> and HierarchyHelper
 	/// to suggest entries in a seperate popup as the user types.
 	/// </summary>
 	public class SuggestBox : SuggestBoxBase
 	{
 		#region fields
+
 		/// <summary>
 		/// Implements the backing store for the <see cref="TextChangedCommand"/> dependency property.
 		/// </summary>
 		public static readonly DependencyProperty TextChangedCommandProperty =
 			DependencyProperty.Register("TextChangedCommand",
 				typeof(ICommand), typeof(SuggestBox), new PropertyMetadata(null));
+
 		#endregion fields
 
 		#region Constructor
+
 		/// <summary>
 		/// Static class constructor.
 		/// </summary>
@@ -40,9 +43,11 @@
 		{
 			IsVisibleChanged += SuggestBox_IsVisibleChanged;
 		}
-		#endregion
+
+		#endregion Constructor
 
 		#region Public Properties
+
 		/// <summary>
 		/// Gets/sets a command that should be executed whenever the text in the textbox
 		/// portion of this control has changed.
@@ -52,13 +57,15 @@
 			get { return (ICommand)GetValue(TextChangedCommandProperty); }
 			set { SetValue(TextChangedCommandProperty, value); }
 		}
-		#endregion
+
+		#endregion Public Properties
 
 		#region Methods
+
 		/// <summary>
 		/// Method executes when the <see cref="SuggestBoxBase.EnableSuggestions"/> dependency property
 		/// has changed its value.
-		/// 
+		///
 		/// Overwrite this method if you want to consume changes of this property.
 		/// </summary>
 		/// <param name="e"></param>
@@ -134,6 +141,7 @@
 				changedCommand.Execute(item);
 			}
 		}
-		#endregion
+
+		#endregion Methods
 	}
 }

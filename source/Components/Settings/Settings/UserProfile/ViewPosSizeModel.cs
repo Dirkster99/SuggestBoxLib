@@ -7,7 +7,7 @@
 	/// <summary>
 	/// Simple wrapper class for allowing windows to persist their
 	/// position, height, and width between user sessions in Properties.Default...
-	/// 
+	///
 	/// The storing of Positions is extended to store collections of
 	/// window names and positions rather than just one window
 	/// </summary>
@@ -16,11 +16,14 @@
 	public class ViewPosSizeModel : Settings.Interfaces.IViewPosSizeModel
 	{
 		#region fields
+
 		private double mX, mY, mWidth, mHeight;
 		private bool mIsMaximized;
+
 		#endregion fields
 
 		#region constructors
+
 		/// <summary>
 		/// Standard class constructor
 		/// </summary>
@@ -63,9 +66,11 @@
 			: this(vs.X, vs.Y, vs.Width, vs.Height)
 		{
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets a default view size that is used when everything else fails.
 		/// </summary>
@@ -183,9 +188,11 @@
 				}
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Convinience function to set the position of a view to a valid position
 		/// </summary>
@@ -234,6 +241,7 @@
 			this.Height = view.Height;
 			this.IsMaximized = (view.WindowState == WindowState.Maximized ? true : false);
 		}
+
 		#endregion methods
 	}
 }

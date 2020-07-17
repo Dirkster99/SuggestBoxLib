@@ -5,12 +5,15 @@
 	public class ThemeDefinitionViewModel : Base.ViewModelBase
 	{
 		#region private fields
+
 		readonly private IThemeInfo _model;
 
 		private bool _IsSelected;
+
 		#endregion private fields
 
 		#region constructors
+
 		public ThemeDefinitionViewModel(IThemeInfo model)
 			: this()
 		{
@@ -22,9 +25,11 @@
 			_model = null;
 			_IsSelected = false;
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets the static theme model based data items.
 		/// </summary>
@@ -51,6 +56,7 @@
 				}
 			}
 		}
+
 		#endregion properties
 	}
 }

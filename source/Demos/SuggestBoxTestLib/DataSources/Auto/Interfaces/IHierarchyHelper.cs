@@ -7,6 +7,7 @@
 	public interface IHierarchyHelper
 	{
 		#region properties
+
 		/// <summary>
 		/// Gets a seperator character that is usually used to seperate one
 		/// entry of one level from its sub-level entry (eg.: '/' or '\')
@@ -19,15 +20,16 @@
 		/// </summary>
 		StringComparison StringComparisonOption { get; }
 
-
 		//        string ParentPath { get; }
 		//
 		//        string ValuePath { get; }
 		//
 		//        string SubentriesPath { get; }
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Used to generate ItemsSource for BreadcrumbCore.
 		/// </summary>
@@ -72,10 +74,10 @@
 		/// Gets the name a string that can have  one or more
 		/// <see cref="Separator"/> characters or an empty string
 		/// if no input string was present.
-		/// 
+		///
 		/// The name portion of the string is either the string itself
 		/// or the remaining string after the last seperator.
-		/// 
+		///
 		/// input                  Name
 		/// 'Libraries'         -> 'Libraries'
 		/// 'Libraries\Music'   -> 'Music'
@@ -83,6 +85,7 @@
 		/// <param name="pathName"></param>
 		/// <returns></returns>
 		string ExtractName(string pathName);
+
 		#endregion methods
 	}
 }

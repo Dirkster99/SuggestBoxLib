@@ -10,26 +10,31 @@ namespace CachedPathSuggestBoxDemo.ViewModels
 	/// <summary>
 	/// Implements a viewmodel that should be attached to the MainWindow's DataContext.
 	/// </summary>
-	class AppViewModel : Base.ViewModelBase
+	internal class AppViewModel : Base.ViewModelBase
 	{
 		#region fields
+
 		private readonly CombinedSuggest combinedSuggest;
 		private readonly FastObservableCollection<BaseItem> listQueryResult;
 		private ICommand _TextChangedCommand;
 		private bool _ValidText;
 		private ICommand _AddBookmarkCommandCommand;
 		private ICommand _RemoveBookmarkCommand;
+
 		#endregion fields
 
 		#region ctors
+
 		public AppViewModel()
 		{
 			combinedSuggest = new CombinedSuggest();
 			listQueryResult = new FastObservableCollection<BaseItem>();
 		}
+
 		#endregion ctors
 
 		#region properties
+
 		public IEnumerable<BaseItem> ListQueryResult => listQueryResult;
 
 		public ICommand TextChangedCommand
@@ -83,9 +88,11 @@ namespace CachedPathSuggestBoxDemo.ViewModels
 				}
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		private async void TextChangedCommand_Execute(object p)
 		{
 			// We want to process empty strings here as well
@@ -104,6 +111,7 @@ namespace CachedPathSuggestBoxDemo.ViewModels
 		}
 
 		#region Add Bookmark Command
+
 		private void AddBookmarkCommand_Executed(object textParam)
 		{
 			var text = textParam as string;
@@ -122,9 +130,11 @@ namespace CachedPathSuggestBoxDemo.ViewModels
 
 			return true;
 		}
+
 		#endregion Add Bookmark Command
 
 		#region Remove Bookmark Command
+
 		private void RemoveBookmarkCommand_Executed(object p)
 		{
 			string key = p as string;
@@ -144,7 +154,9 @@ namespace CachedPathSuggestBoxDemo.ViewModels
 
 			return true;
 		}
+
 		#endregion Remove Bookmark Command
+
 		#endregion methods
 	}
 }

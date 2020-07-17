@@ -12,7 +12,9 @@
 	internal class AlternativeDataTypeHandler
 	{
 		#region fields
+
 		private readonly Dictionary<Type, IAlternativeDataTypeHandler> converters = null;
+
 		#endregion fields
 
 		public AlternativeDataTypeHandler()

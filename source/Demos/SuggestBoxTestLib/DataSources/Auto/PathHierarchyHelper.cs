@@ -13,6 +13,7 @@
 	public class PathHierarchyHelper : IHierarchyHelper
 	{
 		#region Constructors
+
 		/// <summary>
 		/// Class constructor.
 		/// </summary>
@@ -34,9 +35,11 @@
 			Separator = '\\';
 			StringComparisonOption = StringComparison.CurrentCultureIgnoreCase;
 		}
+
 		#endregion Constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets a seperator character that is usually used to seperate one
 		/// entry of one level from its sub-level entry (eg.: '/' or '\')
@@ -63,9 +66,11 @@
 		/// Path to the child dependency property of the item.
 		/// </summary>
 		public string SubentriesPath { get; set; }
+
 		#endregion properties
 
 		#region Methods
+
 		/// <summary>
 		/// Gets the path from a string that holds at least
 		/// one <see cref="Separator"/> character or an empty string
@@ -89,10 +94,10 @@
 		/// Gets the name a string that can have  one or more
 		/// <see cref="Separator"/> characters or an empty string
 		/// if no input string was present.
-		/// 
+		///
 		/// The name portion of the string is either the string itself
 		/// or the remaining string after the last seperator.
-		/// 
+		///
 		/// input                  Name
 		/// 'Libraries'         -> 'Libraries'
 		/// 'Libraries\Music'   -> 'Music'
@@ -163,7 +168,7 @@
 		/// Attempts to find an hierarchy item from a given
 		/// <paramref name="path"/> and <paramref name="rootItem"/>
 		/// using a Breadth First Level Order lookup algorithm.
-		/// 
+		///
 		/// Assuming we give it a path like 'sub2/sub3' and the hierarchy contains
 		/// this path then the method should return an object that represents sub3.
 		/// </summary>
@@ -233,7 +238,8 @@
 		{
 			return PropertyPathHelper.GetValueFromPropertyInfo(item, SubentriesPath) as IEnumerable;
 		}
-		#endregion methods
+
+		#endregion Methods
 	}
 
 	/// <summary>
@@ -244,6 +250,7 @@
 	internal class PathHierarchyHelper<T> : PathHierarchyHelper
 	{
 		#region Constructor
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -260,11 +267,12 @@
 			propInfoValue = typeof(T).GetProperty(valuePath);
 			propInfoParent = typeof(T).GetProperty(parentPath);
 		}
-		#endregion
 
-		PropertyInfo propInfoValue;
-		PropertyInfo propInfoSubEntries;
-		PropertyInfo propInfoParent;
+		#endregion Constructor
+
+		private PropertyInfo propInfoValue;
+		private PropertyInfo propInfoSubEntries;
+		private PropertyInfo propInfoParent;
 
 		protected override object getParent(object item)
 		{

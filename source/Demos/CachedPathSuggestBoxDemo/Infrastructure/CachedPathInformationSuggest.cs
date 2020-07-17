@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using System;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
 		internal void Delete(string text)
 		{
-            LiteRepository.Instance.Remove(text);
+			LiteRepository.Instance.Remove(text);
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
 			IEnumerable<ViewModels.List.BaseItem> MakeSuggestionsPrivate() =>
 				from item in GetPathInformations(queryThis)
-				select new ViewModels.List.Item( item.FullName, item.FullName );
+				select new ViewModels.List.Item(item.FullName, item.FullName);
 
 			static PathInformation[] GetPathInformations(string key)
 			{

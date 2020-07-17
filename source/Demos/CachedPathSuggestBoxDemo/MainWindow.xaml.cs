@@ -1,6 +1,6 @@
-﻿using System.Windows;
-using CachedPathSuggestBoxDemo.Infrastructure;
+﻿using CachedPathSuggestBoxDemo.Infrastructure;
 using CachedPathSuggestBoxDemo.ViewModels;
+using System.Windows;
 
 namespace CachedPathSuggestBoxDemo
 {
@@ -11,6 +11,7 @@ namespace CachedPathSuggestBoxDemo
 	{
 		private readonly CombinedSuggest combinedSuggest = new CombinedSuggest();
 		private readonly FastObservableCollection<object> listQueryResult = new FastObservableCollection<object>();
+
 		public MainWindow()
 		{
 			InitializeComponent();

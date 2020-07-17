@@ -8,6 +8,7 @@
 		Type TargetDataType { get; }
 
 		object Convert(object objectInput);
+
 		object ConvertBack(object objectEncryptedData);
 	}
 }

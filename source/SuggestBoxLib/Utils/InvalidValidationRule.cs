@@ -9,13 +9,15 @@
 	public class InvalidValidationRule : ValidationRule
 	{
 		#region Constructor
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
 		public InvalidValidationRule()
 		{
 		}
-		#endregion
+
+		#endregion Constructor
 
 		/// <summary>
 		/// Always returns an invalid state - use this for standard

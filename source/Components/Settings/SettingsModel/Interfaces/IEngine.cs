@@ -38,7 +38,7 @@
 		/// <summary>
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or null
 		/// if either option or <seealso cref="OptionGroup"/> does not exist.
-		/// 
+		///
 		/// Method returns false if option and <seealso cref="OptionGroup"/> are not known.
 		/// </summary>
 		/// <param name="nameOfOptionGroup"></param>
@@ -51,7 +51,7 @@
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or
 		/// throws an exception if either option or <seealso cref="OptionGroup"/>
 		/// does not exist.
-		/// 
+		///
 		/// Method the requested option value if option and <seealso cref="OptionGroup"/> are known.
 		/// </summary>
 		/// <param name="nameOfOptionGroup"></param>
@@ -144,7 +144,7 @@
 		/// Remove an option from the current model
 		/// (this will remove multiple values at once if the
 		/// requested option referes to a list of option values).
-		/// 
+		///
 		/// Use with extreem care.
 		/// Calling this method is normally not required but
 		/// the function is provided for completeness.

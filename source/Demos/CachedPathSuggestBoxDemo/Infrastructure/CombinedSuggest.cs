@@ -1,4 +1,5 @@
 ﻿#nullable enable
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 	/// Wraps a LiteDB and a FileSystem data provider to generate similarity based suggestions
 	/// for a given string.
 	/// </summary>
-	class CombinedSuggest : ISuggest
+	internal class CombinedSuggest : ISuggest
 	{
 		private readonly DirectorySuggest directorySuggest = new DirectorySuggest();
 

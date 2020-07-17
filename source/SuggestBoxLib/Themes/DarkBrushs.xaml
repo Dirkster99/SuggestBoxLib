@@ -82,5 +82,4 @@
 									 ResourceId=ControlItemTextHoverKey}"
 		options:Freeze="true"
 		Color="#d1d1d1" />
-
 </ResourceDictionary>

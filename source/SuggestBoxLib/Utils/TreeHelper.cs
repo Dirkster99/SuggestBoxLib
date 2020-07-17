@@ -2,17 +2,17 @@
 {
 	using System;
 	using System.Windows;
-	using System.Windows.Media;
 	using System.Windows.Controls.Primitives;
+	using System.Windows.Media;
 
 	internal static class TreeHelper
 	{
 		/// <summary>
-		/// Tries its best to return the specified element's parent. It will 
+		/// Tries its best to return the specified element's parent. It will
 		/// try to find, in this order, the VisualParent, LogicalParent, LogicalTemplatedParent.
 		/// It only works for Visual, FrameworkElement or FrameworkContentElement.
 		/// </summary>
-		/// <param name="element">The element to which to return the parent. It will only 
+		/// <param name="element">The element to which to return the parent. It will only
 		/// work if element is a Visual, a FrameworkElement or a FrameworkContentElement.</param>
 		/// <remarks>If the logical parent is not found (Parent), we check the TemplatedParent
 		/// (see FrameworkElement.Parent documentation). But, we never actually witnessed
@@ -98,7 +98,7 @@
 		/// <typeparam name="T">The type of the element to find</typeparam>
 		/// <param name="startingObject">The node where the search begins.</param>
 		/// <param name="checkStartingObject">Should the specified startingObject be checked first.</param>
-		/// <param name="additionalCheck">Provide a callback to check additional properties 
+		/// <param name="additionalCheck">Provide a callback to check additional properties
 		/// of the found elements. Can be left Null if no additional criteria are needed.</param>
 		/// <returns>Returns the found element. Null if nothing is found.</returns>
 		/// <example>Button button = TreeHelper.FindParent&lt;Button&gt;( this, foundChild => foundChild.Focusable );</example>
@@ -131,7 +131,7 @@
 		}
 
 		/// <summary>
-		/// This will search for a child of the specified type. The search is performed 
+		/// This will search for a child of the specified type. The search is performed
 		/// hierarchically, breadth first (as opposed to depth first).
 		/// </summary>
 		/// <typeparam name="T">The type of the element to find</typeparam>
@@ -143,12 +143,12 @@
 		}
 
 		/// <summary>
-		/// This will search for a child of the specified type. The search is performed 
+		/// This will search for a child of the specified type. The search is performed
 		/// hierarchically, breadth first (as opposed to depth first).
 		/// </summary>
 		/// <typeparam name="T">The type of the element to find</typeparam>
 		/// <param name="parent">The root of the tree to search for. This element itself is not checked.</param>
-		/// <param name="additionalCheck">Provide a callback to check additional properties 
+		/// <param name="additionalCheck">Provide a callback to check additional properties
 		/// of the found elements. Can be left Null if no additional criteria are needed.</param>
 		/// <returns>Returns the found element. Null if nothing is found.</returns>
 		/// <example>Button button = TreeHelper.FindChild&lt;Button&gt;( this, foundChild => foundChild.Focusable );</example>
@@ -187,7 +187,7 @@
 		}
 
 		/// <summary>
-		/// Returns true if the specified element is a child of parent somewhere in the visual 
+		/// Returns true if the specified element is a child of parent somewhere in the visual
 		/// tree. This method will work for Visual, FrameworkElement and FrameworkContentElement.
 		/// </summary>
 		/// <param name="element">The element that is potentially a child of the specified parent.</param>
@@ -198,7 +198,7 @@
 		}
 
 		/// <summary>
-		/// Returns true if the specified element is a child of parent somewhere in the visual 
+		/// Returns true if the specified element is a child of parent somewhere in the visual
 		/// tree. This method will work for Visual, FrameworkElement and FrameworkContentElement.
 		/// </summary>
 		/// <param name="element">The element that is potentially a child of the specified parent.</param>

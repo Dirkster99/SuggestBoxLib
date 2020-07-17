@@ -1,8 +1,8 @@
 ﻿namespace Settings.Internal
 {
+	using MLib.Interfaces;
 	using Settings.Interfaces;
 	using Settings.ProgramSettings;
-	using MLib.Interfaces;
 	using Settings.UserProfile;
 	using SettingsModel.Interfaces;
 	using System;
@@ -20,13 +20,16 @@
 	internal class SettingsManagerImpl : ISettingsManager
 	{
 		#region fields
+
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 		private readonly IOptionsPanel mSettingsDataPanel = null;
 
 		private IProfile mSessionData = null;
+
 		#endregion fields
 
 		#region constructor
+
 		/// <summary>
 		/// Class cosntructor
 		/// </summary>
@@ -44,9 +47,11 @@
 			mSettingsDataPanel = new OptionsPanel();
 			SessionData = new Profile();
 		}
+
 		#endregion constructor
 
 		#region properties
+
 		/// <summary>
 		/// Implement <seealso cref="IOptionsPanel"/> method to query options from model container.
 		/// </summary>
@@ -76,6 +81,7 @@
 		}
 
 		#region min max definitions for useful option values
+
 		/// <summary>
 		/// Gets the minimum font size that should be used in this application.
 		/// </summary>
@@ -159,6 +165,7 @@
 				return 12;
 			}
 		}
+
 		#endregion min max definitions for useful option values
 
 		/// <summary>
@@ -166,9 +173,11 @@
 		/// </summary>
 		[XmlIgnore]
 		public IThemeInfos Themes { get; private set; }
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Get a list of all supported languages in Edi.
 		/// </summary>
@@ -196,6 +205,7 @@
 		}
 
 		#region Load Save UserSessionData
+
 		/// <summary>
 		/// Save program options into persistence.
 		/// See <seealso cref="SaveOptions"/> to save program options on program end.
@@ -279,10 +289,11 @@
 			{
 				if (xw != null)
 					xw.Close(); // Cleanup
-
 			}
 		}
+
 		#endregion Load Save UserSessionData
+
 		#endregion methods
 	}
 }

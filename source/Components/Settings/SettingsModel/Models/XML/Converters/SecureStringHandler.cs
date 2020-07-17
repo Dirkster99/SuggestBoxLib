@@ -1,10 +1,7 @@
 ﻿namespace SettingsModel.Models.XML.Converters
 {
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
 	using System.Security;
-	using System.Text;
 
 	/// <summary>
 	/// Source of string encryption and decryption:
@@ -13,19 +10,24 @@
 	internal class SecureStringHandler : SettingsModel.Models.XML.Converters.IAlternativeDataTypeHandler
 	{
 		#region fields
+
 		private static byte[] entropy = System.Text.Encoding.Unicode.GetBytes("Salt Is Usually Not A Password");
+
 		#endregion fields
 
 		#region constructors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
 		public SecureStringHandler()
 		{
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets the type of the original data type that is to be replaced
 		/// with an alternative (typed) representation.
@@ -49,9 +51,11 @@
 				return typeof(string);
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Converts from the source datatype into the target data type representation.
 		/// </summary>
@@ -134,6 +138,7 @@
 		}
 
 		#region private methods
+
 		private SecureString ToSecureString(string input)
 		{
 			SecureString secure = new SecureString();
@@ -159,7 +164,9 @@
 			}
 			return returnValue;
 		}
+
 		#endregion private methods
+
 		#endregion methods
 	}
 }

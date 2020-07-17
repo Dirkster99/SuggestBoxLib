@@ -1,11 +1,9 @@
 ﻿namespace Settings.Interfaces
 {
-	using Settings.ProgramSettings;
-	using System.Collections.Generic;
-
 	public interface IOptions
 	{
 		#region properties
+
 		bool IsDirty { get; set; }
 		string LanguageSelected { get; set; }
 		bool ReloadOpenFilesOnAppStart { get; set; }
@@ -24,9 +22,11 @@
 		int DefaultFontSize { get; }
 		int FontSizeMin { get; }
 		int FontSizeMax { get; }
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Reset the dirty flag (e.g. after saving program options when they where edit).
 		/// </summary>
@@ -34,7 +34,9 @@
 		void SetDirtyFlag(bool flag);
 
 		void SetIconSize(int size);
+
 		void SetFontSize(int size);
+
 		#endregion methods
 	}
 }

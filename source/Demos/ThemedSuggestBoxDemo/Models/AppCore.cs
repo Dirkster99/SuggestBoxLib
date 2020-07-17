@@ -11,6 +11,7 @@
 	public class AppCore
 	{
 		#region properties
+
 		/// <summary>
 		/// Get the name of the executing assembly (usually name of *.exe file)
 		/// </summary>
@@ -57,6 +58,7 @@
 				return "ThemedSuggestBoxDemo";
 			}
 		}
+
 		public static string Application_Title
 		{
 			get
@@ -102,9 +104,11 @@
 											  string.Format(CultureInfo.InvariantCulture, "{0}.App.session", AppCore.AssemblyTitle));
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Create a dedicated directory to store program settings and session data
 		/// </summary>
@@ -123,6 +127,7 @@
 
 			return true;
 		}
+
 		#endregion methods
 	}
 }

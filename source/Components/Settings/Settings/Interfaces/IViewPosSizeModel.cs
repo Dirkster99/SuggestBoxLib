@@ -1,7 +1,5 @@
 ﻿namespace Settings.Interfaces
 {
-	using System;
-
 	public interface IViewPosSizeModel
 	{
 		bool DefaultConstruct { get; }

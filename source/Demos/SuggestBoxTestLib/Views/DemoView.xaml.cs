@@ -1,8 +1,7 @@
 ﻿namespace SuggestBoxTestLib.Views
 {
-	using SuggestBoxTestLib.ViewModels.Base;
 	using SuggestBoxLib.Events;
-	using System;
+	using SuggestBoxTestLib.ViewModels.Base;
 	using System.Windows;
 	using System.Windows.Controls;
 	using System.Windows.Input;
@@ -40,9 +39,7 @@
 							PART_SuggestComboBox.SelectedItem = null;
 							PART_SuggestComboBox.IsDropDownOpen = true;
 						}
-
 					});
-
 				}
 
 				return _RecentListCommand;
@@ -76,14 +73,13 @@
 			{
 				DiskPathSuggestComboBox.Focus();
 				Keyboard.Focus(DiskPathSuggestComboBox);
-
 			}, DispatcherPriority.ApplicationIdle);
 		}
 
 		/// <summary>
 		/// Method executes when the SuggestionBox signals that editing location
 		/// has been OK'ed (user pressed enter) or cancel'ed (user pressed Escape).
-		/// 
+		///
 		/// These signals are then recorded and processed via IsSwitchOn property
 		/// handler which can also be invoked via Toggle Button which is processed
 		/// as OK.
@@ -115,7 +111,6 @@
 			{
 				NewLocationRequestEventDisplay.Text =
 									string.Format("({0}) '{1}'", action, e.EditResult.NewLocation);
-
 			}
 			else
 				NewLocationRequestEventDisplay.Text = string.Format("{0}", action);

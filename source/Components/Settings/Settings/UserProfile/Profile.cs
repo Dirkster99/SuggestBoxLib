@@ -11,7 +11,7 @@
 	/// settings that should be re-activated when the application
 	/// is re-started at a later point in time (e.g. window size
 	/// and position).
-	/// 
+	///
 	/// This class organizes these per user specific profile settings
 	/// and is responsible for their storage (at program end) and
 	/// retrieval at the start-up of the application.
@@ -19,10 +19,13 @@
 	public class Profile : IProfile
 	{
 		#region fields
+
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 		#endregion fields
 
 		#region constructor
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -37,9 +40,11 @@
 
 			LastActiveSourceFiles = new List<FileReference>();
 		}
+
 		#endregion constructor
 
 		#region properties
+
 		/// <summary>
 		/// Gets the key name of the MainWindow item in the collection.
 		/// Ths name can be used as key in the WindowPosSz property
@@ -59,7 +64,7 @@
 
 		/// <summary>
 		/// Remember the last active solution file name and path of last session.
-		/// 
+		///
 		/// This can be useful when selecting active document in next session or
 		/// determining a useful default path when there is no document currently open.
 		/// </summary>
@@ -68,7 +73,7 @@
 
 		/// <summary>
 		/// Remember the last active path and name of last active document.
-		/// 
+		///
 		/// This can be useful when selecting active document in next session or
 		/// determining a useful default path when there is no document currently open.
 		/// </summary>
@@ -77,15 +82,17 @@
 
 		/// <summary>
 		/// Remember the last active path and name of last active document.
-		/// 
+		///
 		/// This can be useful when selecting active document in next session or
 		/// determining a useful default path when there is no document currently open.
 		/// </summary>
 		[XmlAttribute(AttributeName = "LastActiveTargetFile")]
 		public string LastActiveTargetFile { get; set; }
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Checks the MainWindow for visibility when re-starting application
 		/// (with different screen configuration).
@@ -152,6 +159,7 @@
 
 			return string.Empty;
 		}
+
 		#endregion methods
 	}
 }

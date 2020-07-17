@@ -31,7 +31,6 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 		/// </summary>
 		public string FullName { get; }
 
-
 		public bool Equals(PathInformation other)
 		{
 			if (other is null) return false;

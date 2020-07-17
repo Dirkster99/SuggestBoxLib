@@ -2,10 +2,10 @@
 {
 	/// <summary>
 	/// This class is the parent root class of other lsit item related classes.
-	/// 
+	///
 	/// It exists simple for methods to produce something like IEnmerable{<see cref="BaseItem"/>}
 	/// where 'BaseItem' cen be any class inheriting from <see cref="BaseItem"/>.
-	/// 
+	///
 	/// This enables us to use Converters, DataTemplates or other tools in WPF to display different
 	/// UI bits for different types of classes.
 	/// </summary>

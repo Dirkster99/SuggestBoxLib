@@ -17,6 +17,7 @@
 		private readonly object _RecentLocationItemsItemsLock;
 
 		#region constructors
+
 		/// <summary>
 		/// Class constructor.
 		/// </summary>
@@ -51,9 +52,11 @@
 			_RecentLocationItems.Add("E:");
 			_RecentLocationItems.Add("F:");
 		}
+
 		#endregion constructors
 
 		#region properties
+
 		/// <summary>
 		/// Gets a list of recent locations containing a Windows Shell or
 		/// a File System path.
@@ -83,6 +86,7 @@
 		public AutoSuggestSource SuggestBoxAuto2_SuggestSources { get; }
 
 		#region DiskPathSuggestBox
+
 		/// <summary>
 		/// Gets a suggestions data source that can produce file based suggestions.
 		/// </summary>
@@ -93,15 +97,18 @@
 		/// and is also supported by a recent list of previously selected entries.
 		/// </summary>
 		public DirectorySuggestSource SuggestDirectoryWithRecentList { get; }
+
 		#endregion DiskPathSuggestBox
+
 		#endregion properties
 
 		#region methods
+
 		/// <summary>
 		/// Returns a tree of <see cref="FakeViewModel"/> items with a depth
 		/// of <paramref name="iLevels"/> and
 		/// a number of <paramref name="iSubDirectories"/> per item.
-		/// 
+		///
 		/// Be careful when playing with these parameters because memory consumption
 		/// grows exponentially if you increase both parameters or only one of them
 		/// by a large amount :-(
@@ -162,6 +169,7 @@
 				return fvm;
 			});
 		}
+
 		#endregion methods
 	}
 }

@@ -19,6 +19,7 @@
 	public class AutoSuggestSource : ViewModelBase
 	{
 		#region fields
+
 		private readonly LocationIndicator _LocationIndicator;
 
 		private readonly Dictionary<string, CancellationTokenSource> _Queue;
@@ -28,9 +29,11 @@
 		private string _CurrentText;
 		private bool _IsValidText = true;
 		private bool _Processing;
+
 		#endregion fields
 
 		#region ctors
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
@@ -52,13 +55,15 @@
 			_SlowStuffSemaphore = new SemaphoreSlim(1, 1);
 			_ListQueryResult = new FastObservableCollection<object>();
 		}
+
 		#endregion ctors
 
 		#region properties
+
 		/// <summary>
 		/// Gets a property that indicates whether the initally constructed hierarchy for the
 		/// SuggestBoxAuto2 SuggestBox is ready for consumtion or not.
-		/// 
+		///
 		/// Returns false if the background task is still busy constructing hierarchy items.
 		/// </summary>
 		public bool Processing
@@ -157,9 +162,11 @@
 				return _SuggestTextChangedCommand;
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		public void SetProcessing(bool value)
 		{
 			Processing = value;
@@ -206,13 +213,14 @@
 		}
 
 		#region input parser
+
 		/// <summary>
 		/// Method returns a task that returns a list of suggestion objects
 		/// that are associated to the <paramref name="input"/> string
 		/// and given <paramref name="data"/> object.
-		/// 
+		///
 		/// The list of suggestion is empty if helper object is null.
-		/// 
+		///
 		/// This method is usually directly invoked by the SuggestBox to query data
 		/// sources for suggestions as the user types a string character by character.
 		/// </summary>
@@ -262,7 +270,9 @@
 
 			return Task.FromResult<SuggestQueryResultModel>(retVal);
 		}
+
 		#endregion input parser
+
 		#endregion methods
 	}
 }

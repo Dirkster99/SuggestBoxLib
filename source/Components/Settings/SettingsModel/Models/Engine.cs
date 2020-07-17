@@ -13,23 +13,28 @@
 	internal class OptionsEngine : Interfaces.IEngine
 	{
 		#region fields
+
 		protected static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		private readonly Dictionary<string, OptionGroup> mOptionGroups = new Dictionary<string, OptionGroup>();
 
 		private bool mIsDirty = false;
+
 		#endregion fields
 
 		#region constructor
+
 		/// <summary>
 		/// Class constructor
 		/// </summary>
 		public OptionsEngine()
 		{
 		}
+
 		#endregion constructor
 
 		#region properties
+
 		/// <summary>
 		/// Gets whether any of the properties stored in any options group have changed or not.
 		/// </summary>
@@ -67,9 +72,11 @@
 				}
 			}
 		}
+
 		#endregion properties
 
 		#region methods
+
 		public override int GetHashCode()
 		{
 			return base.GetHashCode() | mOptionGroups.GetHashCode();
@@ -168,7 +175,7 @@
 		/// <summary>
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or null
 		/// if either option or <seealso cref="OptionGroup"/> does not exist.
-		/// 
+		///
 		/// Method returns false if option and <seealso cref="OptionGroup"/> are not known.
 		/// </summary>
 		/// <param name="nameOfOptionGroup"></param>
@@ -191,7 +198,7 @@
 		/// Gets the value of an option in a given <seealso cref="OptionGroup"/> or
 		/// throws an exception if either option or <seealso cref="OptionGroup"/>
 		/// does not exist.
-		/// 
+		///
 		/// Method the requested option value if option and <seealso cref="OptionGroup"/> are known.
 		/// </summary>
 		/// <param name="nameOfOptionGroup"></param>
@@ -316,7 +323,7 @@
 		/// Remove an option from the current model
 		/// (this will remove multiple values at once if the
 		/// requested option referes to a list of option values).
-		/// 
+		///
 		/// Use with extreem care.
 		/// Calling this method is normally not required but
 		/// the function is provided for completeness.
@@ -342,6 +349,7 @@
 		}
 
 		#region XML
+
 		/// <summary>
 		/// Stores option groups and their values in an XML file and sets the
 		/// IsDirty flag to false.
@@ -395,6 +403,7 @@
 			xmlReader.ReadXML(reader, this);
 			IsDirty = false;
 		}
+
 		#endregion XML
 
 		/// <summary>
@@ -417,6 +426,7 @@
 
 			return null;
 		}
+
 		#endregion methods
 	}
 }
