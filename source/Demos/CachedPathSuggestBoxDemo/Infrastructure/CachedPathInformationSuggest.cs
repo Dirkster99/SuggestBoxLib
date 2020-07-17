@@ -29,7 +29,7 @@ namespace CachedPathSuggestBoxDemo.Infrastructure
 
 		internal void Delete(string text)
 		{
-			throw new NotImplementedException();
+            LiteRepository.Instance.Remove(text);
 		}
 
 		/// <summary>
