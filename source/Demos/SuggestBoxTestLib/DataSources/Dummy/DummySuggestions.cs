@@ -1,15 +1,16 @@
-﻿namespace SuggestBoxTestLib.DataSources.Directory
-{
-	using SuggestBoxTestLib.ViewModels;
-	using SuggestBoxTestLib.ViewModels.Base;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Threading;
-	using System.Threading.Tasks;
-	using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Infrastructure;
+using SuggestBoxTestLib.DataSources.Directory;
+using SuggestBoxTestLib.ViewModels;
 
-	/// <summary>
+namespace SuggestBoxTestLib.DataSources.Dummy
+{
+    /// <summary>
 	/// Defines a suggestion object to generate suggestions
 	/// based on sub entries of specified string.
 	/// </summary>

@@ -1,4 +1,7 @@
-﻿namespace SuggestBoxTestLib.ViewModels
+﻿using Infrastructure;
+using SuggestBoxTestLib.DataSources.Dummy;
+
+namespace SuggestBoxTestLib.ViewModels
 {
 	using SuggestBoxTestLib.AutoSuggest;
 	using SuggestBoxTestLib.DataSources;
@@ -11,7 +14,7 @@
 	using System.Threading.Tasks;
 	using System.Windows.Data;
 
-	public class AppViewModel : Base.ViewModelBase
+	public class AppViewModel : ViewModelBase
 	{
 		private readonly ObservableCollection<string> _RecentLocationItems;
 		private readonly object _RecentLocationItemsItemsLock;

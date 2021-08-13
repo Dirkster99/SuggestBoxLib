@@ -1,10 +1,11 @@
-﻿namespace SuggestBoxTestLib.DataSources.Auto
+﻿using Infrastructure;
+
+namespace SuggestBoxTestLib.DataSources.Auto
 {
 	using SuggestBoxTestLib.AutoSuggest;
 	using SuggestBoxTestLib.DataSources.Auto.Interfaces;
 	using SuggestBoxTestLib.DataSources.Directory;
 	using SuggestBoxTestLib.ViewModels;
-	using SuggestBoxTestLib.ViewModels.Base;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;

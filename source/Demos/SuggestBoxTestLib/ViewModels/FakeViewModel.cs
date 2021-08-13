@@ -1,4 +1,6 @@
-﻿namespace SuggestBoxTestLib.ViewModels
+﻿using Infrastructure;
+
+namespace SuggestBoxTestLib.ViewModels
 {
 	using System;
 	using System.Collections.ObjectModel;
@@ -8,7 +10,7 @@
 	/// Implements a tree like viewmodel to demonstrate usage of the suggestion
 	/// boxes with "Sub" string entries.
 	/// </summary>
-	public class FakeViewModel : Base.ViewModelBase
+	public class FakeViewModel : ViewModelBase
 	{
 		#region Fields
 
