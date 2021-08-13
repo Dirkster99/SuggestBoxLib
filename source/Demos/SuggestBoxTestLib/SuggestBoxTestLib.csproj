@@ -56,7 +56,6 @@
     <Compile Include="DataSources\Directory\DirectorySuggestSource.cs" />
     <Compile Include="ViewModels\DummySuggestSource.cs" />
     <Compile Include="ViewModels\FakeViewModel.cs" />
-    <Compile Include="ViewModels\FastObservableCollection.cs" />
     <Compile Include="Views\DemoView.xaml.cs">
       <DependentUpon>DemoView.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using Infrastructure;
+﻿using CachedPathSuggestBox.Demo.Infrastructure;
+using Infrastructure;
 
 namespace SuggestBoxTestLib.DataSources.Auto
 {

@@ -1,8 +1,10 @@
-﻿namespace ThemedSuggestBoxDemo.ViewModels
+﻿using Infrastructure;
+
+namespace ThemedSuggestBoxDemo.ViewModels
 {
 	using MLib.Interfaces;
 
-	public class ThemeDefinitionViewModel : Base.ViewModelBase
+	public class ThemeDefinitionViewModel : ViewModelBase
 	{
 		#region private fields
 

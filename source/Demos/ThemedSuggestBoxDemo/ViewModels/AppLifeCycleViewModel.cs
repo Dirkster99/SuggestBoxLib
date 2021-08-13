@@ -1,4 +1,6 @@
-﻿namespace ThemedSuggestBoxDemo.ViewModels
+﻿using Infrastructure;
+
+namespace ThemedSuggestBoxDemo.ViewModels
 {
 	using MLib.Interfaces;
 	using Models;
@@ -14,7 +16,7 @@
 	/// such as: state for shutdown, shutdown_cancel, command for shutdown,
 	/// and methods for save and load application configuration.
 	/// </summary>
-	public class AppLifeCycleViewModel : Base.ViewModelBase
+	public class AppLifeCycleViewModel : ViewModelBase
 	{
 		#region fields
 
@@ -71,7 +73,7 @@
 				if (mDialogCloseResult != value)
 				{
 					mDialogCloseResult = value;
-					RaisePropertyChanged(() => DialogCloseResult);
+					NotifyPropertyChanged(() => DialogCloseResult);
 				}
 			}
 		}
@@ -85,7 +87,7 @@
 			{
 				if (mExitApp == null)
 				{
-					mExitApp = new Base.RelayCommand<object>((p) => AppExit_CommandExecuted(),
+					mExitApp = new RelayCommand<object>((p) => AppExit_CommandExecuted(),
 															 (p) => Closing_CanExecute());
 				}
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CachedPathSuggestBox.Demo.Infrastructure;
 using Infrastructure;
 using SuggestBoxTestLib.DataSources.Directory;
-using SuggestBoxTestLib.ViewModels;
 
 namespace SuggestBoxTestLib.DataSources.Dummy
 {

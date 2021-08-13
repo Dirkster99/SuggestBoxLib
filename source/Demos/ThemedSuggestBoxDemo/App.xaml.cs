@@ -66,7 +66,7 @@
 
 				appearance.SetTheme(settings.Themes
 									, settings.Options.GetOptionValue<string>("Appearance", "ThemeDisplayName")
-									, ThemeViewModel.GetCurrentAccentColor(settings));
+									, ThemeLocatorViewModel.GetCurrentAccentColor(settings));
 
 				// Construct Application ViewMOdel and mainWindow
 				_appVM = new ViewModels.AppViewModel(lifeCycle);
