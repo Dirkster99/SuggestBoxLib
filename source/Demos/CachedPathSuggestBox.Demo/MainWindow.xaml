@@ -1,0 +1,45 @@
+﻿<Window
+    x:Class="CachedPathSuggestBox.Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:CachedPathSuggestBox.Demo.ViewModel"
+    Title="MainWindow"
+    Width="800"
+    Height="250"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:AppViewModel}">
+
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ContentControl Content="{StaticResource DiskPathSuggestBox}" />
+
+                <WrapPanel Grid.Column="1" Margin="5">
+                    <FrameworkElement.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="Margin" Value="3" />
+                        </Style>
+                    </FrameworkElement.Resources>
+                    <Button
+                        Command="{Binding AddBookmarkCommand}"
+                        CommandParameter="{Binding ElementName=DiskPathSuggestBox, Path=Text, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        Content="Bookmark" />
+                    <Button
+                        Command="{Binding RemoveBookmarkCommand}"
+                        CommandParameter="{Binding ElementName=DiskPathSuggestBox, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                        Content="Remove" />
+                </WrapPanel>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <ContentControl Content="{Binding }" />
+
+</Window>
