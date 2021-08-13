@@ -1,9 +1,9 @@
-﻿namespace SuggestBoxTestLib.ViewModels.Base
-{
-	using System;
-	using System.Diagnostics;
-	using System.Windows.Input;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Input;
 
+namespace Infrastructure
+{
 	/// <summary>
 	/// A command whose sole purpose is to
 	/// relay its functionality to other
@@ -13,7 +13,7 @@
 	///
 	/// Source: http://www.codeproject.com/Articles/31837/Creating-an-Internationalized-Wizard-in-WPF
 	/// </summary>
-	internal class RelayCommand<T> : ICommand
+   public class RelayCommand<T> : ICommand
 	{
 		#region Fields
 
@@ -51,24 +51,11 @@
 
 		#region events
 
-		/// <summary>
-		/// Eventhandler to re-evaluate whether this command can execute or not
-		/// </summary>
-		public event EventHandler CanExecuteChanged
-		{
-			add
-			{
-				if (this.mCanExecute != null)
-					CommandManager.RequerySuggested += value;
-			}
-
-			remove
-			{
-				if (this.mCanExecute != null)
-					CommandManager.RequerySuggested -= value;
-			}
-		}
-
+      /// <summary>
+      /// Eventhandler to re-evaluate whether this command can execute or not
+      /// </summary>
+      public event EventHandler CanExecuteChanged;
+	
 		#endregion events
 
 		#region methods
@@ -80,9 +67,15 @@
 		/// <returns></returns>
 		[DebuggerStepThrough]
 		public bool CanExecute(object parameter)
-		{
-			return this.mCanExecute == null ? true : this.mCanExecute((T)parameter);
+      {
+         return this.mCanExecute == null || this.mCanExecute((T)parameter);
 		}
+
+
+      public void RaiseCanExecute()
+      {
+         CanExecuteChanged?.Invoke(this, new EventArgs());
+      }
 
 		/// <summary>
 		/// Execute the command method managed in this class.
@@ -150,23 +143,11 @@
 
 		#region Events
 
-		/// <summary>
-		/// Eventhandler to re-evaluate whether this command can execute or not
-		/// </summary>
-		public event EventHandler CanExecuteChanged
-		{
-			add
-			{
-				if (this.mCanExecute != null)
-					CommandManager.RequerySuggested += value;
-			}
+      /// <summary>
+      /// Eventhandler to re-evaluate whether this command can execute or not
+      /// </summary>
+      public event EventHandler CanExecuteChanged;
 
-			remove
-			{
-				if (this.mCanExecute != null)
-					CommandManager.RequerySuggested -= value;
-			}
-		}
 
 		#endregion Events
 
