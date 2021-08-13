@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using CachedPathSuggest.Infrastructure;
 using CachedPathSuggest.ViewModels;
+using SuggestBoxLib.Interfaces;
+using SuggestBoxLib.Model;
 
-namespace CachedPathSuggest.Service
+namespace CachedPathSuggestBox.Demo.Service
 {
     /// <summary>
     ///     Wraps a LiteDB and a FileSystem data provider to generate similarity based suggestions
@@ -13,9 +15,7 @@ namespace CachedPathSuggest.Service
     /// </summary>
     public class CombinedAsyncSuggest : IAsyncSuggest
     {
-        private readonly CachedPathInformationAsyncSuggest
-            cachedPathInformationAsyncSuggest = new(new LiteRepository());
-
+        private readonly CachedAsyncSuggest cachedAsyncSuggest = new(new LiteRepository());
         private readonly DirectoryAsyncSuggest directoryAsyncSuggest = new();
 
         /// <summary>
@@ -29,20 +29,22 @@ namespace CachedPathSuggest.Service
         ///     in a single list. The list contains a separator item (if both types of items are returned).
         ///     The separator item can be used for visual enhancement when displaying the list.
         /// </returns>
-        public async Task<IReadOnlyCollection<BaseItem>?> SuggestAsync(string queryThis)
+        public async Task<ISuggestResult> SuggestAsync(string queryThis)
         {
-            var cachedSuggestions = await cachedPathInformationAsyncSuggest.SuggestAsync(queryThis);
+            var cachedSuggestions = await cachedAsyncSuggest.SuggestAsync(queryThis);
             var directorySuggestions = await directoryAsyncSuggest.SuggestAsync(queryThis);
-            return (cachedSuggestions, directorySuggestions) switch
+            var suggestions = (cachedSuggestions, directorySuggestions) switch
             {
                 (null, null) => null,
-                ({Count: 0}, {Count: 0}) => null,
-                ({Count: 0}, {Count: > 0}) => directorySuggestions,
-                ({Count: > 0}, {Count: 0}) => cachedSuggestions,
-                ({Count: > 0} c, {Count: > 0} d) => c
-                    .Concat(new[] {new ItemSeparator()}).Concat(d).ToArray(),
+                ({ Suggestions: { Count: 0 } }, { Suggestions: { Count: 0 } }) => null,
+                ({ Suggestions: { Count: 0 } }, { Suggestions: { Count: > 0 } }) => directorySuggestions.Suggestions,
+                ({ Suggestions: { Count: > 0 } }, { Suggestions: { Count: 0 } }) => cachedSuggestions.Suggestions,
+                ({ Suggestions: { Count: > 0 } c }, { Suggestions: { Count: > 0 } d }) => c
+
+                    .Concat(new[] { new ItemSeparator() }).Concat(d).ToArray(),
                 _ => throw new ArgumentOutOfRangeException()
             };
+            return new SuggestResult(suggestions, suggestions?.Count > 0);
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace CachedPathSuggest.Service
         /// <param name="text"></param>
         public void AddCachedSuggestion(string text)
         {
-            cachedPathInformationAsyncSuggest.Insert(text);
+            cachedAsyncSuggest.Insert(text);
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace CachedPathSuggest.Service
         /// <param name="text"></param>
         public void RemoveCachedSuggestion(string text)
         {
-            cachedPathInformationAsyncSuggest.Delete(text);
+            cachedAsyncSuggest.Delete(text);
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace CachedPathSuggest.Service
         /// <param name="text"></param>
         public bool ContainsSuggestion(string text)
         {
-            return cachedPathInformationAsyncSuggest.Match(text);
+            return cachedAsyncSuggest.Match(text);
         }
     }
 }

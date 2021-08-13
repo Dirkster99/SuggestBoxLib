@@ -1,4 +1,7 @@
-﻿namespace SuggestBoxLib
+﻿using CachedPathSuggestBox.Demo.Infrastructure;
+using SuggestBoxLib.Model;
+
+namespace SuggestBoxLib
 {
     using Interfaces;
     using System.Windows;
@@ -9,14 +12,24 @@
     /// Implements a text based control that updates a list of suggestions
     /// when user updates a given text based path -> TextChangedEvent is raised.
     ///
-    /// This control uses <see cref="ISuggestSource"/> and HierarchyHelper
+    /// This control uses <see cref="IAsyncSuggest"/> and HierarchyHelper
     /// to suggest entries in a separate popup as the user types.
     /// </summary>
     public class SuggestBox : SuggestBoxBase
     {
+
+        public FastObservableCollection<object> QueryResults { get; } = new FastObservableCollection<object>(new[] { new Tip("Enter a file-system-path or the Space key") });
+
         #region fields
         public static readonly RoutedEvent QueryChangedEvent = EventManager.RegisterRoutedEvent(nameof(QueryChanged), RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<string>), typeof(SuggestBox));
         public static readonly DependencyProperty TextChangedCommandProperty = DependencyProperty.Register(nameof(TextChangedCommand), typeof(ICommand), typeof(SuggestBox), new PropertyMetadata(null));
+        public static readonly DependencyProperty SuggestSourceProperty = DependencyProperty.Register(nameof(SuggestSource), typeof(IAsyncSuggest), typeof(SuggestBox), new PropertyMetadata(null));
+
+        public IAsyncSuggest SuggestSource
+        {
+            get => (IAsyncSuggest)GetValue(SuggestSourceProperty);
+            set => SetValue(SuggestSourceProperty, value);
+        }
 
         public event RoutedPropertyChangedEventHandler<string> QueryChanged
         {
@@ -54,7 +67,7 @@
         #endregion Public Properties
 
         #region Methods
-        
+
         /// <summary>
         /// Method executes when the <see cref="SuggestBoxBase.EnableSuggestions"/> dependency property has changed its value.
         /// </summary>
@@ -88,7 +101,7 @@
             QueryForSuggestions();
         }
 
-        private void QueryForSuggestions()
+        private async void QueryForSuggestions()
         {
             // A change during disabled state is likely to be caused by a bound property
             // in a viewmodel (a machine based edit rather than user input)
@@ -103,6 +116,21 @@
 
             if (ParentWindowIsClosing)
                 return;
+
+            if (SuggestSource != null)
+            {
+                ItemsSource = QueryResults;
+                QueryResults.Clear();
+                QueryResults.Add(new Tip("Loading..."));
+                var suggestionResult = (await SuggestSource.SuggestAsync(Text));
+                ValidText = suggestionResult.IsValid;
+                if (suggestionResult.Suggestions != null)
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        QueryResults.Clear();
+                        QueryResults.AddItems(suggestionResult.Suggestions);
+                    });
+            }
 
             this.RaiseEvent(new RoutedPropertyChangedEventArgs<string>(string.Empty, Text, QueryChangedEvent));
 

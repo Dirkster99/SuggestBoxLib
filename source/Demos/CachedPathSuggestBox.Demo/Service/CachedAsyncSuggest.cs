@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CachedPathSuggest.Infrastructure;
 using CachedPathSuggest.ViewModels;
+using SuggestBoxLib.Interfaces;
+using SuggestBoxLib.Model;
 
-namespace CachedPathSuggest.Service
+namespace CachedPathSuggestBox.Demo.Service
 {
     /// <summary>
     ///     Wraps a LiteDB to generate previously bookmarked suggestions through similarity for a given string.
     /// </summary>
-    public class CachedPathInformationAsyncSuggest : IAsyncSuggest
+    public class CachedAsyncSuggest : IAsyncSuggest
     {
         private static readonly int NumberOfResultsToReturn = 5;
         private readonly LiteRepository repository;
 
-        public CachedPathInformationAsyncSuggest(LiteRepository repository)
+        public CachedAsyncSuggest(LiteRepository repository)
         {
             this.repository = repository;
         }
@@ -35,9 +36,9 @@ namespace CachedPathSuggest.Service
         ///     f:\\do_letters
         ///     g:\\document\lists.ico
         /// </example>
-        public async Task<IReadOnlyCollection<BaseItem>?> SuggestAsync(string queryThis)
+        public async Task<ISuggestResult> SuggestAsync(string queryThis)
         {
-            return await Task.Run(() => GetPathInformations(queryThis, repository));
+            return new SuggestResult(await Task.Run(() => GetPathInformations(queryThis, repository)));
 
             static CachedPathInformation[] GetPathInformations(string key, LiteRepository repository)
             {

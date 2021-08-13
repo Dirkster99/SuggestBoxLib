@@ -5,8 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using CachedPathSuggest.Infrastructure;
 using CachedPathSuggest.ViewModels;
+using SuggestBoxLib.Interfaces;
+using SuggestBoxLib.Model;
 
-namespace CachedPathSuggest.Service
+namespace CachedPathSuggestBox.Demo.Service
 {
     /// <summary>
     ///     Wraps a LiteDB and a FileSystem data provider to generate similarity based suggestions
@@ -28,19 +30,19 @@ namespace CachedPathSuggest.Service
         /// <summary>
         ///     Class constructor
         /// </summary>
-        public async Task<IReadOnlyCollection<BaseItem>?> SuggestAsync(string queryThis)
+        public async Task<ISuggestResult> SuggestAsync(string queryThis)
         {
             tokenSource.Cancel();
 
             tokenSource = new CancellationTokenSource();
-            var ty = Task.Run(() =>
+            var ty =await Task.Run(() =>
                 (string.IsNullOrWhiteSpace(queryThis)
                     ? DirectoryHelper.EnumerateLogicalDrives().ToArray()
                     : DirectoryHelper.EnumerateSubDirectories(queryThis)?.ToArray() ??
                       Array.Empty<(string name, string? vi)>())
                 .Select(r => new PathInformation(r.path, r.label)).ToArray(), tokenSource.Token);
 
-            return await ty;
+            return new SuggestResult(ty);
         }
     }
 }

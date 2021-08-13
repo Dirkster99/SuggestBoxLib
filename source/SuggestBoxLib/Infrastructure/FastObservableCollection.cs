@@ -43,7 +43,7 @@ namespace CachedPathSuggestBox.Demo.Infrastructure
         /// It then notifies once after all items are added.
         /// </summary>
         /// <param name="items">The source collection.</param>
-        public void AddItems(IList items)
+        public void AddItems(IEnumerable<T> items)
         {
             this.SuspendCollectionChangeNotification();
             try
@@ -110,14 +110,14 @@ namespace CachedPathSuggestBox.Demo.Infrastructure
         /// It then notifies once after all items are removed.
         /// </summary>
         /// <param name="items">The source collection.</param>
-        public void RemoveItems(IList items)
+        public void RemoveItems(IEnumerable<T> items)
         {
             this.SuspendCollectionChangeNotification();
             try
             {
                 foreach (var i in items)
                 {
-                    this.Remove((T)i);
+                    this.Remove(i);
                 }
             }
             catch (Exception ex)

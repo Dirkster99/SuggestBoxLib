@@ -1,11 +1,8 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using CachedPathSuggest.Service;
-using CachedPathSuggest.ViewModels;
-using CachedPathSuggestBox.Demo.Infrastructure;
+using CachedPathSuggestBox.Demo.Service;
 using Infrastructure;
 
 namespace CachedPathSuggestBox.Demo.ViewModel
@@ -23,37 +20,26 @@ namespace CachedPathSuggestBox.Demo.ViewModel
 
         public AppViewModel()
         {
-            var combinedAsyncSuggest = new CombinedAsyncSuggest();
+            AsyncSuggest = new CombinedAsyncSuggest();
 
-            TextChangedCommand = new Command(async eventArgs =>
+            TextChangedCommand = new Command( _ =>
             {
-                if (eventArgs == null)
-                    return;
-                QueryResults.Clear();
-                QueryResults.Add(new BaseItem("Loading..."));
-                var suggestions = (await combinedAsyncSuggest.SuggestAsync(eventArgs.NewValue))?.ToArray();
-                if (suggestions != null)
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        QueryResults.Clear();
-                        QueryResults.AddItems(suggestions);
-                    });
             });
 
             addBookmarkCommand = new Command(_ =>
             {
-                combinedAsyncSuggest.AddCachedSuggestion(this.text);
+                AsyncSuggest.AddCachedSuggestion(text);
                 addBookmarkCommand.RaiseCanExecute();
                 removeBookmarkCommand.RaiseCanExecute();
-            }, _ => Path.IsPathRooted(text) && combinedAsyncSuggest.ContainsSuggestion(text) == false);
+            }, _ => Path.IsPathRooted(text) && AsyncSuggest.ContainsSuggestion(text) == false);
 
 
             removeBookmarkCommand = new Command(_ =>
             {
-                combinedAsyncSuggest.RemoveCachedSuggestion(this.text);
+                AsyncSuggest.RemoveCachedSuggestion(text);
                 addBookmarkCommand.RaiseCanExecute();
                 removeBookmarkCommand.RaiseCanExecute();
-            }, _ => combinedAsyncSuggest.ContainsSuggestion(text));
+            }, _ => AsyncSuggest.ContainsSuggestion(text));
 
             RemoveBookmarkCommand = removeBookmarkCommand;
             AddBookmarkCommand = addBookmarkCommand;
@@ -61,7 +47,7 @@ namespace CachedPathSuggestBox.Demo.ViewModel
             PropertyChanged += AppViewModel_PropertyChanged;
         }
 
-        public FastObservableCollection<BaseItem> QueryResults { get; } = new(new[] {new BaseItem("Enter a file-system-path or the Space key")});
+        public CombinedAsyncSuggest AsyncSuggest { get; set; }
 
         public ICommand TextChangedCommand { get; }
 

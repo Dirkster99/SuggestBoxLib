@@ -699,7 +699,7 @@
 
             if (this.IsFocused)
             {
-                var itemsSource = (ItemsSource).Cast<object>().ToArray();
+                var itemsSource = (ItemsSource)?.Cast<object>().ToArray();
 
                 if (Any(itemsSource))
                 {

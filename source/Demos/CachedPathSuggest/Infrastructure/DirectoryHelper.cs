@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CachedPathSuggest.Infrastructure
 {
-    internal static class DirectoryHelper
+    public static class DirectoryHelper
     {
         public static IEnumerable<(string path, string? label)>? EnumerateSubDirectories(string input)
         {
@@ -36,7 +36,7 @@ namespace CachedPathSuggest.Infrastructure
                 catch
                 {
                     // Catch invalid path exceptions here ...
-                    return EnumerateLogicalDrives();
+                    return Array.Empty<(string, string?)>();
                 }
             }
 

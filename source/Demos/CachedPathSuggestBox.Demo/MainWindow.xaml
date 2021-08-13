@@ -5,6 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:CachedPathSuggestBox.Demo.ViewModel"
+    xmlns:suggestBoxLib="clr-namespace:SuggestBoxLib;assembly=SuggestBoxLib"
+    xmlns:infrastructure="clr-namespace:CachedPathSuggestBox.Demo.Infrastructure;assembly=SuggestBoxLib"
+    xmlns:vm="clr-namespace:CachedPathSuggest.ViewModels;assembly=CachedPathSuggest"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     Title="MainWindow"
     Width="800"
     Height="250"
@@ -18,7 +22,20 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ContentControl Content="{StaticResource DiskPathSuggestBox}" />
+                <suggestBoxLib:SuggestBox
+                                          Style="{StaticResource SuggestBoxStyle}"
+                                          SuggestSource="{Binding AsyncSuggest, Mode=OneTime}"
+                                          ItemContainerStyle="{StaticResource ItemContainerStyle}"
+                                          Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}">
+                    <suggestBoxLib:SuggestBox.SelectedValuePath>
+                        <infrastructure:NameOf Type='{x:Type vm:BaseItem}' Member='Value' />
+                    </suggestBoxLib:SuggestBox.SelectedValuePath>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="QueryChanged">
+                            <b:InvokeCommandAction Command="{Binding TextChangedCommand}" PassEventArgsToCommand="True" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </suggestBoxLib:SuggestBox>
 
                 <WrapPanel Grid.Column="1" Margin="5">
                     <FrameworkElement.Resources>

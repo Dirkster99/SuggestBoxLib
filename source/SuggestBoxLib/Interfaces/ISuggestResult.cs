@@ -6,24 +6,18 @@
 	/// Defines properties and methods of an object that is used to generate a list
 	/// of suggestion results and whether the given path was considered as valid or not.
 	///
-	/// This type of object is typically used by a <see cref="ISuggestSource"/> object.
+	/// This type of object is typically used by a <see cref="IAsyncSuggest"/> object.
 	/// </summary>
 	public interface ISuggestResult
 	{
 		/// <summary>
-		/// Gets a list of suugestion based on a given input.
+		/// Gets a collection of suggestions based on a given input.
 		/// </summary>
-		IList<object> Suggestions { get; }
+		IReadOnlyCollection<object> Suggestions { get; }
 
 		/// <summary>
-		/// Gets/sets whether the given input was considered as valid or not.
+		/// Gets whether the given input was considered as valid.
 		/// </summary>
-		bool ValidPath { get; set; }
-
-		/// <summary>
-		/// Adds a range of entries into the list of <see cref="Suggestions"/>.
-		/// </summary>
-		/// <param name="list"></param>
-		void AddRange(IEnumerable<object> list);
-	}
+		bool IsValid { get; }
+    }
 }
