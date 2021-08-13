@@ -48,7 +48,7 @@
 					x:Name="PART_Popup"
 					AllowsTransparency="true"
 					Focusable="False"
-					IsOpen="{Binding IsPopupOpened, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+					IsOpen="{Binding IsPopupOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
 					Placement="Bottom"
 					PlacementTarget="{Binding ElementName=PART_ContentHost}"
 					PopupAnimation="None"
