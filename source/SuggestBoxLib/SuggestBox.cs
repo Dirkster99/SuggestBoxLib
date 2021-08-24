@@ -1,147 +1,151 @@
-﻿namespace SuggestBoxLib
+﻿using CachedPathSuggestBox.Demo.Infrastructure;
+using SuggestBoxLib.Model;
+
+namespace SuggestBoxLib
 {
-	using Interfaces;
-	using System.Windows;
-	using System.Windows.Controls;
-	using System.Windows.Input;
+    using Interfaces;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
-	/// <summary>
-	/// Implements a text based control that updates a list of suggestions
-	/// when user updates a given text based path -> TextChangedEvent is raised.
-	///
-	/// This control uses <see cref="ISuggestSource"/> and HierarchyHelper
-	/// to suggest entries in a seperate popup as the user types.
-	/// </summary>
-	public class SuggestBox : SuggestBoxBase
-	{
-		#region fields
+    /// <summary>
+    /// Implements a text based control that updates a list of suggestions
+    /// when user updates a given text based path -> TextChangedEvent is raised.
+    ///
+    /// This control uses <see cref="IAsyncSuggest"/> and HierarchyHelper
+    /// to suggest entries in a separate popup as the user types.
+    /// </summary>
+    public class SuggestBox : SuggestBoxBase
+    {
 
-		/// <summary>
-		/// Implements the backing store for the <see cref="TextChangedCommand"/> dependency property.
-		/// </summary>
-		public static readonly DependencyProperty TextChangedCommandProperty =
-			DependencyProperty.Register("TextChangedCommand",
-				typeof(ICommand), typeof(SuggestBox), new PropertyMetadata(null));
+        public FastObservableCollection<object> QueryResults { get; } = new FastObservableCollection<object>(new[] { new Tip("Enter a file-system-path or the Space key") });
 
-		#endregion fields
+        #region fields
+        public static readonly RoutedEvent QueryChangedEvent = EventManager.RegisterRoutedEvent(nameof(QueryChanged), RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<string>), typeof(SuggestBox));
+        public static readonly DependencyProperty TextChangedCommandProperty = DependencyProperty.Register(nameof(TextChangedCommand), typeof(ICommand), typeof(SuggestBox), new PropertyMetadata(null));
+        public static readonly DependencyProperty SuggestSourceProperty = DependencyProperty.Register(nameof(SuggestSource), typeof(IAsyncSuggest), typeof(SuggestBox), new PropertyMetadata(null));
 
-		#region Constructor
+        public IAsyncSuggest SuggestSource
+        {
+            get => (IAsyncSuggest)GetValue(SuggestSourceProperty);
+            set => SetValue(SuggestSourceProperty, value);
+        }
 
-		/// <summary>
-		/// Static class constructor.
-		/// </summary>
-		static SuggestBox()
-		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(SuggestBox),
-				new FrameworkPropertyMetadata(typeof(SuggestBox)));
-		}
+        public event RoutedPropertyChangedEventHandler<string> QueryChanged
+        {
+            add => AddHandler(QueryChangedEvent, value);
+            remove => RemoveHandler(QueryChangedEvent, value);
+        }
 
-		/// <summary>
-		/// Class constructor
-		/// </summary>
-		public SuggestBox()
-		{
-			IsVisibleChanged += SuggestBox_IsVisibleChanged;
-		}
+        #endregion fields
 
-		#endregion Constructor
+        #region Constructor
+        static SuggestBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SuggestBox), new FrameworkPropertyMetadata(typeof(SuggestBox)));
+        }
 
-		#region Public Properties
+        public SuggestBox()
+        {
+            IsVisibleChanged += SuggestBox_IsVisibleChanged;
+        }
 
-		/// <summary>
-		/// Gets/sets a command that should be executed whenever the text in the textbox
-		/// portion of this control has changed.
-		/// </summary>
-		public ICommand TextChangedCommand
-		{
-			get { return (ICommand)GetValue(TextChangedCommandProperty); }
-			set { SetValue(TextChangedCommandProperty, value); }
-		}
+        #endregion Constructor
 
-		#endregion Public Properties
+        #region Public Properties
 
-		#region Methods
+        /// <summary>
+        /// Gets/sets a command that should be executed whenever the text in the textbox
+        /// portion of this control has changed.
+        /// </summary>
+        public ICommand TextChangedCommand
+        {
+            get { return (ICommand)GetValue(TextChangedCommandProperty); }
+            set { SetValue(TextChangedCommandProperty, value); }
+        }
 
-		/// <summary>
-		/// Method executes when the <see cref="SuggestBoxBase.EnableSuggestions"/> dependency property
-		/// has changed its value.
-		///
-		/// Overwrite this method if you want to consume changes of this property.
-		/// </summary>
-		/// <param name="e"></param>
-		override protected void OnEnableSuggestionChanged(DependencyPropertyChangedEventArgs e)
-		{
-			base.OnEnableSuggestionChanged(e);
+        #endregion Public Properties
 
-			if (((bool)e.NewValue) == true)
-				QueryForSuggestions();
-		}
+        #region Methods
 
-		/// <summary>
-		/// Method executes when the visibility of the control is changed to query for
-		/// suggestions if this was enabled...
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void SuggestBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-		{
-			if (((bool)e.NewValue) == true)
-				QueryForSuggestions();
-		}
+        /// <summary>
+        /// Method executes when the <see cref="SuggestBoxBase.EnableSuggestions"/> dependency property has changed its value.
+        /// </summary>
+        protected override void OnEnableSuggestionChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnEnableSuggestionChanged(e);
 
-		/// <summary>
-		/// Method executes when new text is entered in the textbox portion of the control.
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnTextChanged(TextChangedEventArgs e)
-		{
-			base.OnTextChanged(e);
+            if ((bool)e.NewValue == true)
+                QueryForSuggestions();
+        }
 
-			if (string.IsNullOrEmpty(this.Text) == false)
-				IsHintVisible = false;
-			else
-				IsHintVisible = true;
+        /// <summary>
+        /// Method executes when the visibility of the control is changed to query for
+        /// suggestions if this was enabled...
+        /// </summary>
+        private void SuggestBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (((bool)e.NewValue) == true)
+                QueryForSuggestions();
+        }
 
-			QueryForSuggestions();
-		}
+        /// <summary>
+        /// Method executes when new text is entered in the textbox portion of the control.
+        /// </summary>
+        protected override void OnTextChanged(TextChangedEventArgs e)
+        {
+            base.OnTextChanged(e);
 
-		private void QueryForSuggestions()
-		{
-			// A change during disabled state is likely to be caused by a bound property
-			// in a viewmodel (a machine based edit rather than user input)
-			// -> Lets break the message loop here to avoid unnecessary CPU processings...
-			if (this.IsEnabled == false || this.IsLoaded == false)
-				return;
+            IsHintVisible = string.IsNullOrEmpty(this.Text);
 
-			// Text change is likely to be from property change so we ignore it
-			// if control is invisible or suggestions are currently not requested
-			if (Visibility != Visibility.Visible || EnableSuggestions == false)
-				return;
+            QueryForSuggestions();
+        }
 
-			if (ParentWindowIsClosing == true)
-				return;
+        private async void QueryForSuggestions()
+        {
+            // A change during disabled state is likely to be caused by a bound property
+            // in a viewmodel (a machine based edit rather than user input)
+            // -> Lets break the message loop here to avoid unnecessary CPU processings...
+            if (this.IsEnabled == false || this.IsLoaded == false)
+                return;
 
-			ICommand changedCommand = this.TextChangedCommand;
+            // Text change is likely to be from property change so we ignore it
+            // if control is invisible or suggestions are currently not requested
+            if (Visibility != Visibility.Visible || EnableSuggestions == false)
+                return;
 
-			// There may not be a command bound to this after all
-			if (changedCommand == null)
-				return;
+            if (ParentWindowIsClosing)
+                return;
 
-			var item = this.Text;
+            if (SuggestSource != null)
+            {
+                ItemsSource = QueryResults;
+                QueryResults.Clear();
+                QueryResults.Add(new Tip("Loading..."));
+                var suggestionResult = (await SuggestSource.SuggestAsync(Text));
+                ValidText = suggestionResult.IsValid;
+                if (suggestionResult.Suggestions != null)
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        QueryResults.Clear();
+                        QueryResults.AddItems(suggestionResult.Suggestions);
+                    });
+            }
 
-			// Check whether this attached behaviour is bound to a RoutedCommand
-			if (changedCommand is RoutedCommand)
-			{
-				// Execute the routed command
-				(changedCommand as RoutedCommand).Execute(item, this);
-			}
-			else
-			{
-				// Execute the Command as bound delegate
-				changedCommand.Execute(item);
-			}
-		}
+            this.RaiseEvent(new RoutedPropertyChangedEventArgs<string>(string.Empty, Text, QueryChangedEvent));
 
-		#endregion Methods
-	}
+            // Check whether this attached behaviour is bound to a RoutedCommand
+            if (this.TextChangedCommand is RoutedCommand command)
+            {
+                // Execute the routed command
+                command.Execute(this.Text, this);
+            }
+            else
+            {
+                // Execute the Command as bound delegate if anything bound
+                TextChangedCommand?.Execute(this.Text);
+            }
+        }
+        #endregion Methods
+    }
 }

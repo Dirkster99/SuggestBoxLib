@@ -3,11 +3,15 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:bc="clr-namespace:SuggestBoxLib"
 	xmlns:conv="clr-namespace:SuggestBoxLib.Converters"
-	xmlns:reskeys="clr-namespace:SuggestBoxLib.Themes">
+	xmlns:reskeys="clr-namespace:SuggestBoxLib.Themes"
+	xmlns:local="clr-namespace:SuggestBoxLib.Model">
 
 	<ControlTemplate x:Key="suggestableTextBoxTemplate" TargetType="{x:Type bc:SuggestBoxBase}">
 		<ControlTemplate.Resources>
 			<conv:BoolToVisibilityPropConverter x:Key="btv" />
+			<DataTemplate DataType="{x:Type local:Tip}">
+				<TextBlock Text="{Binding Value, Mode=OneTime}"></TextBlock>
+            </DataTemplate>
 		</ControlTemplate.Resources>
 
 		<Border
@@ -48,7 +52,7 @@
 					x:Name="PART_Popup"
 					AllowsTransparency="true"
 					Focusable="False"
-					IsOpen="{Binding IsPopupOpened, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+					IsOpen="{Binding IsPopupOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
 					Placement="Bottom"
 					PlacementTarget="{Binding ElementName=PART_ContentHost}"
 					PopupAnimation="None"

@@ -1,4 +1,7 @@
-﻿namespace ThemedSuggestBoxDemo.ViewModels
+﻿using Infrastructure;
+using ThemedSuggestBoxDemo.Models;
+
+namespace ThemedSuggestBoxDemo.ViewModels
 {
 	using MLib.Interfaces;
 	using Settings.Interfaces;
@@ -10,7 +13,7 @@
 	/// <summary>
 	/// ViewModel class that manages theme properties for binding and display in WPF UI.
 	/// </summary>
-	public class ThemeViewModel : Base.ViewModelBase
+	public class ThemeLocatorViewModel : LocatorViewModel
 	{
 		#region private fields
 
@@ -26,7 +29,7 @@
 		/// <summary>
 		/// Standard Constructor
 		/// </summary>
-		public ThemeViewModel()
+		public ThemeLocatorViewModel()
 		{
 			var settings = GetService<ISettingsManager>(); // add the default themes
 
@@ -93,7 +96,7 @@
 					if (_SelectedTheme != null)
 						_SelectedTheme.IsSelected = true;
 
-					this.RaisePropertyChanged(() => this.SelectedTheme);
+					this.NotifyPropertyChanged(() => this.SelectedTheme);
 				}
 			}
 		}
@@ -114,7 +117,7 @@
 				if (_IsEnabled != value)
 				{
 					_IsEnabled = value;
-					RaisePropertyChanged(() => IsEnabled);
+					NotifyPropertyChanged(() => IsEnabled);
 				}
 			}
 		}
@@ -136,7 +139,7 @@
 				{
 					var settings = GetService<ISettingsManager>(); // add the default themes
 
-					Color AccentColor = ThemeViewModel.GetCurrentAccentColor(settings);
+					Color AccentColor = ThemeLocatorViewModel.GetCurrentAccentColor(settings);
 					GetService<IAppearanceManager>().SetTheme(settings.Themes, themeName, AccentColor);
 
 					ThemeDefinitionViewModel o;

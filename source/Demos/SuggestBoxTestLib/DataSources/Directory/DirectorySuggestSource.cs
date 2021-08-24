@@ -1,8 +1,10 @@
-﻿namespace SuggestBoxTestLib.DataSources
+﻿       using CachedPathSuggestBox.Demo.Infrastructure;
+       using Infrastructure;
+
+namespace SuggestBoxTestLib.DataSources
 {
 	using SuggestBoxTestLib.DataSources.Directory;
 	using SuggestBoxTestLib.ViewModels;
-	using SuggestBoxTestLib.ViewModels.Base;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;

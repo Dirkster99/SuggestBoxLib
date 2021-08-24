@@ -1,7 +1,7 @@
 ﻿namespace SuggestBoxTestLib.Views
 {
 	using SuggestBoxLib.Events;
-	using SuggestBoxTestLib.ViewModels.Base;
+	using Infrastructure;
 	using System.Windows;
 	using System.Windows.Controls;
 	using System.Windows.Input;

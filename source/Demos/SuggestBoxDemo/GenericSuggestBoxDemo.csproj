@@ -99,6 +99,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj">
+      <Project>{807dc828-11db-4151-8bbd-f48516c1ba44}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SuggestBoxLib\SuggestBoxLib.csproj">
       <Project>{f6d38418-cd9a-4f26-bc8b-12c9bd74a672}</Project>
       <Name>SuggestBoxLib</Name>

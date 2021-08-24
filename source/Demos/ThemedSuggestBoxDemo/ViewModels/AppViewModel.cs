@@ -1,7 +1,8 @@
-﻿namespace ThemedSuggestBoxDemo.ViewModels
+﻿using Infrastructure;
+
+namespace ThemedSuggestBoxDemo.ViewModels
 {
-	using Base;
-	using MLib.Interfaces;
+    using MLib.Interfaces;
 	using Settings.Interfaces;
 	using System;
 	using System.Windows;
@@ -12,7 +13,7 @@
 	/// Main ViewModel vlass that manages session start-up, life span, and shutdown
 	/// of the application.
 	/// </summary>
-	public class AppViewModel : Base.ViewModelBase, IDisposable
+	public class AppViewModel : ViewModelBase, IDisposable
 	{
 		#region private fields
 
@@ -23,7 +24,7 @@
 		private object _lockObject = new object(); // thread lock semaphore
 
 		private ICommand _ThemeSelectionChangedCommand;
-		private ThemeViewModel _AppTheme;
+		private ThemeLocatorViewModel appThemeLocator;
 		private readonly DemoViewModel _demo;
 
 		#endregion private fields
@@ -44,7 +45,7 @@
 		/// </summary>
 		protected AppViewModel()
 		{
-			_AppTheme = new ThemeViewModel();
+			appThemeLocator = new ThemeLocatorViewModel();
 			_demo = new DemoViewModel();
 		}
 
@@ -107,7 +108,7 @@
 
 						if (theme != null)
 						{
-							_AppTheme.ApplyTheme(Application.Current.MainWindow,
+							appThemeLocator.ApplyTheme(Application.Current.MainWindow,
 												 theme.Model.DisplayName);
 						}
 					});
@@ -120,16 +121,16 @@
 		/// <summary>
 		/// Gets the currently selected application theme object.
 		/// </summary>
-		public ThemeViewModel AppTheme
+		public ThemeLocatorViewModel AppThemeLocator
 		{
-			get { return _AppTheme; }
+			get { return appThemeLocator; }
 
 			private set
 			{
-				if (_AppTheme != value)
+				if (appThemeLocator != value)
 				{
-					_AppTheme = value;
-					RaisePropertyChanged(() => this.AppTheme);
+					appThemeLocator = value;
+					NotifyPropertyChanged(() => this.AppThemeLocator);
 				}
 			}
 		}
@@ -221,7 +222,7 @@
 			appearance.AccentColorChanged += Appearance_AccentColorChanged;
 
 			// Initialize UI specific stuff here
-			this.AppTheme.ApplyTheme(Application.Current.MainWindow, themeDisplayName);
+			this.AppThemeLocator.ApplyTheme(Application.Current.MainWindow, themeDisplayName);
 		}
 
 		/// <summary>
